@@ -63,6 +63,9 @@ export {
   SearchInput,
   EditButton,
   ShowButton,
+  SelectInput,
+  ImageInput,
+  FileInput,
 
   /**
    *  Field

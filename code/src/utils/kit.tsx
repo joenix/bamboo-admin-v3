@@ -29,6 +29,7 @@ export const queryClient = new QueryClient({
  */
 export const fetchResources = (permissions: any) => {
   console.log("permissions", permissions);
+  // 1. 获取权限
   return fetch("https://myapi/resources", {
     method: "POST",
     headers: {
@@ -38,6 +39,7 @@ export const fetchResources = (permissions: any) => {
   })
     .then((response) => response.json())
     .then((json) =>
+      // 动态生成source
       knownResources.filter((resource) =>
         json.resources.includes(resource.props.name)
       )
@@ -56,6 +58,7 @@ export const fetchResources = (permissions: any) => {
 
 // 创建 httpClient 对象
 export const httpClient = {
+  // Get
   get: (url, { params, headers = {} } = {}) => {
     const queryString = params
       ? `?${new URLSearchParams(params).toString()}`
@@ -71,6 +74,7 @@ export const httpClient = {
     return fetchUtils.fetchJson(`${host}${url}${queryString}`, options);
   },
 
+  // Post
   post: (url, { data, headers } = {}) => {
     const options = {
       method: "POST",
@@ -84,6 +88,4 @@ export const httpClient = {
     };
     return fetchUtils.fetchJson(`${host}${url}`, options);
   },
-
-  // 其他方法，如 put, delete 等
 };

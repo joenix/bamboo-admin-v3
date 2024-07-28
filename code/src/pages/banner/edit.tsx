@@ -10,7 +10,7 @@ import {
 // import RichTextInput from "ra-input-rich-text";
 
 export const BannerEdit = () => (
-  <Create>
+  <Create title="编辑轮播">
     <SimpleForm>
       <TextInput source="title" validate={[required()]} />
       <TextInput

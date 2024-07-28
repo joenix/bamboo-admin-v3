@@ -19,14 +19,14 @@ import {
  * @returns
  * By default, submitting the form in the <Create> view redirects to the <Edit> view.
  */
-export const MaterialCreate = () => {
+export const RoleCreate = () => {
   const notify = useNotify();
   const redirect = useRedirect();
 
   // 自定义成功回调
   const onSuccess = (data) => {
     notify(`新建成功`);
-    redirect(`/Material`);
+    redirect(`/Role`);
   };
 
   // 自定义失败回调
@@ -61,9 +61,9 @@ export const MaterialCreate = () => {
        *  A function (resource, id, data) => string to redirect to different targets depending on the record
        */
       // redirect="list"
-      title="新建物料"
+      title="新建角色"
       transform={transform}
-      // 自定义resource name，默认是外部<Resource>的name,在这是"Material"
+      // 自定义resource name，默认是外部<Resource>的name,在这是"Role"
       // resource="aaabbb"
     >
       <SimpleForm>
@@ -102,4 +102,4 @@ export const MaterialCreate = () => {
   );
 };
 
-export default MaterialCreate;
+export default RoleCreate;

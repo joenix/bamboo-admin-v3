@@ -9,8 +9,8 @@ import {
 } from "react-admin";
 // import RichTextInput from "ra-input-rich-text";
 
-export const MaterialEdit = () => (
-  <Create title="编辑物料">
+export const SchoolEdit = () => (
+  <Create title="编辑机构">
     <SimpleForm>
       <TextInput source="title" validate={[required()]} />
       <TextInput
@@ -28,4 +28,4 @@ export const MaterialEdit = () => (
   </Create>
 );
 
-export default MaterialEdit;
+export default SchoolEdit;

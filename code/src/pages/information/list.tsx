@@ -79,7 +79,7 @@ const postFilters = [
   <TextInput label="学校" source="title3" defaultValue="333" />,
 ];
 
-const BannerList = () => {
+const InformationList = () => {
   return (
     <List actions={<ListActions />} filters={postFilters}>
       <Datagrid>
@@ -121,4 +121,4 @@ const BannerList = () => {
   );
 };
 
-export default BannerList;
+export default InformationList;

@@ -1,5 +1,9 @@
+import { useParams } from "../../utils/dep";
+
 const MaterialShow = () => {
-  return <div>Show</div>;
+  console.log("useParams", useParams());
+  const { id } = useParams();
+  return <div>物料详情:{id}</div>;
 };
 
 export default MaterialShow;

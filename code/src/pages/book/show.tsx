@@ -1,9 +1,9 @@
 import { useParams } from "../../utils/dep";
 
-const BannerShow = () => {
+const BookShow = () => {
   console.log("useParams", useParams());
   const { id } = useParams();
-  return <div>轮播图详情:{id}</div>;
+  return <div>图书详情:{id}</div>;
 };
 
-export default BannerShow;
+export default BookShow;

@@ -19,7 +19,18 @@ import { Layout } from "./Layout";
 import { dataProvider, authProvider } from "./provider";
 
 // Use Pages
-import { Banner, Material } from "./pages";
+import {
+  Banner,
+  Material,
+  Book,
+  Teach,
+  School,
+  Code,
+  Tips,
+  Information,
+  Role,
+  User,
+} from "./pages";
 
 // Use Components
 import {
@@ -62,24 +73,15 @@ export const App = () => {
     >
       {/* 动态Resource */}
       {/* {fetchResources} */}
-      {/* 标准路由 */}
-      {/* 
-        list calls getList() on mount 
-        show calls getOne() on mount
-        edit calls getOne() on mount, and update() or delete() on submission 
-        create calls create() on submission 
 
-        路由说明:
-        /posts/ maps to list
-        /posts/create maps to create
-        /posts/:id maps to edit
-        /posts/:id/show maps to show
-      */}
+      {/* 标准路由 */}
+
+      {/* Banner */}
       <Resource
         name="Banner"
         list={Banner.List}
         edit={Banner.Edit}
-        show={Banner.Show}
+        // show={Banner.Show}
         create={Banner.Create}
         // 图标
         icon={PostIcon}
@@ -90,16 +92,121 @@ export const App = () => {
         <Route path=":bannerId/detail" element={<div>detail</div>} />
       </Resource>
 
+      {/* Information */}
+      <Resource
+        name="Information"
+        list={Information.List}
+        edit={Information.Edit}
+        // show={Information.Show}
+        create={Information.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "咨询管理" }}
+      ></Resource>
+
+      {/* Material */}
       <Resource
         name="Material"
         list={Material.List}
         edit={Material.Edit}
-        show={Material.Show}
+        // show={Material.Show}
         create={Material.Create}
         // 图标
         icon={PostIcon}
         // 自定义菜单标题
         options={{ label: "物料管理" }}
+      ></Resource>
+
+      {/* Book */}
+      <Resource
+        name="Book"
+        list={Book.List}
+        edit={Book.Edit}
+        // show={Book.Show}
+        create={Book.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "图书管理" }}
+      ></Resource>
+
+      {/* Teach */}
+      <Resource
+        name="Teach"
+        list={Teach.List}
+        edit={Teach.Edit}
+        // show={Teach.Show}
+        create={Teach.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "师资管理" }}
+      ></Resource>
+
+      {/* School */}
+      <Resource
+        name="School"
+        list={School.List}
+        edit={School.Edit}
+        // show={School.Show}
+        create={School.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "机构管理" }}
+      ></Resource>
+
+      {/* Tips */}
+      <Resource
+        name="Tips"
+        list={Tips.List}
+        edit={Tips.Edit}
+        // show={Tips.Show}
+        create={Tips.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "贴士集管理" }}
+      ></Resource>
+
+      {/* Role */}
+      <Resource
+        name="Role"
+        list={Role.List}
+        edit={Role.Edit}
+        // show={Role.Show}
+        create={Role.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "角色管理" }}
+      ></Resource>
+
+      {/* User */}
+      <Resource
+        name="User"
+        list={User.List}
+        edit={User.Edit}
+        // show={User.Show}
+        create={User.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "用户管理" }}
+      ></Resource>
+
+      {/* Code */}
+      <Resource
+        name="Code"
+        list={Code.List}
+        edit={Code.Edit}
+        // show={Code.Show}
+        create={Code.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "激活码管理" }}
       ></Resource>
 
       {/* 自定义路由 - 不会显示在菜单上*/}
