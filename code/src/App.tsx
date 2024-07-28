@@ -1,26 +1,114 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Use Dep
+import {
+  Admin,
+  Resource,
+  localStorageStore,
+  CustomRoutes,
+  Route,
+} from "./utils/dep";
 
-function App() {
+// Use Kit
+import { queryClient, fetchResources } from "./utils/kit";
+
+import PostIcon from "@mui/icons-Material/Book";
+
+// Use Layout
+import { Layout } from "./Layout";
+
+// Use Provider
+import { dataProvider, authProvider } from "./provider";
+
+// Use Pages
+import { Banner, Material } from "./pages";
+
+// Use Components
+import {
+  NotFount,
+  DashBoard,
+  MyError,
+  Setting,
+  Profile,
+  Login,
+  Ready,
+} from "./components";
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Admin
+      // 强制校验路由权限
+      requireAuth
+      // 允许匿名访问，跳过验证
+      // disableAuthentication
+      layout={Layout}
+      // 业务接口
+      dataProvider={dataProvider}
+      // 登陆接口
+      authProvider={authProvider}
+      // 自定义404
+      // catchAll={NotFount}
+      dashboard={DashBoard}
+      // 自定义error
+      error={MyError}
+      // error title
+      title="My Custom Admin"
+      // 使用localStorage缓存数据
+      store={localStorageStore()}
+      // 自定义登陆页面
+      // loginPage={Login}
+      // 接口配置
+      queryClient={queryClient}
+      // 自定义ready页面
+      // ready={Ready}
+    >
+      {/* 动态Resource */}
+      {/* {fetchResources} */}
+      {/* 标准路由 */}
+      {/* 
+        list calls getList() on mount 
+        show calls getOne() on mount
+        edit calls getOne() on mount, and update() or delete() on submission 
+        create calls create() on submission 
 
-export default App;
+        路由说明:
+        /posts/ maps to list
+        /posts/create maps to create
+        /posts/:id maps to edit
+        /posts/:id/show maps to show
+      */}
+      <Resource
+        name="Banner"
+        list={Banner.List}
+        edit={Banner.Edit}
+        show={Banner.Show}
+        create={Banner.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "轮播管理" }}
+      >
+        {/* 详情页 */}
+        <Route path=":bannerId/detail" element={<div>detail</div>} />
+      </Resource>
+
+      <Resource
+        name="Material"
+        list={Material.List}
+        edit={Material.Edit}
+        show={Material.Show}
+        create={Material.Create}
+        // 图标
+        icon={PostIcon}
+        // 自定义菜单标题
+        options={{ label: "物料管理" }}
+      ></Resource>
+
+      {/* 自定义路由 - 不会显示在菜单上*/}
+      <CustomRoutes>
+        {/* 配置 */}
+        <Route path="/setting" element={<Setting />} />
+        {/* 用户中心 */}
+        <Route path="/profile" element={<Profile />} />
+      </CustomRoutes>
+    </Admin>
+  );
+};

@@ -1,0 +1,1086 @@
+{
+	"info": {
+		"_postman_id": "e2167a86-f04f-477e-8bfb-8e81f663ce4c",
+		"name": "six",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8364461"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "regist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \n  \"username\":\"12312\",\n  \"password\" :\"3123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/users/regist",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"regist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getusers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDYzNDMyLCJleHAiOjE3MjIxNDk4MzJ9.kNc0hy4ZU-0WO6BOpCySChUWAbFfefyQAZkOo5fqa9c"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/users/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"users",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"12312\",\n  \"password\" :\"3123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/users/login",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDYyMDgxLCJleHAiOjE3MjIxNDg0ODF9.v2n5VQNkSItbvFzrG7qFL4J_lwmCpptUVn-nMAbJaKQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"12312\",\n  \"password\" :\"3123123123\",\n  \"roleId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/users/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"users",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/wsl/Desktop/WechatIMG81732.jpg"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/wsl/Desktop/WechatIMG81732.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{six}}/public/upload",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"public",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{six}}/public/download?filename=files-1721898238726-962309930.jpg",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{six}}/public/download?filename=files-1721898238726-962309930.jpg",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"public",
+								"download"
+							],
+							"query": [
+								{
+									"key": "filename",
+									"value": "files-1721898238726-962309930.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permission",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDYzNjI3LCJleHAiOjE3MjIxNTAwMjd9.eiKzmb0q2uWZ_lEFLpOXKDswVPPGllych9iWBOYl1kM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"菜单1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/permission/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"permission",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIxOTc3MDYyLCJleHAiOjE3MjIwNjM0NjJ9.hOREzHe3qOkb-gNZuegsmtL1UbzQ4VXlOh2bEF1sOXc"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"菜单2\",\n    \"delete\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/permission/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"permission",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getall",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDYzNDMyLCJleHAiOjE3MjIxNDk4MzJ9.kNc0hy4ZU-0WO6BOpCySChUWAbFfefyQAZkOo5fqa9c"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/permission/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"permission",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIxOTg2NTk1LCJleHAiOjE3MjIwNzI5OTV9.u_pm_e_YCfowQf9CPwXopoV7ZWVc0UemckCDhlAE0N0"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/role/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"role",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIxOTc4Mzk1LCJleHAiOjE3MjIwNjQ3OTV9.PU_PJjbY5pcjAv6ogersUKRHfDuYHMzaWYW2vAtJzH8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"老师\",\n    \"description\":\"黄冈学校\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/role/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"role",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "infomation",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI4NDc0LCJleHAiOjE3MjIyMTQ4NzR9.V1yd8ddpZxwrbQhhC-DkUPI0F41kJQmgLDOzrEdebiE"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/infomation/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"infomation",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI4NDc0LCJleHAiOjE3MjIyMTQ4NzR9.V1yd8ddpZxwrbQhhC-DkUPI0F41kJQmgLDOzrEdebiE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"hello\",\n    \"img\":\"Materialid,Materialid,Materialid\",\n    \"video\":\"Materialid,Materialid,Materialid\",\n    \"name\":\"dwaadwaa\",\n    \"type\":\"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/infomation/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"infomation",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "1"
+							},
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"wl\",\n    \"img\":\"wdwa\",\n    \"video\":\"dwa\",\n    \"name\":\"wss\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/infomation/update?id=3",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"infomation",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "book",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/book/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"book",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI4NDc0LCJleHAiOjE3MjIyMTQ4NzR9.V1yd8ddpZxwrbQhhC-DkUPI0F41kJQmgLDOzrEdebiE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\":\"materialid 类型为book\",\n    \"content\":\"wdwa\",\n    \"img\":\"materialid 类型为 图片\",\n    \"name\":\"dwaadwaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/book/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"book",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\":\"materialid 类型为book\",\n    \"content\":\"wdwa\",\n    \"img\":\"materialid 类型为 图片\",\n    \"name\":\"dwaadwaa1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/book/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"book",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "banner",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/banner/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"banner",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"wdwa\",\n    \"img\":\"materialid 类型为 图片\",\n    \"video\":\"materialid 类型为 视频\",\n    \"name\":\"dwaadwaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/banner/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"banner",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"wdwa\",\n    \"img\":\"materialid 类型为 图片\",\n    \"video\":\"materialid 类型为 视频\",\n    \"name\":\"dwaadwaa1\",\n    \"delete\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/banner/update?id=2",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"banner",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "landing",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/landing/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"landing",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":{\"name\":\"wsl\",\"age\":80},\n    \"name\":\"dwaadwaa\",\n    \"type\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/landing/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"landing",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":{\"name\":\"wsl\",\"age\":90},\n    \"name\":\"dwaadwaa\",\n    \"type\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/landing/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"landing",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "school",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTMwMTI1LCJleHAiOjE3MjIyMTY1MjV9.aGYO_OcFXszh0DGAwQlWcLDV6_0X--_xJIFPtwlJEN0"
+							}
+						],
+						"url": {
+							"raw": "{{six}}/school/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"school",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTMwMTI1LCJleHAiOjE3MjIyMTY1MjV9.aGYO_OcFXszh0DGAwQlWcLDV6_0X--_xJIFPtwlJEN0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"培训机构\",\n    \"name\":\"清华\",\n    \"img\":\"imgurl\",\n    \"area\":\"闵行\",\n    \"city\":\"上海\",\n    \"province\":\"上海\",\n    \"content\":\"学校介绍\",\n    \"nature\":\"学校性质\",\n    \"school_type\":\"学校类别\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/school/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"school",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTMwMTI1LCJleHAiOjE3MjIyMTY1MjV9.aGYO_OcFXszh0DGAwQlWcLDV6_0X--_xJIFPtwlJEN0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"培训机构\",\n    \"name\":\"清华12\",\n    \"img\":\"imgurl\",\n    \"area\":\"闵行\",\n    \"city\":\"上海\",\n    \"province\":\"上海\",\n    \"content\":\"学校介绍\",\n    \"nature\":\"学校性质\",\n    \"school_type\":\"学校类别\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/school/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"school",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tips",
+			"item": [
+				{
+					"name": "get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/tips/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"tips",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"dawdawdaw\",\n    \"name\":\"111\",\n    \"img\":\"materialid,materialid\",\n    \"video\":\"?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/tips/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"tips",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5MzYzLCJleHAiOjE3MjIyMTU3NjN9.z_Y9yWoYFg8coGXIjrtbf-Gz6RBd_V7hzJ6OBXKkGUM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"dawdawdaw\",\n    \"name\":\"1112\",\n    \"img\":\"materialid,materialid\",\n    \"video\":\"?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/tips/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"tips",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teach",
+			"item": [
+				{
+					"name": "get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5OTk5LCJleHAiOjE3MjIyMTYzOTl9.6D3ypF2MGVDg5O1o9LiBSCHNlV_WT2d4x0O38iyyCjs"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/teach/get_all",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"teach",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5OTk5LCJleHAiOjE3MjIyMTYzOTl9.6D3ypF2MGVDg5O1o9LiBSCHNlV_WT2d4x0O38iyyCjs"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"六合点读师\",\n    \"name\":\"sss\",\n    \"avatar\":\"imgurl\",\n    \"age\":\"123\",\n    \"area\":\"宝山区\",\n    \"city\":\"上海\",\n    \"province\":\"上海\",\n    \"gender\":\"男\",\n    \"content\":\"个人介绍\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/teach/create",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"teach",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTI5OTk5LCJleHAiOjE3MjIyMTYzOTl9.6D3ypF2MGVDg5O1o9LiBSCHNlV_WT2d4x0O38iyyCjs"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"六合点读师\",\n    \"name\":\"sss\",\n    \"avatar\":\"imgurl\",\n    \"age\":\"123\",\n    \"area\":\"宝山区\",\n    \"city\":\"上海\",\n    \"province\":\"上海\",\n    \"gender\":\"女\",\n    \"content\":\"个人介绍\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{six}}/teach/update?id=1",
+							"host": [
+								"{{six}}"
+							],
+							"path": [
+								"teach",
+								"update"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "code",
+			"item": []
+		}
+	]
+}
