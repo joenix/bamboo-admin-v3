@@ -6,14 +6,14 @@ export const api = {
   // 用户
   User: {
     registry: "/users/regist",
-    getusers: "/users/get_all",
+    getall: "/users/get_all",
     login: "/users/login",
     update: "/users/update",
   },
-  // 物料
+  // 通用
   Public: {
     upload: "/public/upload",
-    get: "public/download",
+    get: "/public/download",
   },
   // 权限
   Permission: {
@@ -71,8 +71,8 @@ export const api = {
   },
   // 物料
   Material: {
-    get: "/getbanner",
-    update: "/updatebanner",
-    delete: "/deletebanner",
+    create: "/material/create",
+    update: "/material/update",
+    getall: "/material/get_all",
   },
 };

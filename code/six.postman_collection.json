@@ -49,21 +49,40 @@
 				{
 					"name": "getusers",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTUzMjI3LCJleHAiOjE3MjIyMzk2Mjd9.bjaZizbqsg_kuhYRWtGhOaTKZ6M0cxP7LcvsSbT-Kv0"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMjQwMjI5LCJleHAiOjE3MjIzMjY2Mjl9.istbKqj-JwK2EHFJnSzAJhlH62Zv0kY4fbZpYlT2qxc"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\":[\n        {\"key\":\"username\",\"value\":\"\"}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{six}}/users/get_all",
+							"raw": "{{six}}/users/get_all?page=1&pageSize=10",
 							"host": [
 								"{{six}}"
 							],
 							"path": [
 								"users",
 								"get_all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -306,7 +325,7 @@
 				{
 					"name": "getall",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Token",
@@ -334,21 +353,40 @@
 				{
 					"name": "get_all",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Token",
 								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIxOTg2NTk1LCJleHAiOjE3MjIwNzI5OTV9.u_pm_e_YCfowQf9CPwXopoV7ZWVc0UemckCDhlAE0N0"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\":[\n        {\"key\":\"username\",\"value\":\"\"}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{six}}/role/get_all",
+							"raw": "{{six}}/role/get_all?page=1&pageSize=10",
 							"host": [
 								"{{six}}"
 							],
 							"path": [
 								"role",
 								"get_all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -504,21 +542,40 @@
 				{
 					"name": "get_all",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMDY0NDk2LCJleHAiOjE3MjIxNTA4OTZ9.FAelhLLY7jgkqSKgSBQ2m5o7dSg9t7RmWFnav-Fg-hU"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTUxMTM0LCJleHAiOjE3MjIyMzc1MzR9.EJEA0YkXgRXVp0ohA8lKOtUqBbNAJkFKBkiuQFX54rY"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\":[\n        {\"key\":\"name\",\"value\":\"d\"}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{six}}/book/get_all",
+							"raw": "{{six}}/book/get_all?page=1&pageSize=10",
 							"host": [
 								"{{six}}"
 							],
 							"path": [
 								"book",
 								"get_all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -640,21 +697,40 @@
 				{
 					"name": "get_all",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Token",
 								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzIyMTUxMTM0LCJleHAiOjE3MjIyMzc1MzR9.EJEA0YkXgRXVp0ohA8lKOtUqBbNAJkFKBkiuQFX54rY"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filters\":[\n        {\"key\":\"name\",\"value\":\"\"}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{six}}/banner/get_all",
+							"raw": "{{six}}/banner/get_all?page=1&pageSize=10",
 							"host": [
 								"{{six}}"
 							],
 							"path": [
 								"banner",
 								"get_all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},

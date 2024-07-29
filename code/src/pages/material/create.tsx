@@ -11,8 +11,11 @@ import {
   required,
   useNotify,
   useRedirect,
-  useRecordContext,
-  useInput,
+  SaveButton,
+  RefreshButton,
+  Toolbar,
+  TabbedForm,
+  FormTab,
 } from "../../utils/dep";
 
 import { Richtext } from "../../components";
@@ -38,8 +41,6 @@ export const MaterialCreate = () => {
     notify(`新建失败: ${error.message}`);
   };
 
-  const Aside = () => <div>我是侧边栏，还没想好写什么</div>;
-
   // 数据处理： submit ->  transform -> dataProvider.create()
   const transform = (data) => {
     data = {
@@ -55,9 +56,14 @@ export const MaterialCreate = () => {
     { id: "choice2", name: "北大" },
   ];
 
+  const MyToolbar = (props) => (
+    <Toolbar {...props}>
+      <SaveButton label="新建" />
+    </Toolbar>
+  );
+
   return (
     <Create
-      aside={<Aside />}
       mutationOptions={{ meta: { foo: "bar" }, onSuccess, onError }}
       /**
        *  'edit': redirect to the Edit view (the default)
@@ -70,41 +76,74 @@ export const MaterialCreate = () => {
       title="新建物料"
       transform={transform}
     >
-      <SimpleForm>
-        <TextInput source="title" validate={[required()]} label="标题" />
-        <TextInput source="description" multiline={true} label="描述" />
-        <SelectInput source="category" label="学校" choices={choices} />
-        {/* <FileInput
-          source="attachments"
-          label="文件上传"
-          multiple={true}
-          accept="application/pdf,application/msword,image/*,video/*,audio/*"
-        >
-          <FileField source="src" title="title" />
-        </FileInput>
+      <TabbedForm toolbar={<MyToolbar />}>
+        {/* 视频管理 */}
+        <FormTab label="视频管理">
+          <FileInput
+            source="video"
+            placeholder="拖动文件，或者点击进行上传"
+            multiple
+            label="视频上传"
+            accept="video/*"
+          >
+            <FileField source="src" title="title" />
+          </FileInput>
+        </FormTab>
+        {/* 图片管理 */}
+        <FormTab label="图片管理">
+          <ImageInput
+            source="image"
+            placeholder="拖动文件，或者点击进行上传"
+            multiple
+            label="图片上传"
+            accept="image/*"
+          >
+            <ImageField source="src" title="title" />
+          </ImageInput>
+        </FormTab>
+        {/* 文件管理 */}
+        <FormTab label="文件管理">
+          <FileInput
+            source="attachments"
+            label="文件上传"
+            placeholder="拖动文件，或者点击进行上传"
+            multiple
+            accept="application/pdf,application/msword,image/*,video/*,audio/*"
+          >
+            <FileField source="src" title="title" />
+          </FileInput>
+        </FormTab>
+        {/* 音频管理 */}
+        <FormTab label="音频管理">
+          <FileInput
+            source="audio"
+            label="音频上传"
+            placeholder="拖动文件，或者点击进行上传"
+            multiple
+            accept={["audio/wav"]}
+          >
+            <FileField source="src" title="title" />
+          </FileInput>
+        </FormTab>
 
-        <ImageInput source="image" label="图片上传" accept="image/*">
-          <ImageField source="src" title="title" />
-        </ImageInput>
+        {/* 富文本管理 */}
+        <FormTab label="富文本管理">
+          <Richtext onChange={(r) => setRichtext(r)} />
+        </FormTab>
 
-        <FileInput source="video" label="视频上传" accept="video/*">
-          <FileField source="src" title="title" />
-        </FileInput> */}
-        <FileInput
-          source="audio"
-          label="音频上传"
-          // color="secondary"
-          placeholder="拖动文件，或者点击进行上传"
-        >
-          <FileField source="src" title="title" />
-        </FileInput>
-        <Richtext onChange={(richtext) => setRichtext(richtext)} />
-        <DateInput
-          label="时间选择"
-          source="published_at"
-          defaultValue={new Date()}
-        />
-      </SimpleForm>
+        {/* 案件管理 */}
+        <FormTab label="案件管理">
+          <FileInput
+            source="audio"
+            label="案件上传"
+            placeholder="拖动文件，或者点击进行上传"
+            multiple
+            // accept={["audio/wav"]}
+          >
+            <FileField source="src" title="title" />
+          </FileInput>
+        </FormTab>
+      </TabbedForm>
     </Create>
   );
 };

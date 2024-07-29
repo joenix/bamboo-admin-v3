@@ -10,7 +10,17 @@ import {
 // Use Kit
 import { queryClient, fetchResources } from "./utils/kit";
 
-import PostIcon from "@mui/icons-Material/Book";
+// Use Icon
+import MenuBook from "@mui/icons-Material/MenuBook";
+import ViewCarousel from "@mui/icons-Material/ViewCarousel";
+import SupportAgent from "@mui/icons-Material/SupportAgent";
+import Inventory from "@mui/icons-Material/Inventory";
+import Teachs from "@mui/icons-Material/School";
+import Schools from "@mui/icons-Material/Business";
+import TipsAndUpdates from "@mui/icons-Material/TipsAndUpdates";
+import People from "@mui/icons-Material/People";
+import Person from "@mui/icons-Material/Person";
+import VpnKey from "@mui/icons-Material/VpnKey";
 
 // Use Layout
 import { Layout } from "./Layout";
@@ -84,7 +94,7 @@ export const App = () => {
         // show={Banner.Show}
         create={Banner.Create}
         // 图标
-        icon={PostIcon}
+        icon={ViewCarousel}
         // 自定义菜单标题
         options={{ label: "轮播管理" }}
       >
@@ -100,7 +110,7 @@ export const App = () => {
         // show={Information.Show}
         create={Information.Create}
         // 图标
-        icon={PostIcon}
+        icon={SupportAgent}
         // 自定义菜单标题
         options={{ label: "咨询管理" }}
       ></Resource>
@@ -113,7 +123,7 @@ export const App = () => {
         // show={Material.Show}
         create={Material.Create}
         // 图标
-        icon={PostIcon}
+        icon={Inventory}
         // 自定义菜单标题
         options={{ label: "物料管理" }}
       ></Resource>
@@ -126,7 +136,7 @@ export const App = () => {
         // show={Book.Show}
         create={Book.Create}
         // 图标
-        icon={PostIcon}
+        icon={MenuBook}
         // 自定义菜单标题
         options={{ label: "图书管理" }}
       ></Resource>
@@ -139,7 +149,7 @@ export const App = () => {
         // show={Teach.Show}
         create={Teach.Create}
         // 图标
-        icon={PostIcon}
+        icon={Teachs}
         // 自定义菜单标题
         options={{ label: "师资管理" }}
       ></Resource>
@@ -152,7 +162,7 @@ export const App = () => {
         // show={School.Show}
         create={School.Create}
         // 图标
-        icon={PostIcon}
+        icon={Schools}
         // 自定义菜单标题
         options={{ label: "机构管理" }}
       ></Resource>
@@ -165,7 +175,7 @@ export const App = () => {
         // show={Tips.Show}
         create={Tips.Create}
         // 图标
-        icon={PostIcon}
+        icon={TipsAndUpdates}
         // 自定义菜单标题
         options={{ label: "贴士集管理" }}
       ></Resource>
@@ -178,7 +188,7 @@ export const App = () => {
         // show={Role.Show}
         create={Role.Create}
         // 图标
-        icon={PostIcon}
+        icon={People}
         // 自定义菜单标题
         options={{ label: "角色管理" }}
       ></Resource>
@@ -191,7 +201,7 @@ export const App = () => {
         // show={User.Show}
         create={User.Create}
         // 图标
-        icon={PostIcon}
+        icon={Person}
         // 自定义菜单标题
         options={{ label: "用户管理" }}
       ></Resource>
@@ -204,7 +214,7 @@ export const App = () => {
         // show={Code.Show}
         create={Code.Create}
         // 图标
-        icon={PostIcon}
+        icon={VpnKey}
         // 自定义菜单标题
         options={{ label: "激活码管理" }}
       ></Resource>

@@ -16,7 +16,6 @@ import {
   SelectField,
   RichTextField,
   UrlField,
-  WrapperField,
   TopToolbar,
   FilterButton,
   CreateButton,
@@ -27,6 +26,7 @@ import {
   useListContext,
   EditButton,
   ShowButton,
+  RefreshButton,
 } from "../../utils/dep";
 
 // 定义操作按钮的回调函数
@@ -59,9 +59,10 @@ const ListActions = () => {
 
   return (
     <TopToolbar>
+      <FilterButton disableSaveQuery={true} />
       <CreateButton label="新建" />
+      <RefreshButton label="刷新" />
       <ExportButton label="导出" />
-      <FilterButton />
       {/* <ImportButton>: benwinding/react-admin-import-csv. */}
     </TopToolbar>
   );
@@ -79,7 +80,7 @@ const postFilters = [
   <TextInput label="学校" source="title3" defaultValue="333" />,
 ];
 
-const TeacherList = () => {
+const TeachList = () => {
   return (
     <List actions={<ListActions />} filters={postFilters}>
       <Datagrid>
@@ -121,4 +122,4 @@ const TeacherList = () => {
   );
 };
 
-export default TeacherList;
+export default TeachList;
