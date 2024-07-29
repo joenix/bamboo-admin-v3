@@ -3,6 +3,8 @@ import { QueryClient, Resource, fetchUtils } from "./dep";
 
 import { host } from "../http";
 
+import authProvider from "../provider/authProvider";
+
 /**
  * @param permissions
  * @returns
@@ -56,10 +58,23 @@ export const fetchResources = (permissions: any) => {
 //   />,
 // ];
 
+// 获取token
+const getToken = async () => {
+  const identity = await authProvider.getIdentity();
+
+  if (identity === null) return null;
+
+  const { token } = identity;
+
+  return token;
+};
+
 // 创建 httpClient 对象
 export const httpClient = {
   // Get
-  get: (url, { params, headers = {} } = {}) => {
+  get: async (url, { params, headers = {} } = {}) => {
+    const token = await getToken();
+
     const queryString = params
       ? `?${new URLSearchParams(params).toString()}`
       : "";
@@ -68,21 +83,23 @@ export const httpClient = {
       headers: new Headers({
         Accept: "application/json",
         ...headers,
-        // Authorization: `Bearer ${yourAuthToken}`, // 示例认证头
+        Authorization: `Bearer ${token}`,
       }),
     };
     return fetchUtils.fetchJson(`${host}${url}${queryString}`, options);
   },
 
   // Post
-  post: (url, { data, headers } = {}) => {
+  post: async (url, { data, headers } = {}) => {
+    const token = await getToken();
+
     const options = {
       method: "POST",
       headers: new Headers({
         Accept: "application/json",
         "Content-Type": "application/json",
         ...headers,
-        // Authorization: `Bearer ${yourAuthToken}`, // 示例认证头
+        Authorization: `Bearer ${token}`,
       }),
       body: JSON.stringify(data),
     };

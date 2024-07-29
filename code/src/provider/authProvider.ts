@@ -1,19 +1,28 @@
 import { AuthProvider, HttpError, redirectTo } from "react-admin";
-import data from "../users.json";
+// Use Api
+import { api } from "../http";
+
+// Use HttpClient
+import { httpClient } from "../utils/kit";
+
+// Use User Api
+const { User } = api;
 
 // AuthProvider
 export const authProvider: AuthProvider = {
-  login: ({ username, password }) => {
-    const user = data.users.find(
-      (u) => u.username === username && u.password === password
-    );
+  // 登陆
+  login: async ({ username, password }) => {
+    // const res = await httpClient.post(User.login, {
+    //   data: { username, password },
+    // });
 
-    if (user) {
-      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      let { password, ...userToPersist } = user;
-      localStorage.setItem("user", JSON.stringify(userToPersist));
-      return Promise.resolve();
-    }
+    // console.log("res", res);
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ name: "dingding", token: "12345" })
+    );
+    return Promise.resolve();
 
     return Promise.reject(
       new HttpError("用户名或密码错误", 401, {
@@ -21,6 +30,7 @@ export const authProvider: AuthProvider = {
       })
     );
   },
+  // 登出
   logout: () => {
     localStorage.removeItem("user");
     return Promise.resolve();
@@ -29,11 +39,20 @@ export const authProvider: AuthProvider = {
     console.log("error", error);
     return Promise.resolve();
   },
-  checkAuth: () =>
-    localStorage.getItem("user") ? Promise.resolve() : Promise.reject(),
+
+  // 检查登陆态
+  checkAuth: () => {
+    return localStorage.getItem("user")
+      ? Promise.resolve()
+      : Promise.reject("用户未登录"!);
+  },
+
+  // 获取权限
   getPermissions: () => {
     return Promise.resolve("有没有权限呢?");
   },
+
+  // 获取用户信息
   getIdentity: () => {
     const persistedUser = localStorage.getItem("user");
     const user = persistedUser ? JSON.parse(persistedUser) : null;

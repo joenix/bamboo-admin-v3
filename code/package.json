@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-react": "^1.0.6",
     "react": "^18.3.0",
     "react-admin": "^5.0.0",
     "react-dom": "^18.3.0"

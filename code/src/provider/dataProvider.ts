@@ -8,8 +8,18 @@ import { api } from "../http/index";
 export const dataProvider = {
   // 新建 - 返回新建的id
   create: async (resource, params) => {
-    console.log("params", params);
-    console.log("resource", resource);
+    // Banner
+    //     {
+    //     "content":"wdwa",
+    //     "img":"1",
+    //     "video":"1",
+    //     "name":"dwaadwaa",
+    //     "index":1,
+    //     "used":true
+    // }
+    // const res = await httpClient.post(api[resource].create, { data: params });
+
+    // console.log("res", res);
 
     return Promise.resolve({
       data: {
@@ -19,18 +29,11 @@ export const dataProvider = {
     });
   },
 
+  // 获取列表
   getList: async (resource, params) => {
-    // httpClient
-    //   .post(api[resource].get, {
-    //     data: { key1: "value1", key2: "value2" },
-    //     headers: { "Custom-Header": "CustomValue" },
-    //   })
-    //   .then((response) => {
-    //     console.log("POST response:", response.json);
-    //   })
-    //   .catch((error) => {
-    //     console.error("POST error:", error);
-    //   });
+    // const res = await httpClient.get(api[resource].getall);
+
+    // console.log("res", res);
 
     const data = {
       data: [

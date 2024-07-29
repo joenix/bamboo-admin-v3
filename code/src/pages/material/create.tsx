@@ -12,8 +12,11 @@ import {
   useNotify,
   useRedirect,
   useRecordContext,
+  useInput,
 } from "../../utils/dep";
-// import RichTextInput from "ra-input-rich-text";
+
+import { Richtext } from "../../components";
+import { useState } from "react";
 
 /**
  * @returns
@@ -22,6 +25,7 @@ import {
 export const MaterialCreate = () => {
   const notify = useNotify();
   const redirect = useRedirect();
+  const [richtext, setRichtext] = useState("");
 
   // 自定义成功回调
   const onSuccess = (data) => {
@@ -31,17 +35,19 @@ export const MaterialCreate = () => {
 
   // 自定义失败回调
   const onError = (error) => {
-    notify(`Could not create post: ${error.message}`);
+    notify(`新建失败: ${error.message}`);
   };
 
   const Aside = () => <div>我是侧边栏，还没想好写什么</div>;
 
   // 数据处理： submit ->  transform -> dataProvider.create()
   const transform = (data) => {
-    return {
+    data = {
       ...data,
-      fullName: 123,
+      richtext,
     };
+    console.log(data);
+    return data;
   };
 
   const choices = [
@@ -63,15 +69,12 @@ export const MaterialCreate = () => {
       // redirect="list"
       title="新建物料"
       transform={transform}
-      // 自定义resource name，默认是外部<Resource>的name,在这是"Material"
-      // resource="aaabbb"
     >
       <SimpleForm>
         <TextInput source="title" validate={[required()]} label="标题" />
         <TextInput source="description" multiline={true} label="描述" />
         <SelectInput source="category" label="学校" choices={choices} />
-
-        <FileInput
+        {/* <FileInput
           source="attachments"
           label="文件上传"
           multiple={true}
@@ -86,12 +89,16 @@ export const MaterialCreate = () => {
 
         <FileInput source="video" label="视频上传" accept="video/*">
           <FileField source="src" title="title" />
-        </FileInput>
-
-        <FileInput source="audio" label="音频上传" accept="audio/*">
+        </FileInput> */}
+        <FileInput
+          source="audio"
+          label="音频上传"
+          // color="secondary"
+          placeholder="拖动文件，或者点击进行上传"
+        >
           <FileField source="src" title="title" />
         </FileInput>
-        {/* <RichTextInput source="body" /> */}
+        <Richtext onChange={(richtext) => setRichtext(richtext)} />
         <DateInput
           label="时间选择"
           source="published_at"

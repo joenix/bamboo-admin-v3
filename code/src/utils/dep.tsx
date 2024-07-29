@@ -15,6 +15,7 @@ export {
   fetchUtils,
   useNotify,
   useRedirect,
+  useInput,
 
   /**
    *  DataProvider

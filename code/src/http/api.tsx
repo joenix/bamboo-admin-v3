@@ -1,5 +1,5 @@
 // Host
-export const host = "http://127.0.0.1:3000/users/regist";
+export const host = "http://127.0.0.1:3000";
 
 // Api
 export const api = {
