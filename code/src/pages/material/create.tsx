@@ -18,7 +18,7 @@ import {
   FormTab,
 } from "../../utils/dep";
 
-import { Richtext } from "../../components";
+import { RichText } from "../../components";
 import { useState } from "react";
 
 /**
@@ -128,7 +128,7 @@ export const MaterialCreate = () => {
 
         {/* 富文本管理 */}
         <FormTab label="富文本管理">
-          <Richtext onChange={(r) => setRichtext(r)} />
+          <RichText onChange={(r) => setRichtext(r)} />
         </FormTab>
 
         {/* 案件管理 */}

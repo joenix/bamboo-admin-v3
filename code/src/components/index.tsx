@@ -5,7 +5,8 @@ import Profile from "./profile";
 import Setting from "./setting";
 import Login from "./login";
 import Ready from "./ready";
-import Richtext from "./richtext";
+import RichText from "./richtext";
+import VideoField from "./videofield";
 
 export {
   NotFount,
@@ -15,5 +16,6 @@ export {
   Setting,
   Login,
   Ready,
-  Richtext,
+  RichText,
+  VideoField,
 };

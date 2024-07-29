@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
 
-function Richtext({ source, onChange }) {
+function RichText({ source, onChange }) {
   // editor 实例
   const [editor, setEditor] = useState(null); // JS 语法
 
@@ -63,4 +63,4 @@ function Richtext({ source, onChange }) {
   );
 }
 
-export default Richtext;
+export default RichText;

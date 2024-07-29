@@ -1,20 +1,12 @@
 import {
   Datagrid,
-  EmailField,
   List,
   TextField,
   FunctionField,
   Button,
-  ArrayField,
-  SingleFieldList,
   BooleanField,
-  ChipField,
-  DateField,
-  FileField,
   ImageField,
-  NumberField,
   SelectField,
-  RichTextField,
   UrlField,
   TopToolbar,
   FilterButton,
@@ -24,10 +16,11 @@ import {
   TextInput,
   usePermissions,
   useListContext,
-  EditButton,
-  ShowButton,
   RefreshButton,
 } from "../../utils/dep";
+
+// Use Components
+import { VideoField } from "../../components";
 
 // 定义操作按钮的回调函数
 const handleConfirm = (event, id) => {
@@ -45,10 +38,10 @@ const handleCancel = (event, id) => {
 const CustomActions = ({ record }) => (
   <div>
     <Button onClick={(e) => handleConfirm(e, record.id)} color="primary">
-      确认
+      编辑
     </Button>
     <Button onClick={(e) => handleCancel(e, record.id)} color="secondary">
-      取消
+      删除
     </Button>
   </div>
 );
@@ -67,56 +60,37 @@ const ListActions = () => {
     </TopToolbar>
   );
 };
-const hobbyList = [
-  { id: "death", name: "死神" },
-  { id: "nija", name: "火影" },
-];
-
-// 搜索
-const postFilters = [
-  <SearchInput placeholder="请搜索" source="id" alwaysOn />,
-  <TextInput label="标题" source="title1" defaultValue="111" />,
-  <TextInput label="年龄" source="title2" defaultValue="222" />,
-  <TextInput label="学校" source="title3" defaultValue="333" />,
-];
 
 const BannerList = () => {
+  const LinkList = [
+    { id: "1", name: "外部链接" },
+    { id: "2", name: "小程序链接" },
+  ];
+
+  // 搜索
+  const postFilters = [
+    <SearchInput placeholder="请搜索" source="id" alwaysOn />,
+    <TextInput label="标题" source="title1" defaultValue="111" />,
+    <TextInput label="年龄" source="title2" defaultValue="222" />,
+    <TextInput label="学校" source="title3" defaultValue="333" />,
+  ];
+
   return (
     <List actions={<ListActions />} filters={postFilters}>
       <Datagrid>
-        <TextField source="id" />
-        <ChipField source="rank" />
-        <DateField source="birthday" label="出生" />
-        <BooleanField source="isAdult" label="是否成年" />
-        <EmailField source="email" label="邮箱" />
-        <NumberField source="money" />
-        <RichTextField source="signature" label="签名" />
-        <SelectField
-          source="hobby"
-          choices={hobbyList}
-          optionText="name"
-          optionValue="id"
-          label="兴趣"
-        />
-
-        <ArrayField source="tags">
-          <SingleFieldList>
-            <TextField source="name" />
-          </SingleFieldList>
-        </ArrayField>
-
-        <FileField source="file" title="点击下载" label="文件" />
-        <TextField source="company.name" label="公司" />
-        <UrlField source="website" />
-        <ImageField source="avator" title="头像" label="头像" />
+        <TextField source="id" label="id" />
+        <TextField source="name" label="名字" />
+        <TextField source="content" label="内容" />
+        <TextField source="index" label="排序" />
+        <BooleanField source="used" label="是否使用" />
+        <ImageField source="img" title="图片" label="图片" />
+        <UrlField source="link" label="跳转链接" />
+        <VideoField source="video" />
+        <SelectField source="linkType" choices={LinkList} label="链接类型" />
         <FunctionField
           label="操作"
           render={(record) => <CustomActions record={record} />}
         />
-        <>
-          <EditButton label="编辑" />
-          <ShowButton label="查看" />
-        </>
       </Datagrid>
     </List>
   );
