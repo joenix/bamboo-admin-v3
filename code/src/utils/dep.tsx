@@ -76,6 +76,7 @@ export {
   Toolbar,
   TabbedForm,
   FormTab,
+  BulkDeleteButton,
 
   /**
    *  Field
@@ -110,6 +111,3 @@ export {
 
 // Use @mui/material
 export { Breadcrumbs, Link, Typography } from "@mui/material";
-
-// Use Icon
-import PostIcon from "@mui/icons-material/Book";

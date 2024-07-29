@@ -28,6 +28,8 @@ import { Layout } from "./Layout";
 // Use Provider
 import { dataProvider, authProvider } from "./provider";
 
+import "./index.less";
+
 // Use Pages
 import {
   Banner,
@@ -91,7 +93,7 @@ export const App = () => {
         name="Banner"
         list={Banner.List}
         edit={Banner.Edit}
-        // show={Banner.Show}
+        show={Banner.Show}
         create={Banner.Create}
         // 图标
         icon={ViewCarousel}

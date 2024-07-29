@@ -22,44 +22,9 @@ import {
 // Use Components
 import { VideoField } from "../../components";
 
-// 定义操作按钮的回调函数
-const handleConfirm = (event, id) => {
-  event.stopPropagation();
-  console.log("Confirm clicked for ID:", id);
-  // 处理确认逻辑
-};
-
-const handleCancel = (event, id) => {
-  event.stopPropagation();
-  console.log("Cancel clicked for ID:", id);
-  // 处理取消逻辑
-};
-
-const CustomActions = ({ record }) => (
-  <div>
-    <Button onClick={(e) => handleConfirm(e, record.id)} color="primary">
-      编辑
-    </Button>
-    <Button onClick={(e) => handleCancel(e, record.id)} color="secondary">
-      删除
-    </Button>
-  </div>
-);
-
-const ListActions = () => {
-  const { total, isPending } = useListContext();
-  const { permissions } = usePermissions();
-
-  return (
-    <TopToolbar>
-      <FilterButton disableSaveQuery={true} />
-      <CreateButton label="新建" />
-      <RefreshButton label="刷新" />
-      <ExportButton label="导出" />
-      {/* <ImportButton>: benwinding/react-admin-import-csv. */}
-    </TopToolbar>
-  );
-};
+// Use Icon
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const BannerList = () => {
   const LinkList = [
@@ -67,13 +32,60 @@ const BannerList = () => {
     { id: "2", name: "小程序链接" },
   ];
 
+  const ListActions = () => {
+    const { total, isPending } = useListContext();
+    const { permissions } = usePermissions();
+
+    return (
+      <TopToolbar>
+        <FilterButton disableSaveQuery={true} />
+        <CreateButton label="新建" />
+        <RefreshButton label="刷新" />
+        <ExportButton label="导出" />
+        {/* <ImportButton>: benwinding/react-admin-import-csv. */}
+      </TopToolbar>
+    );
+  };
+
   // 搜索
   const postFilters = [
     <SearchInput placeholder="请搜索" source="id" alwaysOn />,
-    <TextInput label="标题" source="title1" defaultValue="111" />,
-    <TextInput label="年龄" source="title2" defaultValue="222" />,
-    <TextInput label="学校" source="title3" defaultValue="333" />,
+    <TextInput label="是否使用" source="used" defaultValue={true} />,
+    <TextInput label="名字" source="name" defaultValue="" />,
+    <TextInput label="跳转类型" source="linkType" defaultValue="" />,
   ];
+
+  // 处理删除
+  const handleDel = (event, id) => {
+    event.stopPropagation();
+    console.log("handleDel for ID:", id);
+  };
+
+  // 处理编辑
+  const handleEdit = (event, id) => {
+    event.stopPropagation();
+    console.log("handleEdit for ID:", id);
+  };
+
+  const CustomActions = ({ record }) => (
+    <div className="buttonGroup">
+      <Button
+        onClick={(e) => handleEdit(e, record.id)}
+        color="primary"
+        variant="contained"
+        startIcon={<EditIcon />}
+        label="编辑"
+      ></Button>
+
+      <Button
+        onClick={(e) => handleDel(e, record.id)}
+        color="error"
+        variant="contained"
+        startIcon={<DeleteIcon />}
+        label="删除"
+      ></Button>
+    </div>
+  );
 
   return (
     <List actions={<ListActions />} filters={postFilters}>
@@ -85,7 +97,7 @@ const BannerList = () => {
         <BooleanField source="used" label="是否使用" />
         <ImageField source="img" title="图片" label="图片" />
         <UrlField source="link" label="跳转链接" />
-        <VideoField source="video" />
+        <VideoField source="video" label="视频" />
         <SelectField source="linkType" choices={LinkList} label="链接类型" />
         <FunctionField
           label="操作"
