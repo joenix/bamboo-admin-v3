@@ -8,9 +8,10 @@ import {
   Button,
   TextInput,
   RouterLink,
-  ImageInput,
-  ImageField,
   BooleanInput,
+  Toolbar,
+  SaveButton,
+  DeleteButton,
 } from "../../utils/dep";
 
 // Use Icon
@@ -102,10 +103,17 @@ const BannerEdit = () => {
       </>
     );
   };
+  // 自定义工具栏
+  const CustomToolbar = (props) => (
+    <Toolbar {...props} className="buttonGroup">
+      <SaveButton label="保存" />
+      <DeleteButton label="删除" />
+    </Toolbar>
+  );
 
   return (
     <Edit title="编辑轮播" actions={<EditActions />}>
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>
     </Edit>

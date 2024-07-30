@@ -18,6 +18,8 @@ import {
   useListContext,
   RefreshButton,
   RouterLink,
+  BooleanInput,
+  SelectInput,
 } from "../../utils/dep";
 
 // Use Components
@@ -49,9 +51,9 @@ const BannerList = () => {
   // 搜索
   const postFilters = [
     <SearchInput placeholder="请搜索" source="id" alwaysOn />,
-    <TextInput label="是否使用" source="used" defaultValue={true} />,
     <TextInput label="名字" source="name" defaultValue="" />,
-    <TextInput label="跳转类型" source="linkType" defaultValue="" />,
+    <SelectInput source="linkType" choices={LinkList} label="链接类型" />,
+    <BooleanInput label="是否使用" source="used" />,
   ];
 
   // 处理删除

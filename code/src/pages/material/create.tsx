@@ -1,25 +1,20 @@
 import {
   Create,
-  SimpleForm,
-  TextInput,
-  DateInput,
-  SelectInput,
   ImageInput,
   FileInput,
   FileField,
   ImageField,
-  required,
   useNotify,
   useRedirect,
   SaveButton,
-  RefreshButton,
   Toolbar,
   TabbedForm,
   FormTab,
+  useState,
 } from "../../utils/dep";
 
+// Use Components
 import { RichText } from "../../components";
-import { useState } from "react";
 
 /**
  * @returns
@@ -51,12 +46,7 @@ export const MaterialCreate = () => {
     return data;
   };
 
-  const choices = [
-    { id: "choice1", name: "清华" },
-    { id: "choice2", name: "北大" },
-  ];
-
-  const MyToolbar = (props) => (
+  const CustomToolbar = (props) => (
     <Toolbar {...props}>
       <SaveButton label="新建" />
     </Toolbar>
@@ -76,7 +66,7 @@ export const MaterialCreate = () => {
       title="新建物料"
       transform={transform}
     >
-      <TabbedForm toolbar={<MyToolbar />}>
+      <TabbedForm toolbar={<CustomToolbar />}>
         {/* 视频管理 */}
         <FormTab label="视频管理">
           <FileInput
