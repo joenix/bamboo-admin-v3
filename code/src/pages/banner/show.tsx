@@ -1,16 +1,78 @@
-import { useParams, useRecordContext } from "../../utils/dep";
+import {
+  Show,
+  SimpleShowLayout,
+  useRecordContext,
+  TextField,
+  UrlField,
+  BooleanField,
+  ImageField,
+  SelectField,
+  TopToolbar,
+  EditButton,
+} from "../../utils/dep";
+
+// Use Config
+import { LinkList } from "./config";
 
 const BannerShow = () => {
-  console.log("useParams", useParams());
-  const { id } = useParams();
+  const ShowActions = () => {
+    return (
+      <TopToolbar>
+        <EditButton label="编辑" />
+      </TopToolbar>
+    );
+  };
 
-  const record = useRecordContext();
+  const View = () => {
+    const record = useRecordContext();
 
-  // if (!record) return null;
+    if (!record) return null;
 
-  console.log("Record:", record); // 打印当前记录的数据
+    return (
+      <>
+        <div className="viewContainer">
+          <div className="title">ID：</div>
+          <TextField source="id" label="ID" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">名称：</div>
+          <TextField source="name" label="名称" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">内容：</div>
+          <TextField source="content" label="内容" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">排序：</div>
+          <TextField source="index" label="排序" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">链接类型:</div>
+          <SelectField source="linkType" choices={LinkList} label="链接类型" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">跳转链接：</div>
+          <UrlField source="link" label="链接" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">是否使用：</div>
+          <BooleanField source="used" label="是否使用" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">图片：</div>
+          <ImageField source="img" title="图片" label="图片" />
+        </div>
+      </>
+    );
+  };
 
-  return <div>轮播图详情:{id}</div>;
+  return (
+    <Show actions={<ShowActions />}>
+      <SimpleShowLayout>
+        <View />
+      </SimpleShowLayout>
+    </Show>
+  );
 };
 
 export default BannerShow;

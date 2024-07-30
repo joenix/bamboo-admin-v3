@@ -161,8 +161,56 @@ export const dataProvider = {
         return Promise.resolve(data);
     }
   },
+
+  // 获取某条数据
   getOne: (resource, params) => {
-    return Promise.resolve();
+    console.log("params", params);
+    switch (resource) {
+      case "Banner":
+        const { id } = params;
+        // 走接口获取单个数据
+
+        const data2 = [
+          {
+            id: "111",
+            content: "生鲜",
+            img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+            video,
+            name: "生鲜类目",
+            index: 0,
+            used: true,
+            link: "http://www.baidu.com",
+            linkType: "1",
+          },
+          {
+            id: "222",
+            content: "户外",
+            img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+            video,
+            name: "户外类目",
+            index: 1,
+            used: false,
+            link: "wx/login",
+            linkType: "2",
+          },
+          {
+            id: "333",
+            content: "亲子",
+            img: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+            video,
+            name: "亲子类目",
+            index: 2,
+            used: true,
+            link: "http://www.google.com",
+            linkType: "1",
+          },
+        ];
+        const d = data2.find((x) => x.id === id);
+
+        return Promise.resolve({ data: d });
+      default:
+        return Promise.resolve(data);
+    }
   },
   getMany: (resource, params) => {
     return Promise.resolve();

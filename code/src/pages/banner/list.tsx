@@ -26,12 +26,10 @@ import { VideoField } from "../../components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const BannerList = () => {
-  const LinkList = [
-    { id: "1", name: "外部链接" },
-    { id: "2", name: "小程序链接" },
-  ];
+// Use Config
+import { LinkList } from "./config";
 
+const BannerList = () => {
   const ListActions = () => {
     const { total, isPending } = useListContext();
     const { permissions } = usePermissions();

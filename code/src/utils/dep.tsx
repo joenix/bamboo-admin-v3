@@ -16,6 +16,7 @@ export {
   useNotify,
   useRedirect,
   useInput,
+  RecordContextProvider,
 
   /**
    *  DataProvider
@@ -53,6 +54,8 @@ export {
   TopToolbar,
   CheckForApplicationUpdate,
   Create,
+  Show,
+  Edit,
   SimpleForm,
   TextInput,
   DateInput,
@@ -77,6 +80,7 @@ export {
   TabbedForm,
   FormTab,
   BulkDeleteButton,
+  SimpleShowLayout,
 
   /**
    *  Field

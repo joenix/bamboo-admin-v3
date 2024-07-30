@@ -100,8 +100,7 @@ export const App = () => {
         // 自定义菜单标题
         options={{ label: "轮播管理" }}
       >
-        {/* 详情页 */}
-        <Route path=":bannerId/detail" element={<div>detail</div>} />
+        {/* <Route path=":bannerId/detail" element={<div>detail</div>} /> */}
       </Resource>
 
       {/* Information */}
@@ -109,7 +108,7 @@ export const App = () => {
         name="Information"
         list={Information.List}
         edit={Information.Edit}
-        // show={Information.Show}
+        show={Information.Show}
         create={Information.Create}
         // 图标
         icon={SupportAgent}
@@ -122,7 +121,7 @@ export const App = () => {
         name="Material"
         list={Material.List}
         edit={Material.Edit}
-        // show={Material.Show}
+        show={Material.Show}
         create={Material.Create}
         // 图标
         icon={Inventory}
@@ -135,7 +134,7 @@ export const App = () => {
         name="Book"
         list={Book.List}
         edit={Book.Edit}
-        // show={Book.Show}
+        show={Book.Show}
         create={Book.Create}
         // 图标
         icon={MenuBook}
@@ -148,7 +147,7 @@ export const App = () => {
         name="Teach"
         list={Teach.List}
         edit={Teach.Edit}
-        // show={Teach.Show}
+        show={Teach.Show}
         create={Teach.Create}
         // 图标
         icon={Teachs}
@@ -161,7 +160,7 @@ export const App = () => {
         name="School"
         list={School.List}
         edit={School.Edit}
-        // show={School.Show}
+        show={School.Show}
         create={School.Create}
         // 图标
         icon={Schools}
@@ -174,7 +173,7 @@ export const App = () => {
         name="Tips"
         list={Tips.List}
         edit={Tips.Edit}
-        // show={Tips.Show}
+        show={Tips.Show}
         create={Tips.Create}
         // 图标
         icon={TipsAndUpdates}
@@ -187,7 +186,7 @@ export const App = () => {
         name="Role"
         list={Role.List}
         edit={Role.Edit}
-        // show={Role.Show}
+        show={Role.Show}
         create={Role.Create}
         // 图标
         icon={People}
@@ -200,7 +199,7 @@ export const App = () => {
         name="User"
         list={User.List}
         edit={User.Edit}
-        // show={User.Show}
+        show={User.Show}
         create={User.Create}
         // 图标
         icon={Person}
@@ -213,7 +212,7 @@ export const App = () => {
         name="Code"
         list={Code.List}
         edit={Code.Edit}
-        // show={Code.Show}
+        show={Code.Show}
         create={Code.Create}
         // 图标
         icon={VpnKey}
