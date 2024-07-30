@@ -68,6 +68,7 @@ export {
   ShowButton,
   SelectInput,
   ImageInput,
+  BooleanInput,
   FileInput,
   SaveButton,
   UpdateButton,
@@ -81,6 +82,7 @@ export {
   FormTab,
   BulkDeleteButton,
   SimpleShowLayout,
+  ReferenceInput,
 
   /**
    *  Field
@@ -114,4 +116,12 @@ export {
 } from "react-router-dom";
 
 // Use @mui/material
-export { Breadcrumbs, Link, Typography } from "@mui/material";
+export {
+  Breadcrumbs,
+  Link,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";

@@ -4,12 +4,13 @@ import {
   Edit,
   TopToolbar,
   TextField,
-  UrlField,
-  BooleanField,
-  ImageField,
-  SelectField,
+  SelectInput,
   Button,
+  TextInput,
   RouterLink,
+  ImageInput,
+  ImageField,
+  BooleanInput,
 } from "../../utils/dep";
 
 // Use Icon
@@ -17,6 +18,9 @@ import InfoIcon from "@mui/icons-material/Info";
 
 // Use Config
 import { LinkList } from "./config";
+
+// Use Components
+import { Imgselect } from "../../components";
 
 const BannerEdit = () => {
   const EditActions = () => {
@@ -42,39 +46,58 @@ const BannerEdit = () => {
 
     if (!record) return null;
 
+    // 请求物料-图片库
+    const ImgList = [
+      {
+        id: 1,
+        name: "风景",
+        url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
+      {
+        id: 2,
+        name: "写实",
+        url: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
+      {
+        id: 3,
+        name: "人物",
+        url: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      },
+    ];
+
     return (
       <>
         <div className="viewContainer">
           <div className="title">ID：</div>
-          <TextField source="id" label="ID" />
+          <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">名称：</div>
-          <TextField source="name" label="名称" />
+          <TextInput source="name" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">内容：</div>
-          <TextField source="content" label="内容" />
+          <TextInput source="content" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">排序：</div>
-          <TextField source="index" label="排序" />
+          <TextInput source="index" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">链接类型:</div>
-          <SelectField source="linkType" choices={LinkList} label="链接类型" />
+          <SelectInput source="linkType" choices={LinkList} label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">跳转链接：</div>
-          <UrlField source="link" label="链接" />
+          <TextInput source="link" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">是否使用：</div>
-          <BooleanField source="used" label="是否使用" />
+          <BooleanInput source="used" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">图片：</div>
-          <ImageField source="img" title="图片" label="图片" />
+          <Imgselect cururl={record.img} datasource={ImgList}></Imgselect>
         </div>
       </>
     );

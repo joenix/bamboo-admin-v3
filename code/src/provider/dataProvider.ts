@@ -10,15 +10,6 @@ import video from "../SampleVideo.mp4";
 export const dataProvider = {
   // 新建 - 返回新建的id
   create: async (resource, params) => {
-    // Banner
-    //     {
-    //     "content":"wdwa",
-    //     "img":"1",
-    //     "video":"1",
-    //     "name":"dwaadwaa",
-    //     "index":1,
-    //     "used":true
-    // }
     // const res = await httpClient.post(api[resource].create, { data: params });
 
     // console.log("res", res);
@@ -218,8 +209,24 @@ export const dataProvider = {
   getManyReference: (resource, params) => {
     return Promise.resolve();
   },
+  update: (resource, params) => {
+    console.log("update", params);
+    const { data, id, previousData } = params;
+    return Promise.resolve();
+  },
   updateMany: (resource, params) => Promise.resolve(),
+
+  // 删除单个
   delete: (resource, params) => {
+    console.log("delete", params);
+    switch (resource) {
+      case "Banner":
+        const { id } = params;
+        // 删除单个接口
+        return Promise.resolve();
+      default:
+        return Promise.resolve();
+    }
     return Promise.resolve();
   },
 
