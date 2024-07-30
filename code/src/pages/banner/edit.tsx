@@ -20,7 +20,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { LinkList } from "./config";
 
 // Use Components
-import { Imgselect } from "../../components";
+import { ImgSelect } from "../../components";
 
 const BannerEdit = () => {
   const EditActions = () => {
@@ -97,7 +97,7 @@ const BannerEdit = () => {
         </div>
         <div className="viewContainer">
           <div className="title">图片：</div>
-          <Imgselect cururl={record.img} datasource={ImgList}></Imgselect>
+          <ImgSelect source="img" choices={ImgList} label="选择图片" />
         </div>
       </>
     );

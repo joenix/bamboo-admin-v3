@@ -7,7 +7,7 @@ import Login from "./login";
 import Ready from "./ready";
 import RichText from "./richtext";
 import VideoField from "./videofield";
-import Imgselect from "./imgselect";
+import ImgSelect from "./imgselect";
 
 export {
   NotFount,
@@ -19,5 +19,5 @@ export {
   Ready,
   RichText,
   VideoField,
-  Imgselect,
+  ImgSelect,
 };

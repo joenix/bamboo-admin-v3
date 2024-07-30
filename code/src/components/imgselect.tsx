@@ -2,43 +2,70 @@
 import { useEffect, useState } from "react";
 
 // Use Dep
-import { Select, MenuItem, InputLabel, FormControl } from "../utils/dep";
+import {
+  Select,
+  MenuItem,
+  useInput,
+  InputLabel,
+  FormControl,
+} from "../utils/dep";
 
 /**
  *
- * @param datasource  图片数据源列表
+ * @param choices  图片数据源列表
+ * @param source   对应数据中的图片字段名
  * @param cururl      当前图片地址
  * @returns
  */
-const ImgSelect = ({ datasource, cururl }) => {
+const ImgSelect = ({ source, choices, label }) => {
+  const {
+    field: { value, onChange },
+  } = useInput({ source });
+
   const [img, setImg] = useState("");
 
   useEffect(() => {
-    if (!datasource || !cururl) return;
-    const selectedImg = datasource.find((img) => img.url === cururl);
+    if (!choices || !value) return;
+    const selectedImg = choices.find((img) => img.url === value);
     setImg(selectedImg);
-  }, [datasource, cururl]);
+  }, [choices, value]);
 
   const handleChange = (event) => {
-    const selectedImg = datasource.find(
-      (img) => img.url === event.target.value
-    );
+    const selectedUrl = event.target.value;
+    const selectedImg = choices.find((img) => img.url === selectedUrl);
+
+    // 更新本地图片
     setImg(selectedImg);
+
+    // 更新表单的值
+    onChange(selectedUrl);
   };
 
   return (
     <div className="ImgSelect">
-      <FormControl fullWidth variant="outlined">
-        <InputLabel id="img-select-label">选择图片</InputLabel>
-        <Select value={img?.url || ""} onChange={handleChange} label="选择图片">
-          {datasource.map((img) => (
+      <FormControl fullWidth variant="outlined" margin="normal">
+        <InputLabel id={`${source}-select-label`}>{label}</InputLabel>
+        <Select
+          labelId={`${source}-select-label`}
+          value={value || ""}
+          onChange={handleChange}
+          label={label}
+        >
+          {choices.map((img) => (
             <MenuItem key={img.url} value={img.url}>
               {img.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      {img && <img className="preview" src={img.url} alt="预览图片" />}
+      {img && (
+        <img
+          className="preview"
+          src={img.url}
+          alt="预览图片"
+          style={{ marginTop: "16px", maxWidth: "100%", height: "auto" }}
+        />
+      )}
     </div>
   );
 };
