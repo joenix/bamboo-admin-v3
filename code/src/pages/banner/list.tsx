@@ -17,6 +17,7 @@ import {
   usePermissions,
   useListContext,
   RefreshButton,
+  RouterLink,
 } from "../../utils/dep";
 
 // Use Components
@@ -59,20 +60,18 @@ const BannerList = () => {
     console.log("handleDel for ID:", id);
   };
 
-  // 处理编辑
-  const handleEdit = (event, id) => {
-    event.stopPropagation();
-    console.log("handleEdit for ID:", id);
-  };
-
   const CustomActions = ({ record }) => (
     <div className="buttonGroup">
       <Button
-        onClick={(e) => handleEdit(e, record.id)}
+        component={RouterLink}
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
+        to={`/banner/${record.id}`}
         label="编辑"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       ></Button>
 
       <Button
