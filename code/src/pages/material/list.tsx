@@ -112,7 +112,7 @@ const MaterialList = () => {
           <UrlField
             source="url"
             label="链接"
-            style={{ width: "200px", display: "block", overflow: "scroll" }}
+            style={{ width: "250px", display: "block", overflow: "scroll" }}
           ></UrlField>
           <DateField source="createdAt" label="创建时间"></DateField>
           <DateField source="updatedAt" label="更新时间"></DateField>
