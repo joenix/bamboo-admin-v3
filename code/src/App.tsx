@@ -88,6 +88,19 @@ export const App = () => {
 
       {/* 标准路由 */}
 
+      {/* Material */}
+      <Resource
+        name="Material"
+        list={Material.List}
+        edit={Material.Edit}
+        show={Material.Show}
+        create={Material.Create}
+        // 图标
+        icon={Inventory}
+        // 自定义菜单标题
+        options={{ label: "物料管理" }}
+      ></Resource>
+
       {/* Banner */}
       <Resource
         name="Banner"
@@ -114,19 +127,6 @@ export const App = () => {
         icon={SupportAgent}
         // 自定义菜单标题
         options={{ label: "咨询管理" }}
-      ></Resource>
-
-      {/* Material */}
-      <Resource
-        name="Material"
-        list={Material.List}
-        edit={Material.Edit}
-        show={Material.Show}
-        create={Material.Create}
-        // 图标
-        icon={Inventory}
-        // 自定义菜单标题
-        options={{ label: "物料管理" }}
       ></Resource>
 
       {/* Book */}

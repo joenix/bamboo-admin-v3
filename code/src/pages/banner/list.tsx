@@ -73,7 +73,7 @@ const BannerList = () => {
   };
 
   const dialogconfirm = () => {
-    // 1. 走删除单个banner接口
+    // 1. 走删除单个接口
 
     // 2. 关闭弹窗
     dialogclose();
@@ -125,7 +125,7 @@ const BannerList = () => {
       <Confirmdialog
         open={dialogvisible}
         title="提示"
-        description="确定要删除这个导航吗"
+        description="确定要删除这条数据吗"
         onClose={dialogclose}
         onConfirm={dialogconfirm}
       ></Confirmdialog>

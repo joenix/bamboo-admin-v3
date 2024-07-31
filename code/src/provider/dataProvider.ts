@@ -110,7 +110,7 @@ export const dataProvider = {
     switch (resource) {
       case "Banner":
         // mock
-        const d = {
+        const d1 = {
           data: [
             {
               id: "111",
@@ -148,7 +148,33 @@ export const dataProvider = {
           ],
           total: 3,
         };
-        return Promise.resolve(d);
+        return Promise.resolve(d1);
+      case "Material":
+        // mock
+        const d2 = {
+          data: [
+            {
+              id: "111",
+              type: "1",
+              url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+              name: "图片名字",
+              content: "图片内容",
+              createdAt: "2024/01/20",
+              updatedAt: "2024/01/22",
+            },
+            {
+              id: "222",
+              type: "2",
+              url: video,
+              name: "视频名字",
+              content: "视频内容",
+              createdAt: "2024/01/20",
+              updatedAt: "2024/01/22",
+            },
+          ],
+          total: 3,
+        };
+        return Promise.resolve(d2);
       default:
         return Promise.resolve(data);
     }
