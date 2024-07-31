@@ -58,8 +58,8 @@ const BannerShow = () => {
           <UrlField source="link" label="链接" />
         </div>
         <div className="viewContainer">
-          <div className="title">是否使用:</div>
-          <BooleanField source="used" label="是否使用" />
+          <div className="title">是否启用:</div>
+          <BooleanField source="used" label="是否启用" />
         </div>
         <div className="viewContainer">
           <div className="title">视频:</div>

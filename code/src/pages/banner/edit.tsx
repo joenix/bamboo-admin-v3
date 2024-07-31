@@ -109,7 +109,7 @@ const BannerEdit = () => {
           <TextInput source="link" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">是否使用:</div>
+          <div className="title">是否启用:</div>
           <BooleanInput source="used" label={false} />
         </div>
         <div className="viewContainer">

@@ -1,102 +1,118 @@
 import {
-  Create,
   SimpleForm,
-  TextInput,
-  DateInput,
+  TextField,
   SelectInput,
-  ImageInput,
-  FileInput,
-  FileField,
-  ImageField,
+  TextInput,
+  BooleanInput,
+  Toolbar,
+  SaveButton,
+  Create,
   required,
-  useNotify,
-  useRedirect,
-  useRecordContext,
 } from "../../utils/dep";
-// import RichTextInput from "ra-input-rich-text";
 
-/**
- * @returns
- * By default, submitting the form in the <Create> view redirects to the <Edit> view.
- */
-export const BannerCreate = () => {
-  const notify = useNotify();
-  const redirect = useRedirect();
+// Use Config
+import { LinkList } from "./config";
 
-  // 自定义成功回调
-  const onSuccess = (data) => {
-    notify(`新建成功`);
-    redirect(`/Banner`);
+// Use Components
+import { ImgSelect, Videoselect } from "../../components";
+
+// Test
+import video from "../../SampleVideo.mp4";
+
+const BannerCreate = () => {
+  const View = () => {
+    // 请求物料-图片库
+    const ImgList = [
+      {
+        id: 1,
+        name: "风景",
+        url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
+      {
+        id: 2,
+        name: "写实",
+        url: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
+      {
+        id: 3,
+        name: "人物",
+        url: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      },
+    ];
+
+    // 请求物料 - 视频库
+    const VodeoList = [
+      {
+        id: 1,
+        name: "火影忍者",
+        url: video,
+      },
+      {
+        id: 2,
+        name: "灌篮高手",
+        url: "https://vdept3.bdstatic.com/mda-qcsi39qagaesy86k/cae_h264/1711546069015176164/mda-qcsi39qagaesy86k.mp4?v_from_s=hkapp-haokan-suzhou&auth_key=1722426373-0-0-23c7ecffb58901eeaf2b4247f9650664&bcevod_channel=searchbox_feed&pd=1&cr=0&cd=0&pt=3&logid=2773108710&vid=7863036942044162201&klogid=2773108710&abtest=",
+      },
+    ];
+
+    return (
+      <>
+        <div className="viewContainer">
+          <div className="title">名称:</div>
+          <TextInput source="name" label="名称" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">内容:</div>
+          <TextInput source="content" label="内容" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">排序:</div>
+          <TextInput source="index" label="排序" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">链接类型:</div>
+          <SelectInput
+            source="linkType"
+            choices={LinkList}
+            label="链接类型"
+            validate={[required()]}
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">跳转链接:</div>
+          <TextInput source="link" label="跳转链接" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">是否启用:</div>
+          <BooleanInput
+            source="used"
+            label="是否启用"
+            validate={[required()]}
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">视频:</div>
+          <Videoselect source="video" choices={VodeoList} label="选择视频" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">图片:</div>
+          <ImgSelect source="img" choices={ImgList} label="选择图片" />
+        </div>
+      </>
+    );
   };
-
-  // 自定义失败回调
-  const onError = (error) => {
-    notify(`Could not create post: ${error.message}`);
+  // 自定义工具栏
+  const CustomToolbar = (props) => {
+    return (
+      <Toolbar {...props} className="buttonGroup">
+        <SaveButton label="保存" />
+      </Toolbar>
+    );
   };
-
-  const Aside = () => <div>我是侧边栏，还没想好写什么</div>;
-
-  // 数据处理： submit ->  transform -> dataProvider.create()
-  const transform = (data) => {
-    return {
-      ...data,
-      fullName: 123,
-    };
-  };
-
-  const choices = [
-    { id: "choice1", name: "清华" },
-    { id: "choice2", name: "北大" },
-  ];
 
   return (
-    <Create
-      aside={<Aside />}
-      mutationOptions={{ meta: { foo: "bar" }, onSuccess, onError }}
-      /**
-       *  'edit': redirect to the Edit view (the default)
-       *  'list': redirect to the List view
-       *  'show': redirect to the Show view
-       *  false: do not redirect
-       *  A function (resource, id, data) => string to redirect to different targets depending on the record
-       */
-      // redirect="list"
-      title="新建轮播"
-      transform={transform}
-      // 自定义resource name，默认是外部<Resource>的name,在这是"Banner"
-      // resource="aaabbb"
-    >
-      <SimpleForm>
-        <TextInput source="title" validate={[required()]} label="标题" />
-        <TextInput source="description" multiline={true} label="描述" />
-        <SelectInput source="category" label="学校" choices={choices} />
-
-        <FileInput
-          source="attachments"
-          label="文件上传"
-          multiple={true}
-          accept="application/pdf,application/msword,image/*,video/*,audio/*"
-        >
-          <FileField source="src" title="title" />
-        </FileInput>
-
-        <ImageInput source="image" label="图片上传" accept="image/*">
-          <ImageField source="src" title="title" />
-        </ImageInput>
-
-        <FileInput source="video" label="视频上传" accept="video/*">
-          <FileField source="src" title="title" />
-        </FileInput>
-
-        <FileInput source="audio" label="音频上传" accept="audio/*">
-          <FileField source="src" title="title" />
-        </FileInput>
-        {/* <RichTextInput source="body" /> */}
-        <DateInput
-          label="时间选择"
-          source="published_at"
-          defaultValue={new Date()}
-        />
+    <Create>
+      <SimpleForm toolbar={<CustomToolbar />}>
+        <View />
       </SimpleForm>
     </Create>
   );

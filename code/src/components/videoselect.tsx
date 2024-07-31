@@ -12,29 +12,34 @@ import {
 
 /**
  *
- * @param choices  图片数据源列表
- * @param source   对应数据中的图片字段名
- * @param cururl      当前图片地址
+ * @param choices  数据源列表
+ * @param source   对应数据中的字段名
  * @returns
  */
 const VideoSelect = ({ source, choices, label }) => {
-  const {
+  let {
     field: { value, onChange },
   } = useInput({ source });
 
-  const [video, setVideo] = useState("");
+  const [video, setVideo] = useState({ url: "" });
 
   const videoRef = useRef(null);
 
   useEffect(() => {
-    if (!choices || !value) return;
-    const selectedVideo = choices.find((video) => video.url === value);
+    if (!choices) return null;
+
+    let selectedVideo = choices.find((video) => video.url === value);
+
+    // Set Default
+    selectedVideo = selectedVideo || choices[0];
+
     setVideo(selectedVideo);
-  }, [choices, value]);
+  }, [choices]);
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.load(); // 加载新的视频源
+      // Reload New Video
+      videoRef.current.load();
     }
   }, [video.url]); // 监听视频URL的变化
 
@@ -55,12 +60,12 @@ const VideoSelect = ({ source, choices, label }) => {
         <InputLabel id={`${source}-select-label`}>{label}</InputLabel>
         <Select
           labelId={`${source}-select-label`}
-          value={value || ""}
+          value={video.url}
           onChange={handleChange}
           label={label}
         >
           {choices.map((video) => (
-            <MenuItem key={video.url} value={video.url}>
+            <MenuItem key={video.id} value={video.url}>
               {video.name}
             </MenuItem>
           ))}

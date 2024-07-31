@@ -12,23 +12,27 @@ import {
 
 /**
  *
- * @param choices  图片数据源列表
- * @param source   对应数据中的图片字段名
- * @param cururl      当前图片地址
+ * @param choices  数据源列表
+ * @param source   对应数据中的字段名
  * @returns
  */
 const ImgSelect = ({ source, choices, label }) => {
-  const {
+  let {
     field: { value, onChange },
   } = useInput({ source });
 
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState({ url: "" });
 
   useEffect(() => {
-    if (!choices || !value) return;
-    const selectedImg = choices.find((img) => img.url === value);
+    if (!choices) return null;
+
+    let selectedImg = choices.find((img) => img.url === value);
+
+    // Set Default
+    selectedImg = selectedImg || choices[0];
+
     setImg(selectedImg);
-  }, [choices, value]);
+  }, [choices]);
 
   const handleChange = (event) => {
     const selectedUrl = event.target.value;
@@ -47,12 +51,12 @@ const ImgSelect = ({ source, choices, label }) => {
         <InputLabel id={`${source}-select-label`}>{label}</InputLabel>
         <Select
           labelId={`${source}-select-label`}
-          value={value || ""}
+          value={img.url}
           onChange={handleChange}
           label={label}
         >
           {choices.map((img) => (
-            <MenuItem key={img.url} value={img.url}>
+            <MenuItem key={img.id} value={img.url}>
               {img.name}
             </MenuItem>
           ))}

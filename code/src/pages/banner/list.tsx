@@ -57,7 +57,7 @@ const BannerList = () => {
     <SearchInput placeholder="请搜索" source="id" alwaysOn />,
     <TextInput label="名字" source="name" defaultValue="" />,
     <SelectInput source="linkType" choices={LinkList} label="链接类型" />,
-    <BooleanInput label="是否使用" source="used" />,
+    <BooleanInput label="是否启用" source="used" />,
   ];
 
   // 处理删除
@@ -111,7 +111,7 @@ const BannerList = () => {
           <TextField source="name" label="名字" />
           <TextField source="content" label="内容" />
           <TextField source="index" label="排序" />
-          <BooleanField source="used" label="是否使用" />
+          <BooleanField source="used" label="是否启用" />
           <ImageField source="img" title="图片" label="图片" />
           <UrlField source="link" label="跳转链接" />
           <VideoField source="video" label="视频" />

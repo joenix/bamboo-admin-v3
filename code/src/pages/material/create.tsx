@@ -48,7 +48,7 @@ export const MaterialCreate = () => {
 
   const CustomToolbar = (props) => (
     <Toolbar {...props}>
-      <SaveButton label="新建" />
+      <SaveButton label="保存" />
     </Toolbar>
   );
 
