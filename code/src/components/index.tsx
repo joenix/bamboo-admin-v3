@@ -8,6 +8,7 @@ import Ready from "./ready";
 import RichText from "./richtext";
 import VideoField from "./videofield";
 import ImgSelect from "./imgselect";
+import Videoselect from "./videoselect";
 
 export {
   NotFount,
@@ -20,4 +21,5 @@ export {
   RichText,
   VideoField,
   ImgSelect,
+  Videoselect,
 };

@@ -21,7 +21,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import { LinkList } from "./config";
 
 // Use Components
-import { ImgSelect } from "../../components";
+import { ImgSelect, Videoselect } from "../../components";
+
+// Test
+import video from "../../SampleVideo.mp4";
 
 const BannerEdit = () => {
   const EditActions = () => {
@@ -66,22 +69,36 @@ const BannerEdit = () => {
       },
     ];
 
+    // 请求物料 - 视频库
+    const VodeoList = [
+      {
+        id: 1,
+        name: "火影忍者",
+        url: video,
+      },
+      {
+        id: 2,
+        name: "灌篮高手",
+        url: "https://vdept3.bdstatic.com/mda-qcsi39qagaesy86k/cae_h264/1711546069015176164/mda-qcsi39qagaesy86k.mp4?v_from_s=hkapp-haokan-suzhou&auth_key=1722426373-0-0-23c7ecffb58901eeaf2b4247f9650664&bcevod_channel=searchbox_feed&pd=1&cr=0&cd=0&pt=3&logid=2773108710&vid=7863036942044162201&klogid=2773108710&abtest=",
+      },
+    ];
+
     return (
       <>
         <div className="viewContainer">
-          <div className="title">ID：</div>
+          <div className="title">ID:</div>
           <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">名称：</div>
+          <div className="title">名称:</div>
           <TextInput source="name" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">内容：</div>
+          <div className="title">内容:</div>
           <TextInput source="content" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">排序：</div>
+          <div className="title">排序:</div>
           <TextInput source="index" label={false} />
         </div>
         <div className="viewContainer">
@@ -89,15 +106,19 @@ const BannerEdit = () => {
           <SelectInput source="linkType" choices={LinkList} label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">跳转链接：</div>
+          <div className="title">跳转链接:</div>
           <TextInput source="link" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">是否使用：</div>
+          <div className="title">是否使用:</div>
           <BooleanInput source="used" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">图片：</div>
+          <div className="title">视频:</div>
+          <Videoselect source="video" choices={VodeoList} label="选择视频" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">图片:</div>
           <ImgSelect source="img" choices={ImgList} label="选择图片" />
         </div>
       </>

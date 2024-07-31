@@ -10,10 +10,12 @@ const VideoField = ({ source }) => {
   }, [record]);
 
   return (
-    <video width="200" height="150" controls>
-      <source src={record[source]} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <>
+      <video width="200" height="150" controls>
+        <source src={record[source]} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </>
   );
 };
 

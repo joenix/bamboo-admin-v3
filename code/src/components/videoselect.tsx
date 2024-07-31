@@ -1,5 +1,5 @@
 // Use React
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // Use Dep
 import {
@@ -17,32 +17,40 @@ import {
  * @param cururl      当前图片地址
  * @returns
  */
-const ImgSelect = ({ source, choices, label }) => {
+const VideoSelect = ({ source, choices, label }) => {
   const {
     field: { value, onChange },
   } = useInput({ source });
 
-  const [img, setImg] = useState("");
+  const [video, setVideo] = useState("");
+
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (!choices || !value) return;
-    const selectedImg = choices.find((img) => img.url === value);
-    setImg(selectedImg);
+    const selectedVideo = choices.find((video) => video.url === value);
+    setVideo(selectedVideo);
   }, [choices, value]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load(); // 加载新的视频源
+    }
+  }, [video.url]); // 监听视频URL的变化
 
   const handleChange = (event) => {
     const selectedUrl = event.target.value;
-    const selectedImg = choices.find((img) => img.url === selectedUrl);
+    const selectedVideo = choices.find((video) => video.url === selectedUrl);
 
     // 更新本地
-    setImg(selectedImg);
+    setVideo(selectedVideo);
 
     // 更新表单
     onChange(selectedUrl);
   };
 
   return (
-    <div className="ImgSelect">
+    <div className="VideoSelect">
       <FormControl fullWidth variant="outlined" margin="normal">
         <InputLabel id={`${source}-select-label`}>{label}</InputLabel>
         <Select
@@ -51,23 +59,28 @@ const ImgSelect = ({ source, choices, label }) => {
           onChange={handleChange}
           label={label}
         >
-          {choices.map((img) => (
-            <MenuItem key={img.url} value={img.url}>
-              {img.name}
+          {choices.map((video) => (
+            <MenuItem key={video.url} value={video.url}>
+              {video.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      {img && (
-        <img
+      {video && (
+        <video
           className="preview"
-          src={img.url}
-          alt="预览图片"
+          ref={videoRef}
+          width="200"
+          height="150"
+          controls
           style={{ marginTop: "16px", maxWidth: "100%", height: "auto" }}
-        />
+        >
+          <source src={video.url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       )}
     </div>
   );
 };
 
-export default ImgSelect;
+export default VideoSelect;
