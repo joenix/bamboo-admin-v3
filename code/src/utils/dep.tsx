@@ -124,6 +124,11 @@ export {
   MenuItem,
   InputLabel,
   FormControl,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 
 // Use React

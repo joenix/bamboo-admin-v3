@@ -20,10 +20,11 @@ import {
   RouterLink,
   BooleanInput,
   SelectInput,
+  useState,
 } from "../../utils/dep";
 
 // Use Components
-import { VideoField } from "../../components";
+import { VideoField, Confirmdialog } from "../../components";
 
 // Use Icon
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -33,6 +34,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { LinkList } from "./config";
 
 const BannerList = () => {
+  const [dialogvisible, setDialogvisible] = useState(false);
+  const [curId, setCurId] = useState(null);
+
   const ListActions = () => {
     const { total, isPending } = useListContext();
     const { permissions } = usePermissions();
@@ -59,7 +63,20 @@ const BannerList = () => {
   // 处理删除
   const handleDel = (event, id) => {
     event.stopPropagation();
-    console.log("handleDel for ID:", id);
+    setDialogvisible(true);
+    setCurId(id);
+  };
+
+  const dialogclose = () => {
+    setCurId(null);
+    setDialogvisible(false);
+  };
+
+  const dialogconfirm = () => {
+    // 1. 走删除单个banner接口
+
+    // 2. 关闭弹窗
+    dialogclose();
   };
 
   const CustomActions = ({ record }) => (
@@ -87,23 +104,32 @@ const BannerList = () => {
   );
 
   return (
-    <List actions={<ListActions />} filters={postFilters}>
-      <Datagrid>
-        <TextField source="id" label="id" />
-        <TextField source="name" label="名字" />
-        <TextField source="content" label="内容" />
-        <TextField source="index" label="排序" />
-        <BooleanField source="used" label="是否使用" />
-        <ImageField source="img" title="图片" label="图片" />
-        <UrlField source="link" label="跳转链接" />
-        <VideoField source="video" label="视频" />
-        <SelectField source="linkType" choices={LinkList} label="链接类型" />
-        <FunctionField
-          label="操作"
-          render={(record) => <CustomActions record={record} />}
-        />
-      </Datagrid>
-    </List>
+    <>
+      <List actions={<ListActions />} filters={postFilters}>
+        <Datagrid>
+          <TextField source="id" label="id" />
+          <TextField source="name" label="名字" />
+          <TextField source="content" label="内容" />
+          <TextField source="index" label="排序" />
+          <BooleanField source="used" label="是否使用" />
+          <ImageField source="img" title="图片" label="图片" />
+          <UrlField source="link" label="跳转链接" />
+          <VideoField source="video" label="视频" />
+          <SelectField source="linkType" choices={LinkList} label="链接类型" />
+          <FunctionField
+            label="操作"
+            render={(record) => <CustomActions record={record} />}
+          />
+        </Datagrid>
+      </List>
+      <Confirmdialog
+        open={dialogvisible}
+        title="提示"
+        description="确定要删除这个导航吗"
+        onClose={dialogclose}
+        onConfirm={dialogconfirm}
+      ></Confirmdialog>
+    </>
   );
 };
 

@@ -11,7 +11,6 @@ import {
   BooleanInput,
   Toolbar,
   SaveButton,
-  DeleteButton,
 } from "../../utils/dep";
 
 // Use Icon
@@ -125,12 +124,13 @@ const BannerEdit = () => {
     );
   };
   // 自定义工具栏
-  const CustomToolbar = (props) => (
-    <Toolbar {...props} className="buttonGroup">
-      <SaveButton label="保存" />
-      <DeleteButton label="删除" />
-    </Toolbar>
-  );
+  const CustomToolbar = (props) => {
+    return (
+      <Toolbar {...props} className="buttonGroup">
+        <SaveButton label="保存" />
+      </Toolbar>
+    );
+  };
 
   return (
     <Edit title="编辑轮播" actions={<EditActions />}>

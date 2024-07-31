@@ -9,6 +9,7 @@ import RichText from "./richtext";
 import VideoField from "./videofield";
 import ImgSelect from "./imgselect";
 import Videoselect from "./videoselect";
+import Confirmdialog from "./confirmdialog";
 
 export {
   NotFount,
@@ -22,4 +23,5 @@ export {
   VideoField,
   ImgSelect,
   Videoselect,
+  Confirmdialog,
 };
