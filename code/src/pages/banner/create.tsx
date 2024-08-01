@@ -132,7 +132,7 @@ const BannerCreate = () => {
   };
 
   return (
-    <Create>
+    <Create title="新建轮播">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

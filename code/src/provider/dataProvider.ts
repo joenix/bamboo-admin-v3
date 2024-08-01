@@ -176,6 +176,33 @@ const MaterialData = {
   total: 3,
 };
 
+const InformationData = {
+  data: [
+    {
+      id: "111",
+      content: "生鲜",
+      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      video,
+      name: "生鲜类目",
+    },
+    {
+      id: "222",
+      content: "户外",
+      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      video,
+      name: "户外类目",
+    },
+    {
+      id: "333",
+      content: "亲子",
+      img: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      video,
+      name: "亲子类目",
+    },
+  ],
+  total: 3,
+};
+
 // AataProvider
 export const dataProvider = {
   // 新建 - 返回新建的id
@@ -201,6 +228,8 @@ export const dataProvider = {
         return Promise.resolve(BannerData);
       case "Material":
         return Promise.resolve(MaterialData);
+      case "Information":
+        return Promise.resolve(InformationData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -217,6 +246,9 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       case "Material":
         _d = MaterialData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Information":
+        _d = InformationData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
         return Promise.resolve(data);

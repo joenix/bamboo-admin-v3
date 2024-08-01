@@ -74,7 +74,7 @@ const BannerShow = () => {
   };
 
   return (
-    <Show actions={<ShowActions />}>
+    <Show actions={<ShowActions />} title="轮播详情">
       <SimpleShowLayout>
         <View />
       </SimpleShowLayout>

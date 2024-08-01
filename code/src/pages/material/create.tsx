@@ -157,7 +157,7 @@ const MaterialCreate = () => {
   };
 
   return (
-    <Create>
+    <Create title="新建物料">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

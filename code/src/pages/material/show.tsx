@@ -67,7 +67,7 @@ const MaterialShow = () => {
   };
 
   return (
-    <Show actions={<ShowActions />}>
+    <Show actions={<ShowActions />} title="物料详情">
       <SimpleShowLayout>
         <View />
       </SimpleShowLayout>
