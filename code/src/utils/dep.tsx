@@ -83,6 +83,7 @@ export {
   BulkDeleteButton,
   SimpleShowLayout,
   ReferenceInput,
+  NumberInput,
 
   /**
    *  Field

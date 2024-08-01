@@ -11,6 +11,7 @@ import {
   BooleanInput,
   Toolbar,
   SaveButton,
+  NumberInput,
 } from "../../utils/dep";
 
 // Use Icon
@@ -23,7 +24,7 @@ import { LinkList } from "./config";
 import { ImgSelect, Videoselect } from "../../components";
 
 // Test
-import video from "../../SampleVideo.mp4";
+import video from "../../static/video/SampleVideo.mp4";
 
 const BannerEdit = () => {
   const EditActions = () => {
@@ -86,27 +87,32 @@ const BannerEdit = () => {
       <>
         <div className="viewContainer">
           <div className="title">ID:</div>
-          <TextField source="id" label={false} />
+          <TextField source="id" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">名称:</div>
-          <TextInput source="name" label={false} />
+          <TextInput source="name" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label={false} />
+          <TextInput source="content" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">排序:</div>
-          <TextInput source="index" label={false} />
+          <NumberInput source="index" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">链接类型:</div>
-          <SelectInput source="linkType" choices={LinkList} label={false} />
+          <SelectInput
+            source="linkType"
+            choices={LinkList}
+            label={false}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">跳转链接:</div>
-          <TextInput source="link" label={false} />
+          <TextInput source="link" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">是否启用:</div>

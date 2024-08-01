@@ -125,6 +125,7 @@ const MaterialCreate = () => {
         <div className="viewContainer">
           <div className="title">物料类型:</div>
           <SelectInput
+            variant="outlined"
             source="type"
             choices={TypeList}
             defaultValue={"1"}
@@ -135,11 +136,21 @@ const MaterialCreate = () => {
         </div>
         <div className="viewContainer">
           <div className="title">名称:</div>
-          <TextInput source="name" label="名称" validate={[required()]} />
+          <TextInput
+            source="name"
+            label="名称"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label="内容" validate={[required()]} />
+          <TextInput
+            source="content"
+            label="内容"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">上传:</div>

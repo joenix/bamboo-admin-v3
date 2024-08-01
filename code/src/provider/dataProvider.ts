@@ -5,7 +5,7 @@ import { httpClient } from "../utils/kit";
 import { api } from "../http/index";
 
 // Test
-import video from "../SampleVideo.mp4";
+import video from "../static/video/SampleVideo.mp4";
 
 // AataProvider
 export const dataProvider = {

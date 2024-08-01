@@ -107,15 +107,20 @@ const BannerList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" />
-          <TextField source="name" label="名字" />
-          <TextField source="content" label="内容" />
-          <TextField source="index" label="排序" />
-          <BooleanField source="used" label="是否启用" />
-          <ImageField source="img" title="图片" label="图片" />
-          <UrlField source="link" label="跳转链接" />
-          <VideoField source="video" label="视频" />
-          <SelectField source="linkType" choices={LinkList} label="链接类型" />
+          <TextField source="id" label="id" sortable={false} />
+          <TextField source="name" label="名字" sortable={false} />
+          <TextField source="content" label="内容" sortable={false} />
+          <TextField source="index" label="排序" sortable={false} />
+          <BooleanField source="used" label="是否启用" sortable={false} />
+          <ImageField source="img" title="图片" label="图片" sortable={false} />
+          <UrlField source="link" label="跳转链接" sortable={false} />
+          <VideoField source="video" label="视频" sortable={false} />
+          <SelectField
+            source="linkType"
+            choices={LinkList}
+            label="链接类型"
+            sortable={false}
+          />
           <FunctionField
             label="操作"
             render={(record) => <CustomActions record={record} />}

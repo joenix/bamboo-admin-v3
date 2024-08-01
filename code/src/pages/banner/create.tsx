@@ -8,6 +8,7 @@ import {
   SaveButton,
   Create,
   required,
+  NumberInput,
 } from "../../utils/dep";
 
 // Use Config
@@ -17,7 +18,7 @@ import { LinkList } from "./config";
 import { ImgSelect, Videoselect } from "../../components";
 
 // Test
-import video from "../../SampleVideo.mp4";
+import video from "../../static/video/SampleVideo.mp4";
 
 const BannerCreate = () => {
   const View = () => {
@@ -58,15 +59,30 @@ const BannerCreate = () => {
       <>
         <div className="viewContainer">
           <div className="title">名称:</div>
-          <TextInput source="name" label="名称" validate={[required()]} />
+          <TextInput
+            source="name"
+            label="名称"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label="内容" validate={[required()]} />
+          <TextInput
+            source="content"
+            label="内容"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">排序:</div>
-          <TextInput source="index" label="排序" validate={[required()]} />
+          <NumberInput
+            source="index"
+            label="排序"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">链接类型:</div>
@@ -75,11 +91,17 @@ const BannerCreate = () => {
             choices={LinkList}
             label="链接类型"
             validate={[required()]}
+            variant="outlined"
           />
         </div>
         <div className="viewContainer">
           <div className="title">跳转链接:</div>
-          <TextInput source="link" label="跳转链接" validate={[required()]} />
+          <TextInput
+            source="link"
+            label="跳转链接"
+            validate={[required()]}
+            variant="outlined"
+          />
         </div>
         <div className="viewContainer">
           <div className="title">是否启用:</div>

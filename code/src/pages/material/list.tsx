@@ -105,17 +105,31 @@ const MaterialList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" />
-          <TextField source="name" label="名字" />
-          <TextField source="content" label="内容" />
-          <SelectField source="type" choices={TypeList} label="物料类型" />
+          <TextField source="id" label="id" sortable={false} />
+          <TextField source="name" label="名字" sortable={false} />
+          <TextField source="content" label="内容" sortable={false} />
+          <SelectField
+            source="type"
+            choices={TypeList}
+            label="物料类型"
+            sortable={false}
+          />
           <UrlField
             source="url"
             label="链接"
             style={{ width: "250px", display: "block", overflow: "scroll" }}
+            sortable={false}
           ></UrlField>
-          <DateField source="createdAt" label="创建时间"></DateField>
-          <DateField source="updatedAt" label="更新时间"></DateField>
+          <DateField
+            source="createdAt"
+            label="创建时间"
+            sortable={false}
+          ></DateField>
+          <DateField
+            source="updatedAt"
+            label="更新时间"
+            sortable={false}
+          ></DateField>
           <FunctionField
             label="操作"
             render={(record) => <CustomActions record={record} />}
