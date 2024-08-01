@@ -36,7 +36,7 @@ const BannerEdit = () => {
         <Button
           component={RouterLink}
           startIcon={<InfoIcon />}
-          to={`/banner/${record.id}/show`}
+          to={`/Banner/${record.id}/show`}
           variant="text"
           color="primary"
           label="详情"

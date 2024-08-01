@@ -7,11 +7,6 @@ import {
   Create,
   required,
   useState,
-  ImageInput,
-  FileInput,
-  ImageField,
-  FileField,
-  useNotify,
   Mbutton,
 } from "../../utils/dep";
 
@@ -24,6 +19,12 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 // Use Styled
 import { styled } from "@mui/material/styles";
 
+// Use Kit
+import { httpClient } from "../../utils/kit";
+
+// Use Api
+import { api } from "../../http";
+
 const MaterialCreate = () => {
   const View = () => {
     const [selectedType, setSelectedType] = useState("1");
@@ -32,6 +33,7 @@ const MaterialCreate = () => {
       setSelectedType(event.target.value);
     };
 
+    // Custom Styled
     const VisuallyHiddenInput = styled("input")({
       clip: "rect(0 0 0 0)",
       clipPath: "inset(50%)",
@@ -44,80 +46,66 @@ const MaterialCreate = () => {
       width: 1,
     });
 
+    const upload = async (e) => {
+      const { files } = e.target;
+
+      // New FormData
+      const formData = new FormData();
+
+      // Add files to FormData
+      Array.from(files).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      // Upload File For Urls
+      const urls = await httpClient.post(api.Public.upload, {
+        data: formData,
+      });
+
+      // console.log("urls", urls);
+    };
+
     // 自定义上传
     const renderUploader = () => {
+      let accept = "";
       switch (selectedType) {
         // 图片
         case "1":
-          return (
-            <Mbutton
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              点击上传
-              <VisuallyHiddenInput type="file" accept="image/*" />
-            </Mbutton>
-          );
+          accept = "image/*";
+          break;
         // 视频
         case "2":
-          return (
-            <Mbutton
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              点击上传
-              <VisuallyHiddenInput type="file" accept="video/*" />
-            </Mbutton>
-          );
-        // 书
-        case "3":
-          return (
-            <Mbutton
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              点击上传
-              <VisuallyHiddenInput type="file" accept="application/*" />
-            </Mbutton>
-          );
-        // 音乐
-        case "4":
-          return (
-            <Mbutton
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              点击上传
-              <VisuallyHiddenInput type="file" accept="audio/*" />
-            </Mbutton>
-          );
         // 附件
         case "5":
-          return (
-            <Mbutton
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              点击上传
-              <VisuallyHiddenInput type="file" accept="application/*" />
-            </Mbutton>
-          );
+          accept = "video/*";
+          break;
+        // 书
+        case "3":
+          accept = "application/*";
+          break;
+        // 音乐
+        case "4":
+          accept = "audio/*";
+          break;
       }
+
+      return (
+        <Mbutton
+          component="label"
+          role={undefined}
+          variant="contained"
+          startIcon={<CloudUploadIcon />}
+        >
+          点击上传
+          <VisuallyHiddenInput
+            type="file"
+            accept={accept}
+            onChange={upload}
+            required
+            multiple
+          />
+        </Mbutton>
+      );
     };
 
     return (

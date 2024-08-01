@@ -91,18 +91,30 @@ export const httpClient = {
 
   // Post
   post: async (url, { data, headers } = {}) => {
+    // Get  Token
     const token = await getToken();
+
+    // Check if data is an instance of FormData
+    const isFormData = data instanceof FormData;
+
+    // Create the headers object, conditionally setting Content-Type
+    const finalHeaders = new Headers({
+      Accept: "application/json",
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    });
+
+    // Only set Content-Type if not FormData
+    if (!isFormData) {
+      finalHeaders.set("Content-Type", "application/json");
+    }
 
     const options = {
       method: "POST",
-      headers: new Headers({
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        ...headers,
-        Authorization: `Bearer ${token}`,
-      }),
-      body: JSON.stringify(data),
+      headers: finalHeaders,
+      body: isFormData ? data : JSON.stringify(data),
     };
+
     return fetchUtils.fetchJson(`${host}${url}`, options);
   },
 };
