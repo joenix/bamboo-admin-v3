@@ -1,139 +1,167 @@
 import {
+  SimpleForm,
+  SelectInput,
+  TextInput,
+  Toolbar,
+  SaveButton,
   Create,
+  required,
+  useState,
   ImageInput,
   FileInput,
-  FileField,
   ImageField,
+  FileField,
   useNotify,
-  useRedirect,
-  SaveButton,
-  Toolbar,
-  TabbedForm,
-  FormTab,
-  useState,
+  Mbutton,
 } from "../../utils/dep";
 
-// Use Components
-import { RichText } from "../../components";
+// Use Config
+import { TypeList } from "./config";
 
-/**
- * @returns
- * By default, submitting the form in the <Create> view redirects to the <Edit> view.
- */
-export const MaterialCreate = () => {
-  const notify = useNotify();
-  const redirect = useRedirect();
-  const [richtext, setRichtext] = useState("");
+// Use Icon
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
-  // 自定义成功回调
-  const onSuccess = (data) => {
-    notify(`新建成功`);
-    redirect(`/Material`);
-  };
+// Use Styled
+import { styled } from "@mui/material/styles";
 
-  // 自定义失败回调
-  const onError = (error) => {
-    notify(`新建失败: ${error.message}`);
-  };
+const MaterialCreate = () => {
+  const View = () => {
+    const [selectedType, setSelectedType] = useState("1");
 
-  // 数据处理： submit ->  transform -> dataProvider.create()
-  const transform = (data) => {
-    data = {
-      ...data,
-      richtext,
+    const handleTypeChange = (event) => {
+      setSelectedType(event.target.value);
     };
-    console.log(data);
-    return data;
-  };
 
-  const CustomToolbar = (props) => (
-    <Toolbar {...props}>
-      <SaveButton label="保存" />
-    </Toolbar>
-  );
+    const VisuallyHiddenInput = styled("input")({
+      clip: "rect(0 0 0 0)",
+      clipPath: "inset(50%)",
+      height: 1,
+      overflow: "hidden",
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      whiteSpace: "nowrap",
+      width: 1,
+    });
+
+    // 自定义上传
+    const renderUploader = () => {
+      switch (selectedType) {
+        // 图片
+        case "1":
+          return (
+            <Mbutton
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              点击上传
+              <VisuallyHiddenInput type="file" accept="image/*" />
+            </Mbutton>
+          );
+        // 视频
+        case "2":
+          return (
+            <Mbutton
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              点击上传
+              <VisuallyHiddenInput type="file" accept="video/*" />
+            </Mbutton>
+          );
+        // 书
+        case "3":
+          return (
+            <Mbutton
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              点击上传
+              <VisuallyHiddenInput type="file" accept="application/*" />
+            </Mbutton>
+          );
+        // 音乐
+        case "4":
+          return (
+            <Mbutton
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              点击上传
+              <VisuallyHiddenInput type="file" accept="audio/*" />
+            </Mbutton>
+          );
+        // 附件
+        case "5":
+          return (
+            <Mbutton
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              点击上传
+              <VisuallyHiddenInput type="file" accept="application/*" />
+            </Mbutton>
+          );
+      }
+    };
+
+    return (
+      <>
+        <div className="viewContainer">
+          <div className="title">物料类型:</div>
+          <SelectInput
+            source="type"
+            choices={TypeList}
+            defaultValue={"1"}
+            label="物料类型"
+            validate={[required()]}
+            onChange={handleTypeChange}
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">名称:</div>
+          <TextInput source="name" label="名称" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">内容:</div>
+          <TextInput source="content" label="内容" validate={[required()]} />
+        </div>
+        <div className="viewContainer">
+          <div className="title">上传:</div>
+          {renderUploader()}
+        </div>
+      </>
+    );
+  };
+  // 自定义工具栏
+  const CustomToolbar = (props) => {
+    return (
+      <Toolbar {...props} className="buttonGroup">
+        <SaveButton label="保存" />
+      </Toolbar>
+    );
+  };
 
   return (
-    <Create
-      mutationOptions={{ meta: { foo: "bar" }, onSuccess, onError }}
-      /**
-       *  'edit': redirect to the Edit view (the default)
-       *  'list': redirect to the List view
-       *  'show': redirect to the Show view
-       *  false: do not redirect
-       *  A function (resource, id, data) => string to redirect to different targets depending on the record
-       */
-      // redirect="list"
-      title="新建物料"
-      transform={transform}
-    >
-      <TabbedForm toolbar={<CustomToolbar />}>
-        {/* 视频管理 */}
-        <FormTab label="视频管理">
-          <FileInput
-            source="video"
-            placeholder="拖动文件，或者点击进行上传"
-            multiple
-            label="视频上传"
-            accept="video/*"
-          >
-            <FileField source="src" title="title" />
-          </FileInput>
-        </FormTab>
-        {/* 图片管理 */}
-        <FormTab label="图片管理">
-          <ImageInput
-            source="image"
-            placeholder="拖动文件，或者点击进行上传"
-            multiple
-            label="图片上传"
-            accept="image/*"
-          >
-            <ImageField source="src" title="title" />
-          </ImageInput>
-        </FormTab>
-        {/* 文件管理 */}
-        <FormTab label="文件管理">
-          <FileInput
-            source="attachments"
-            label="文件上传"
-            placeholder="拖动文件，或者点击进行上传"
-            multiple
-            accept="application/pdf,application/msword,image/*,video/*,audio/*"
-          >
-            <FileField source="src" title="title" />
-          </FileInput>
-        </FormTab>
-        {/* 音频管理 */}
-        <FormTab label="音频管理">
-          <FileInput
-            source="audio"
-            label="音频上传"
-            placeholder="拖动文件，或者点击进行上传"
-            multiple
-            accept={["audio/wav"]}
-          >
-            <FileField source="src" title="title" />
-          </FileInput>
-        </FormTab>
-
-        {/* 富文本管理 */}
-        <FormTab label="富文本管理">
-          <RichText onChange={(r) => setRichtext(r)} />
-        </FormTab>
-
-        {/* 案件管理 */}
-        <FormTab label="案件管理">
-          <FileInput
-            source="audio"
-            label="案件上传"
-            placeholder="拖动文件，或者点击进行上传"
-            multiple
-            // accept={["audio/wav"]}
-          >
-            <FileField source="src" title="title" />
-          </FileInput>
-        </FormTab>
-      </TabbedForm>
+    <Create>
+      <SimpleForm toolbar={<CustomToolbar />}>
+        <View />
+      </SimpleForm>
     </Create>
   );
 };
