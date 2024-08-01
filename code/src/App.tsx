@@ -112,9 +112,7 @@ export const App = () => {
         icon={ViewCarousel}
         // 自定义菜单标题
         options={{ label: "轮播管理" }}
-      >
-        {/* <Route path=":bannerId/detail" element={<div>detail</div>} /> */}
-      </Resource>
+      ></Resource>
 
       {/* Information */}
       <Resource

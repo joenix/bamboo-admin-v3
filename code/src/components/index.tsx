@@ -10,6 +10,7 @@ import VideoField from "./videofield";
 import ImgSelect from "./imgselect";
 import Videoselect from "./videoselect";
 import Confirmdialog from "./confirmdialog";
+import FileSelect from "./fileselect";
 
 export {
   NotFount,
@@ -24,4 +25,5 @@ export {
   ImgSelect,
   Videoselect,
   Confirmdialog,
+  FileSelect,
 };

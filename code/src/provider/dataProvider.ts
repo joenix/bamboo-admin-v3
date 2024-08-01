@@ -203,9 +203,29 @@ const InformationData = {
   total: 3,
 };
 
+const BookData = {
+  data: [
+    {
+      id: "111",
+      content: "生鲜",
+      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      name: "孔子",
+      url: "http://www.mengzi.com",
+    },
+    {
+      id: "222",
+      content: "户外",
+      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      name: "孟子",
+      url: "http://www.mengzi.com",
+    },
+  ],
+  total: 3,
+};
+
 // AataProvider
 export const dataProvider = {
-  // 新建 - 返回新建的id
+  // 新建
   create: async (resource, params) => {
     // const res = await httpClient.post(api[resource].create, { data: params });
 
@@ -214,7 +234,7 @@ export const dataProvider = {
     return Promise.resolve({
       data: {
         // id - required
-        id: 123,
+        id: "199999",
       },
     });
   },
@@ -230,6 +250,8 @@ export const dataProvider = {
         return Promise.resolve(MaterialData);
       case "Information":
         return Promise.resolve(InformationData);
+      case "Book":
+        return Promise.resolve(BookData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -237,7 +259,13 @@ export const dataProvider = {
 
   // 获取某条数据
   getOne: (resource, params) => {
-    console.log("params", params);
+    // if (params.id == "199999") {
+    //   return Promise.resolve({
+    //     data: {
+    //       id: 199999,
+    //     },
+    //   });
+    // }
     const { id } = params;
     let _d = null;
     switch (resource) {
@@ -250,8 +278,11 @@ export const dataProvider = {
       case "Information":
         _d = InformationData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Book":
+        _d = BookData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
-        return Promise.resolve(data);
+        return Promise.resolve(defaultData);
     }
   },
   getMany: (resource, params) => {
@@ -278,7 +309,6 @@ export const dataProvider = {
       default:
         return Promise.resolve();
     }
-    return Promise.resolve();
   },
 
   // 批量删除 - 返回被删除的id
