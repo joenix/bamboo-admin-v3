@@ -220,6 +220,51 @@ const BookData = {
       url: "http://www.mengzi.com",
     },
   ],
+  total: 2,
+};
+
+const TeachData = {
+  data: [
+    {
+      id: "1",
+      type: "1",
+      name: "章三",
+      age: 20,
+      province: "上海",
+      city: "上海市",
+      area: "宝山区",
+      gender: "男",
+      content: "我是教体育的..",
+      avatar:
+        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+    },
+    {
+      id: "2",
+      type: "2",
+      name: "李四",
+      age: 34,
+      province: "上海",
+      city: "上海市",
+      area: "嘉定区",
+      gender: "男",
+      content: "我是教柔道的..",
+      avatar:
+        "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+    },
+    {
+      id: "3",
+      type: "3",
+      name: "王五",
+      age: 29,
+      province: "上海",
+      city: "上海市",
+      area: "静安区",
+      gender: "女",
+      content: "我是教芭蕾舞的..",
+      avatar:
+        "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+    },
+  ],
   total: 3,
 };
 
@@ -252,6 +297,8 @@ export const dataProvider = {
         return Promise.resolve(InformationData);
       case "Book":
         return Promise.resolve(BookData);
+      case "Teach":
+        return Promise.resolve(TeachData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -259,13 +306,6 @@ export const dataProvider = {
 
   // 获取某条数据
   getOne: (resource, params) => {
-    // if (params.id == "199999") {
-    //   return Promise.resolve({
-    //     data: {
-    //       id: 199999,
-    //     },
-    //   });
-    // }
     const { id } = params;
     let _d = null;
     switch (resource) {
@@ -280,6 +320,9 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       case "Book":
         _d = BookData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Teach":
+        _d = TeachData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
         return Promise.resolve(defaultData);

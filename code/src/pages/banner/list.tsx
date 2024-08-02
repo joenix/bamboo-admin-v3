@@ -21,6 +21,7 @@ import {
   BooleanInput,
   SelectInput,
   useState,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Components
@@ -86,7 +87,7 @@ const BannerList = () => {
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
-        to={`/banner/${record.id}`}
+        to={`/${useResourceContext()}/${record.id}`}
         label="编辑"
         onClick={(e) => {
           e.stopPropagation();

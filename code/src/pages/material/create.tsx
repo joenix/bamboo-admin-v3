@@ -1,3 +1,4 @@
+// Use Dep
 import {
   SimpleForm,
   SelectInput,
@@ -7,23 +8,19 @@ import {
   Create,
   required,
   useState,
-  Mbutton,
 } from "../../utils/dep";
 
 // Use Config
 import { TypeList } from "./config";
-
-// Use Icon
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
-// Use Styled
-import { styled } from "@mui/material/styles";
 
 // Use Kit
 import { httpClient } from "../../utils/kit";
 
 // Use Api
 import { api } from "../../http";
+
+// Use Components
+import { UpLoad } from "../../components";
 
 const MaterialCreate = () => {
   const View = () => {
@@ -32,19 +29,6 @@ const MaterialCreate = () => {
     const handleTypeChange = (event) => {
       setSelectedType(event.target.value);
     };
-
-    // Custom Styled
-    const VisuallyHiddenInput = styled("input")({
-      clip: "rect(0 0 0 0)",
-      clipPath: "inset(50%)",
-      height: 1,
-      overflow: "hidden",
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      whiteSpace: "nowrap",
-      width: 1,
-    });
 
     const upload = async (e) => {
       const { files } = e.target;
@@ -89,23 +73,7 @@ const MaterialCreate = () => {
           break;
       }
 
-      return (
-        <Mbutton
-          component="label"
-          role={undefined}
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-        >
-          点击上传
-          <VisuallyHiddenInput
-            type="file"
-            accept={accept}
-            onChange={upload}
-            required
-            multiple
-          />
-        </Mbutton>
-      );
+      return <UpLoad accept={accept} onChange={upload}></UpLoad>;
     };
 
     return (

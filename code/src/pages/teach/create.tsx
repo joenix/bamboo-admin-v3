@@ -1,105 +1,139 @@
 import {
-  Create,
   SimpleForm,
-  TextInput,
-  DateInput,
   SelectInput,
-  ImageInput,
-  FileInput,
-  FileField,
-  ImageField,
+  TextInput,
+  Toolbar,
+  SaveButton,
+  Create,
   required,
-  useNotify,
-  useRedirect,
-  useRecordContext,
+  NumberInput,
 } from "../../utils/dep";
-// import RichTextInput from "ra-input-rich-text";
 
-/**
- * @returns
- * By default, submitting the form in the <Create> view redirects to the <Edit> view.
- */
-export const TeacherCreate = () => {
-  const notify = useNotify();
-  const redirect = useRedirect();
+// Use Config
+import { TypeList, GenderList } from "./config";
 
-  // 自定义成功回调
-  const onSuccess = (data) => {
-    notify(`新建成功`);
-    redirect(`/Teacher`);
-  };
+// Use Components
+import { UpLoad } from "../../components";
 
-  // 自定义失败回调
-  const onError = (error) => {
-    notify(`Could not create post: ${error.message}`);
-  };
+const TeachCreate = () => {
+  const View = () => {
+    const upload = async (e) => {
+      const { files } = e.target;
 
-  const Aside = () => <div>我是侧边栏，还没想好写什么</div>;
+      // New FormData
+      const formData = new FormData();
 
-  // 数据处理： submit ->  transform -> dataProvider.create()
-  const transform = (data) => {
-    return {
-      ...data,
-      fullName: 123,
+      // Add files to FormData
+      Array.from(files).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      // Upload File For Urls
+      const urls = await httpClient.post(api.Public.upload, {
+        data: formData,
+      });
+
+      // console.log("urls", urls);
     };
-  };
 
-  const choices = [
-    { id: "choice1", name: "清华" },
-    { id: "choice2", name: "北大" },
-  ];
+    return (
+      <>
+        <div className="viewContainer">
+          <div className="title">师资类型:</div>
+          <SelectInput
+            source="type"
+            choices={TypeList}
+            label="师资类型"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">姓名:</div>
+          <TextInput
+            source="name"
+            label="姓名"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">性别:</div>
+          <TextInput
+            source="gender"
+            label="性别"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">年龄:</div>
+          <TextInput
+            source="age"
+            label="年龄"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">个人介绍:</div>
+          <TextInput
+            source="content"
+            label="个人介绍"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">省:</div>
+          <TextInput
+            source="province"
+            label="省"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">市:</div>
+          <TextInput
+            source="city"
+            label="市"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">区:</div>
+          <TextInput
+            source="area"
+            label="区"
+            validate={[required()]}
+            variant="outlined"
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">头像:</div>
+          <UpLoad accept={"images/*"} onChange={upload}></UpLoad>
+        </div>
+      </>
+    );
+  };
+  // 自定义工具栏
+  const CustomToolbar = (props) => {
+    return (
+      <Toolbar {...props} className="buttonGroup">
+        <SaveButton label="保存" />
+      </Toolbar>
+    );
+  };
 
   return (
-    <Create
-      aside={<Aside />}
-      mutationOptions={{ meta: { foo: "bar" }, onSuccess, onError }}
-      /**
-       *  'edit': redirect to the Edit view (the default)
-       *  'list': redirect to the List view
-       *  'show': redirect to the Show view
-       *  false: do not redirect
-       *  A function (resource, id, data) => string to redirect to different targets depending on the record
-       */
-      // redirect="list"
-      title="新建师资"
-      transform={transform}
-      // 自定义resource name，默认是外部<Resource>的name,在这是"Teacher"
-      // resource="aaabbb"
-    >
-      <SimpleForm>
-        <TextInput source="title" validate={[required()]} label="标题" />
-        <TextInput source="description" multiline={true} label="描述" />
-        <SelectInput source="category" label="学校" choices={choices} />
-
-        <FileInput
-          source="attachments"
-          label="文件上传"
-          multiple={true}
-          accept="application/pdf,application/msword,image/*,video/*,audio/*"
-        >
-          <FileField source="src" title="title" />
-        </FileInput>
-
-        <ImageInput source="image" label="图片上传" accept="image/*">
-          <ImageField source="src" title="title" />
-        </ImageInput>
-
-        <FileInput source="video" label="视频上传" accept="video/*">
-          <FileField source="src" title="title" />
-        </FileInput>
-
-        <FileInput source="audio" label="音频上传" accept="audio/*">
-          <FileField source="src" title="title" />
-        </FileInput>
-        {/* <RichTextInput source="body" /> */}
-        <DateInput
-          label="时间选择"
-          source="published_at"
-          defaultValue={new Date()}
-        />
+    <Create title="新建师资">
+      <SimpleForm toolbar={<CustomToolbar />}>
+        <View />
       </SimpleForm>
     </Create>
   );
 };
 
-export default TeacherCreate;
+export default TeachCreate;

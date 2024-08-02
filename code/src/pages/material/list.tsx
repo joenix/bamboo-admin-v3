@@ -18,6 +18,7 @@ import {
   useState,
   DateField,
   UrlField,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Components
@@ -81,7 +82,7 @@ const MaterialList = () => {
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
-        to={`/Material/${record.id}`}
+        to={`/${useResourceContext()}/${record.id}`}
         label="编辑"
         onClick={(e) => {
           e.stopPropagation();

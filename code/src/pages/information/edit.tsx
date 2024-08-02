@@ -12,6 +12,7 @@ import {
   Toolbar,
   SaveButton,
   NumberInput,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Icon
@@ -26,6 +27,7 @@ import video from "../../static/video/SampleVideo.mp4";
 const InformationEdit = () => {
   const EditActions = () => {
     const record = useRecordContext();
+    const resouce = useResourceContext();
 
     if (!record) return null;
     return (
@@ -33,7 +35,7 @@ const InformationEdit = () => {
         <Button
           component={RouterLink}
           startIcon={<InfoIcon />}
-          to={`/Information/${record.id}/show`}
+          to={`/${resouce}/${record.id}/show`}
           variant="text"
           color="primary"
           label="详情"

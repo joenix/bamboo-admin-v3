@@ -17,6 +17,7 @@ import {
   RefreshButton,
   RouterLink,
   useState,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Components
@@ -77,7 +78,7 @@ const BooklList = () => {
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
-        to={`/Book/${record.id}`}
+        to={`/${useResourceContext()}/${record.id}`}
         label="编辑"
         onClick={(e) => {
           e.stopPropagation();

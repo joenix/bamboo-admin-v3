@@ -9,6 +9,7 @@ import {
   RouterLink,
   Toolbar,
   SaveButton,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Icon
@@ -23,6 +24,7 @@ import video from "../../static/video/SampleVideo.mp4";
 const BookEdit = () => {
   const EditActions = () => {
     const record = useRecordContext();
+    const resouce = useResourceContext();
 
     if (!record) return null;
     return (
@@ -30,7 +32,7 @@ const BookEdit = () => {
         <Button
           component={RouterLink}
           startIcon={<InfoIcon />}
-          to={`/Book/${record.id}/show`}
+          to={`/${resouce}/${record.id}/show`}
           variant="text"
           color="primary"
           label="详情"

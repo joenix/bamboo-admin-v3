@@ -16,6 +16,7 @@ import {
   RefreshButton,
   RouterLink,
   useState,
+  useResourceContext,
 } from "../../utils/dep";
 
 // Use Components
@@ -76,7 +77,7 @@ const InformationList = () => {
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
-        to={`/Information/${record.id}`}
+        to={`/${useResourceContext()}/${record.id}`}
         label="编辑"
         onClick={(e) => {
           e.stopPropagation();
