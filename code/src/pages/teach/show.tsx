@@ -40,7 +40,7 @@ const TeachShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">姓名:</div>
-          <TextField source="name" label="名称" />
+          <TextField source="name" label="姓名" />
         </div>
         <div className="viewContainer">
           <div className="title">性别:</div>

@@ -268,6 +268,36 @@ const TeachData = {
   total: 3,
 };
 
+const SchoolData = {
+  data: [
+    {
+      id: "1",
+      type: "1",
+      name: "新东方培训",
+      province: "上海",
+      city: "上海市",
+      area: "宝山区",
+      content: "我是机构",
+      nature: "",
+      school_type: "",
+      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+    },
+    {
+      id: "2",
+      type: "2",
+      name: "清华",
+      province: "上海",
+      city: "上海市",
+      area: "嘉定区",
+      content: "我是学校",
+      nature: "211大学",
+      school_type: "公立学校",
+      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+    },
+  ],
+  total: 2,
+};
+
 // AataProvider
 export const dataProvider = {
   // 新建
@@ -299,6 +329,8 @@ export const dataProvider = {
         return Promise.resolve(BookData);
       case "Teach":
         return Promise.resolve(TeachData);
+      case "School":
+        return Promise.resolve(SchoolData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -323,6 +355,9 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       case "Teach":
         _d = TeachData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "School":
+        _d = SchoolData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
         return Promise.resolve(defaultData);

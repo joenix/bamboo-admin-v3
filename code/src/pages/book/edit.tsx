@@ -10,6 +10,7 @@ import {
   Toolbar,
   SaveButton,
   useResourceContext,
+  required,
 } from "../../utils/dep";
 
 // Use Icon
@@ -97,15 +98,25 @@ const BookEdit = () => {
       <>
         <div className="viewContainer">
           <div className="title">ID:</div>
-          <TextField source="id" label={false} variant="outlined" />
+          <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">书名:</div>
-          <TextInput source="name" label={false} variant="outlined" />
+          <TextInput
+            source="name"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label={false} variant="outlined" />
+          <TextInput
+            source="content"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">书:</div>

@@ -13,6 +13,7 @@ import {
   SaveButton,
   NumberInput,
   useResourceContext,
+  required,
 } from "../../utils/dep";
 
 // Use Icon
@@ -89,19 +90,34 @@ const BannerEdit = () => {
       <>
         <div className="viewContainer">
           <div className="title">ID:</div>
-          <TextField source="id" label={false} variant="outlined" />
+          <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">名称:</div>
-          <TextInput source="name" label={false} variant="outlined" />
+          <TextInput
+            source="name"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label={false} variant="outlined" />
+          <TextInput
+            source="content"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">排序:</div>
-          <NumberInput source="index" label={false} variant="outlined" />
+          <NumberInput
+            source="index"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">链接类型:</div>
@@ -110,11 +126,17 @@ const BannerEdit = () => {
             choices={LinkList}
             label={false}
             variant="outlined"
+            validate={[required()]}
           />
         </div>
         <div className="viewContainer">
           <div className="title">跳转链接:</div>
-          <TextInput source="link" label={false} variant="outlined" />
+          <TextInput
+            source="link"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">是否启用:</div>
@@ -122,11 +144,21 @@ const BannerEdit = () => {
         </div>
         <div className="viewContainer">
           <div className="title">视频:</div>
-          <Videoselect source="video" choices={VodeoList} label="选择视频" />
+          <Videoselect
+            source="video"
+            choices={VodeoList}
+            label="选择视频"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">图片:</div>
-          <ImgSelect source="img" choices={ImgList} label="选择图片" />
+          <ImgSelect
+            source="img"
+            choices={ImgList}
+            label="选择图片"
+            validate={[required()]}
+          />
         </div>
       </>
     );

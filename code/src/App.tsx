@@ -193,7 +193,7 @@ export const App = () => {
       ></Resource>
 
       {/* User */}
-      <Resource
+      {/* <Resource
         name="User"
         list={User.List}
         edit={User.Edit}
@@ -203,7 +203,7 @@ export const App = () => {
         icon={Person}
         // 自定义菜单标题
         options={{ label: "用户管理" }}
-      ></Resource>
+      ></Resource> */}
 
       {/* Code */}
       <Resource

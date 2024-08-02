@@ -15,6 +15,7 @@ import {
   useResourceContext,
   ImageInput,
   ImageField,
+  required,
 } from "../../utils/dep";
 
 // Use Icon
@@ -86,35 +87,71 @@ const TeachEdit = () => {
             choices={TypeList}
             label={false}
             variant="outlined"
+            validate={[required()]}
           />
         </div>
         <div className="viewContainer">
           <div className="title">姓名:</div>
-          <TextInput source="name" label={false} variant="outlined" />
+          <TextInput
+            source="name"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">性别:</div>
-          <TextInput source="gender" label={false} variant="outlined" />
+          <TextInput
+            source="gender"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">年龄:</div>
-          <TextInput source="age" label={false} variant="outlined" />
+          <TextInput
+            source="age"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">个人介绍:</div>
-          <TextInput source="content" label={false} variant="outlined" />
+          <TextInput
+            source="content"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">省:</div>
-          <TextInput source="province" label={false} variant="outlined" />
+          <TextInput
+            source="province"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">市:</div>
-          <TextInput source="city" label={false} variant="outlined" />
+          <TextInput
+            source="city"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">区:</div>
-          <TextInput source="area" label={false} variant="outlined" />
+          <TextInput
+            source="area"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
 
         <div className="viewContainer">

@@ -13,6 +13,7 @@ import {
   SaveButton,
   NumberInput,
   useResourceContext,
+  required,
 } from "../../utils/dep";
 
 // Use Icon
@@ -86,7 +87,7 @@ const MaterialEdit = () => {
       <>
         <div className="viewContainer">
           <div className="title">ID:</div>
-          <TextField source="id" label={false} variant="outlined" />
+          <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
           <div className="title">物料类型:</div>
@@ -95,19 +96,35 @@ const MaterialEdit = () => {
             choices={TypeList}
             label={false}
             variant="outlined"
+            validate={[required()]}
           />
         </div>
         <div className="viewContainer">
           <div className="title">链接:</div>
-          <TextInput source="url" label={false} variant="outlined" />
+          <TextInput
+            source="url"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">名称:</div>
-          <TextInput source="name" label={false} variant="outlined" />
+          <TextInput
+            source="name"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
         <div className="viewContainer">
           <div className="title">内容:</div>
-          <TextInput source="content" label={false} variant="outlined" />
+          <TextInput
+            source="content"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
         </div>
       </>
     );
