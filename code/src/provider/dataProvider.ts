@@ -298,6 +298,58 @@ const SchoolData = {
   total: 2,
 };
 
+const TipsData = {
+  data: [
+    {
+      id: "1",
+      name: "tip1",
+      content: "我是tip1",
+      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      video,
+    },
+    {
+      id: "2",
+      name: "tip2",
+      content: "我是tip2",
+      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      video,
+    },
+  ],
+  total: 2,
+};
+
+const RoleData = {
+  data: [
+    {
+      id: "1",
+      name: "张三",
+      description: "体育老师",
+    },
+    {
+      id: "2",
+      name: "李四",
+      description: "化学老师",
+    },
+  ],
+  total: 2,
+};
+
+const CodeData = {
+  data: [
+    {
+      id: "1",
+      bookid: "111",
+      count: "10",
+    },
+    {
+      id: "2",
+      bookid: "222",
+      count: "4",
+    },
+  ],
+  total: 2,
+};
+
 // AataProvider
 export const dataProvider = {
   // 新建
@@ -331,6 +383,12 @@ export const dataProvider = {
         return Promise.resolve(TeachData);
       case "School":
         return Promise.resolve(SchoolData);
+      case "Tips":
+        return Promise.resolve(TipsData);
+      case "Role":
+        return Promise.resolve(RoleData);
+      case "Code":
+        return Promise.resolve(CodeData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -358,6 +416,15 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       case "School":
         _d = SchoolData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Tips":
+        _d = TipsData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Role":
+        _d = RoleData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Code":
+        _d = CodeData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
         return Promise.resolve(defaultData);
