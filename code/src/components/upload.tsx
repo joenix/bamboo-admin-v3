@@ -33,8 +33,8 @@ const UpLoad = ({ accept, onChange }) => {
         type="file"
         accept={accept}
         onChange={onChange}
-        required
-        multiple
+        // required
+        // multiple
       />
     </Mbutton>
   );

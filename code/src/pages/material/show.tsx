@@ -55,12 +55,16 @@ const MaterialShow = () => {
           <TextField source="content" label="内容" />
         </div>
         <div className="viewContainer">
+          <div className="title">跳转地址:</div>
+          <UrlField source="link" label="跳转地址" />
+        </div>
+        <div className="viewContainer">
           <div className="title">创建时间:</div>
-          <DateField source="createdAt" label="创建时间" />
+          <DateField source="createdAt" label="创建时间" showTime />
         </div>
         <div className="viewContainer">
           <div className="title">更新时间:</div>
-          <DateField source="updatedAt" label="更新时间" />
+          <DateField source="updatedAt" label="更新时间" showTime />
         </div>
       </>
     );

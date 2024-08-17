@@ -19,6 +19,7 @@ import {
   DateField,
   UrlField,
   useResourceContext,
+  useDataProvider,
 } from "../../utils/dep";
 
 // Use Components
@@ -32,6 +33,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { TypeList } from "./config";
 
 const MaterialList = () => {
+  const dataProvider = useDataProvider();
+  const resource = useResourceContext();
   const [dialogvisible, setDialogvisible] = useState(false);
   const [curId, setCurId] = useState(null);
 
@@ -68,11 +71,17 @@ const MaterialList = () => {
     setDialogvisible(false);
   };
 
-  const dialogconfirm = () => {
+  const dialogconfirm = async () => {
+    console.log(111);
     // 1. 走删除单个接口
-
+    await dataProvider.delete(resource, { id: curId });
+    console.log(222);
     // 2. 关闭弹窗
     dialogclose();
+
+    // 3. 刷新页面
+    await dataProvider.getList(resource);
+    console.log(333);
   };
 
   const CustomActions = ({ record }) => (
@@ -82,7 +91,7 @@ const MaterialList = () => {
         color="primary"
         variant="contained"
         startIcon={<EditIcon />}
-        to={`/${useResourceContext()}/${record.id}`}
+        to={`/${resource}/${record.id}`}
         label="编辑"
         onClick={(e) => {
           e.stopPropagation();
@@ -115,17 +124,27 @@ const MaterialList = () => {
           <UrlField
             source="url"
             label="链接"
-            style={{ width: "250px", display: "block", overflow: "scroll" }}
+            style={{ width: "200px", display: "block", overflow: "scroll" }}
             sortable={false}
+            target="block"
+          ></UrlField>
+          <UrlField
+            source="link"
+            label="跳转地址"
+            style={{ width: "200px", display: "block", overflow: "scroll" }}
+            sortable={false}
+            target="block"
           ></UrlField>
           <DateField
             source="createdAt"
             label="创建时间"
+            showTime
             sortable={false}
           ></DateField>
           <DateField
             source="updatedAt"
             label="更新时间"
+            showTime
             sortable={false}
           ></DateField>
           <FunctionField

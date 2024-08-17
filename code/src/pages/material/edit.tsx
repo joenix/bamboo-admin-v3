@@ -14,6 +14,7 @@ import {
   NumberInput,
   useResourceContext,
   required,
+  useState,
 } from "../../utils/dep";
 
 // Use Icon
@@ -25,11 +26,15 @@ import { TypeList } from "./config";
 // Test
 import video from "../../static/video/SampleVideo.mp4";
 
-const MaterialEdit = () => {
-  const EditActions = () => {
-    const record = useRecordContext();
-    const resouce = useResourceContext();
+// Use Components
+import { UpLoad } from "../../components";
 
+const MaterialEdit = () => {
+  const record = useRecordContext();
+  const resouce = useResourceContext();
+  const [selectedType, setSelectedType] = useState(1);
+
+  const EditActions = () => {
     if (!record) return null;
     return (
       <TopToolbar>
@@ -48,40 +53,53 @@ const MaterialEdit = () => {
   const View = () => {
     const record = useRecordContext();
 
+    console.log("record", record);
+
     if (!record) return null;
 
-    // 请求物料-图片库
-    const ImgList = [
-      {
-        id: 1,
-        name: "风景",
-        url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
-      },
-      {
-        id: 2,
-        name: "写实",
-        url: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
-      },
-      {
-        id: 3,
-        name: "人物",
-        url: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
-      },
-    ];
+    const upload = async (e) => {
+      const { files } = e.target;
 
-    // 请求物料 - 视频库
-    const VodeoList = [
-      {
-        id: 1,
-        name: "火影忍者",
-        url: video,
-      },
-      {
-        id: 2,
-        name: "灌篮高手",
-        url: "https://vdept3.bdstatic.com/mda-qcsi39qagaesy86k/cae_h264/1711546069015176164/mda-qcsi39qagaesy86k.mp4?v_from_s=hkapp-haokan-suzhou&auth_key=1722426373-0-0-23c7ecffb58901eeaf2b4247f9650664&bcevod_channel=searchbox_feed&pd=1&cr=0&cd=0&pt=3&logid=2773108710&vid=7863036942044162201&klogid=2773108710&abtest=",
-      },
-    ];
+      // New FormData
+      const formData = new FormData();
+
+      // Add files to FormData
+      Array.from(files).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      // Upload File For Urls
+      const urls = await httpClient.post(api.Public.upload, {
+        data: formData,
+      });
+    };
+
+    // 自定义上传
+    const renderUploader = () => {
+      let accept = "";
+      switch (selectedType) {
+        // 图片
+        case 1:
+          accept = "image/*";
+          break;
+        // 视频
+        case 2:
+          accept = "video/*";
+          break;
+        // 书
+        case 3:
+        // 附件
+        case 5:
+          accept = "application/*";
+          break;
+        // 音乐
+        case 4:
+          accept = "audio/*";
+          break;
+      }
+
+      return <UpLoad accept={accept} onChange={upload}></UpLoad>;
+    };
 
     return (
       <>
@@ -94,15 +112,6 @@ const MaterialEdit = () => {
           <SelectInput
             source="type"
             choices={TypeList}
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">链接:</div>
-          <TextInput
-            source="url"
             label={false}
             variant="outlined"
             validate={[required()]}
@@ -125,6 +134,29 @@ const MaterialEdit = () => {
             variant="outlined"
             validate={[required()]}
           />
+        </div>
+        <div className="viewContainer">
+          <div className="title">跳转地址:</div>
+          <TextInput
+            source="link"
+            label={false}
+            variant="outlined"
+            validate={[required()]}
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">链接:</div>
+          <TextInput
+            source="url"
+            label="链接"
+            variant="outlined"
+            readOnly
+            validate={[required()]}
+          />
+        </div>
+        <div className="viewContainer">
+          <div className="title">上传物料:</div>
+          {renderUploader()}
         </div>
       </>
     );

@@ -1,5 +1,5 @@
 // Host
-export const host = "http://127.0.0.1:3000";
+export const host = "https://api.lhdd.club";
 
 // Api
 export const api = {

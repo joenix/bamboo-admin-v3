@@ -12,23 +12,20 @@ const { User } = api;
 export const authProvider: AuthProvider = {
   // 登陆
   login: async ({ username, password }) => {
-    // const res = await httpClient.post(User.login, {
-    //   data: { username, password },
-    // });
+    const res = await httpClient.post(User.login, {
+      data: { username, password },
+    });
 
-    // console.log("res", res);
+    console.log("res", res);
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name: "dingding", token: "12345" })
-    );
+    localStorage.setItem("user", JSON.stringify({ username, token: res.msg }));
     return Promise.resolve();
 
-    return Promise.reject(
-      new HttpError("用户名或密码错误", 401, {
-        message: "Invalid username or password",
-      })
-    );
+    // return Promise.reject(
+    //   new HttpError("用户名或密码错误", 401, {
+    //     message: "Invalid username or password",
+    //   })
+    // );
   },
   // 登出
   logout: () => {

@@ -12,6 +12,7 @@ export {
   useRecordContext,
   usePermissions,
   useListContext,
+  useDataProvider,
   fetchUtils,
   useNotify,
   useRedirect,
@@ -135,3 +136,6 @@ export {
 
 // Use React
 export { useState, useEffect } from "react";
+
+// Use react-hook-form
+export { useForm, FormProvider, useFormContext } from "react-hook-form";

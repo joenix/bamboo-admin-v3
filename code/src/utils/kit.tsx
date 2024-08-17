@@ -83,7 +83,7 @@ export const httpClient = {
       headers: new Headers({
         Accept: "application/json",
         ...headers,
-        Authorization: `Bearer ${token}`,
+        Token: token,
       }),
     };
     return fetchUtils.fetchJson(`${host}${url}${queryString}`, options);
@@ -101,7 +101,7 @@ export const httpClient = {
     const finalHeaders = new Headers({
       Accept: "application/json",
       ...headers,
-      Authorization: `Bearer ${token}`,
+      Token: token,
     });
 
     // Only set Content-Type if not FormData
@@ -115,6 +115,13 @@ export const httpClient = {
       body: isFormData ? data : JSON.stringify(data),
     };
 
-    return fetchUtils.fetchJson(`${host}${url}`, options);
+    const result = await fetchUtils.fetchJson(`${host}${url}`, options);
+    console.log("data", result);
+    const { status, ...res } = result?.json;
+    if (status === 200) {
+      return res;
+    }
+
+    return Promise.reject("错误");
   },
 };

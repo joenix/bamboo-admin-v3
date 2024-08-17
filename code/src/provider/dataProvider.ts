@@ -7,7 +7,6 @@ import { api } from "../http/index";
 // Test
 import video from "../static/video/SampleVideo.mp4";
 
-// Mock
 const defaultData = {
   data: [
     {
@@ -125,55 +124,9 @@ const BannerData = {
   total: 3,
 };
 
-const MaterialData = {
-  data: [
-    {
-      id: "111",
-      type: "1",
-      url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
-      name: "图片名字",
-      content: "图片内容",
-      createdAt: "2024/01/20",
-      updatedAt: "2024/01/22",
-    },
-    {
-      id: "222",
-      type: "2",
-      url: video,
-      name: "视频名字",
-      content: "视频内容",
-      createdAt: "2024/01/20",
-      updatedAt: "2024/01/22",
-    },
-    {
-      id: "333",
-      type: "3",
-      url: "书的链接",
-      name: "书的名字",
-      content: "书的内容",
-      createdAt: "2024/01/20",
-      updatedAt: "2024/01/22",
-    },
-    {
-      id: "444",
-      type: "4",
-      url: "音乐的链接",
-      name: "音乐的名字",
-      content: "音乐的内容",
-      createdAt: "2024/01/20",
-      updatedAt: "2024/01/22",
-    },
-    {
-      id: "555",
-      type: "5",
-      url: "附件的链接",
-      name: "附件的名字",
-      content: "附件的内容",
-      createdAt: "2024/01/20",
-      updatedAt: "2024/01/22",
-    },
-  ],
-  total: 3,
+let MaterialData = {
+  data: [],
+  total: "",
 };
 
 const InformationData = {
@@ -354,9 +307,10 @@ const CodeData = {
 export const dataProvider = {
   // 新建
   create: async (resource, params) => {
-    // const res = await httpClient.post(api[resource].create, { data: params });
+    console.log("params", params);
+    const res = await httpClient.post(api[resource].create, params);
 
-    // console.log("res", res);
+    console.log("create", res);
 
     return Promise.resolve({
       data: {
@@ -368,13 +322,18 @@ export const dataProvider = {
 
   // 获取列表
   getList: async (resource, params) => {
-    // const res = await httpClient.get(api[resource].getall);
-    // console.log("res", res);
+    console.log(555);
+    const { msg } = await httpClient.post(api[resource].getall);
+
+    const data = { data: msg.data, total: msg.totalPages };
+
     switch (resource) {
       case "Banner":
         return Promise.resolve(BannerData);
       case "Material":
-        return Promise.resolve(MaterialData);
+        MaterialData = data;
+        console.log(666);
+        return Promise.resolve(data);
       case "Information":
         return Promise.resolve(InformationData);
       case "Book":
@@ -395,28 +354,30 @@ export const dataProvider = {
   },
 
   // 获取某条数据
-  getOne: (resource, params) => {
+  getOne: async (resource, params) => {
     const { id } = params;
+
     let _d = null;
     switch (resource) {
       case "Banner":
         _d = BannerData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Material":
         _d = MaterialData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        console.log(364, _d.data);
+        return Promise.resolve({ data: _d?.data?.find((x) => x.id == id) });
       case "Information":
         _d = InformationData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Book":
         _d = BookData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Teach":
         _d = TeachData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "School":
         _d = SchoolData;
-        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Tips":
         _d = TipsData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
@@ -436,24 +397,36 @@ export const dataProvider = {
   getManyReference: (resource, params) => {
     return Promise.resolve();
   },
-  update: (resource, params) => {
-    console.log("update", params);
+  // 编辑
+  update: async (resource, params) => {
     const { data, id, previousData } = params;
-    return Promise.resolve();
+
+    await httpClient.post(`${api[resource].update}?id=${id}`, {
+      data,
+    });
+
+    return Promise.resolve({
+      data: {
+        // id - required
+        id,
+      },
+    });
   },
   updateMany: (resource, params) => Promise.resolve(),
 
   // 删除单个
-  delete: (resource, params) => {
-    console.log("delete", params);
-    switch (resource) {
-      case "Banner":
-        const { id } = params;
-        // 删除单个接口
-        return Promise.resolve();
-      default:
-        return Promise.resolve();
-    }
+  delete: async (resource, params) => {
+    const { id } = params;
+
+    await httpClient.post(`${api[resource].update}?id=${id}`, {
+      data: {
+        delete: true,
+        id,
+      },
+    });
+
+    console.log(4444);
+    return Promise.resolve();
   },
 
   // 批量删除 - 返回被删除的id
