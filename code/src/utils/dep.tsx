@@ -113,6 +113,7 @@ export { QueryClient } from "@tanstack/react-query";
 export {
   useParams,
   useLocation,
+  useNavigate,
   Route,
   Link as RouterLink,
 } from "react-router-dom";

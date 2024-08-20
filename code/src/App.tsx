@@ -77,7 +77,7 @@ export const App = () => {
       // 使用localStorage缓存数据
       store={localStorageStore()}
       // 自定义登陆页面
-      // loginPage={Login}
+      loginPage={Login}
       // 接口配置
       queryClient={queryClient}
       // 自定义ready页面
