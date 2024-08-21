@@ -30,12 +30,14 @@ import video from "../../static/video/SampleVideo.mp4";
 import { UpLoad } from "../../components";
 
 const MaterialEdit = () => {
-  const record = useRecordContext();
   const resouce = useResourceContext();
   const [selectedType, setSelectedType] = useState(1);
 
   const EditActions = () => {
+    const record = useRecordContext();
+
     if (!record) return null;
+
     return (
       <TopToolbar>
         <Button
@@ -43,7 +45,7 @@ const MaterialEdit = () => {
           startIcon={<InfoIcon />}
           to={`/${resouce}/${record.id}/show`}
           variant="text"
-          color="success"
+          color="primary"
           label="详情"
         ></Button>
       </TopToolbar>
@@ -52,8 +54,6 @@ const MaterialEdit = () => {
 
   const View = () => {
     const record = useRecordContext();
-
-    console.log("record", record);
 
     if (!record) return null;
 

@@ -20,6 +20,7 @@ export {
   RecordContextProvider,
   HttpError,
   useStore,
+  defaultTheme,
 
   /**
    *  DataProvider

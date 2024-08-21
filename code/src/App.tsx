@@ -6,6 +6,7 @@ import {
   CustomRoutes,
   Route,
   Provider,
+  defaultTheme,
 } from "./utils/dep";
 
 // Use Kit
@@ -90,6 +91,7 @@ export const App = () => {
         queryClient={queryClient}
         // 自定义ready页面
         // ready={Ready}
+        theme={defaultTheme}
       >
         {/* 动态Resource */}
         {/* {fetchResources} */}
