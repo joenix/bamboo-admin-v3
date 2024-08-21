@@ -17,7 +17,7 @@ export const Layout = ({ children }: { children }) => {
       {/* 面包屑 */}
       <Breadcrumbs
         aria-label="breadcrumb"
-        style={{ padding: "1rem 0 0.3rem 0" }}
+        style={{ padding: "20px 10px", background: " #fff" }}
       >
         <Link color="inherit" component={RouterLink} to="/">
           Home
