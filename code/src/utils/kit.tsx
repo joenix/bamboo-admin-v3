@@ -1,9 +1,13 @@
 // Use dep
-import { QueryClient, Resource, fetchUtils } from "./dep";
+import { QueryClient, Resource, fetchUtils, useNotify } from "./dep";
+
+import { HttpError } from "react-admin";
 
 import { host } from "../http";
 
 import authProvider from "../provider/authProvider";
+
+import store, { setLoading, setNotify } from "../store";
 
 /**
  * @param permissions
@@ -115,13 +119,40 @@ export const httpClient = {
       body: isFormData ? data : JSON.stringify(data),
     };
 
+    // Show Loading
+    store.dispatch(setLoading(true));
+
     const result = await fetchUtils.fetchJson(`${host}${url}`, options);
-    console.log("data", result);
-    const { status, ...res } = result?.json;
+
+    // Hide Loading
+    store.dispatch(setLoading(false));
+
+    const { status, error, ...res } = result?.json;
+
+    console.log("result?.json;", result?.json);
+
     if (status === 200) {
       return res;
     }
 
-    return Promise.reject("错误");
+    // Show Nofify
+    store.dispatch(
+      setNotify({
+        content: error,
+        type: "error",
+        visible: true,
+      })
+    );
+
+    // Hide Notify
+    setTimeout(() => {
+      store.dispatch(
+        setNotify({
+          visible: false,
+        })
+      );
+    }, 2000);
+
+    return Promise.reject();
   },
 };

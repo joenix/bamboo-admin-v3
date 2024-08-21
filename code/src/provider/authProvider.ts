@@ -19,13 +19,8 @@ export const authProvider: AuthProvider = {
     console.log("res", res);
 
     localStorage.setItem("user", JSON.stringify({ username, token: res.msg }));
-    return Promise.resolve();
 
-    // return Promise.reject(
-    //   new HttpError("用户名或密码错误", 401, {
-    //     message: "Invalid username or password",
-    //   })
-    // );
+    return Promise.resolve();
   },
   // 登出
   logout: () => {

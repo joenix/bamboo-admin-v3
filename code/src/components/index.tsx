@@ -12,6 +12,8 @@ import Videoselect from "./videoselect";
 import Confirmdialog from "./confirmdialog";
 import FileSelect from "./fileselect";
 import UpLoad from "./upload";
+import Loading from "./loading";
+import Notify from "./notify";
 
 export {
   NotFount,
@@ -28,4 +30,6 @@ export {
   Confirmdialog,
   FileSelect,
   UpLoad,
+  Loading,
+  Notify,
 };
