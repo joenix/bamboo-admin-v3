@@ -43,7 +43,7 @@ const MaterialEdit = () => {
           startIcon={<InfoIcon />}
           to={`/${resouce}/${record.id}/show`}
           variant="text"
-          color="primary"
+          color="success"
           label="详情"
         ></Button>
       </TopToolbar>

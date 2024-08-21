@@ -112,7 +112,6 @@ const MaterialList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" sortable={false} />
           <TextField source="name" label="名字" sortable={false} />
           <TextField source="content" label="内容" sortable={false} />
           <SelectField

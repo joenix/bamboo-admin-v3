@@ -103,7 +103,6 @@ const RoleList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" sortable={false} />
           <TextField source="name" label="名字" sortable={false} />
           <TextField source="description" label="描述" sortable={false} />
           <FunctionField

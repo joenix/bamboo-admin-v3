@@ -105,7 +105,6 @@ const SchoolList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" sortable={false} />
           <SelectField
             source="type"
             choices={TypeList}

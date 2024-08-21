@@ -99,7 +99,6 @@ const BooklList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" sortable={false} />
           <TextField source="name" label="书名" sortable={false} />
           <TextField source="content" label="内容" sortable={false} />
           <ImageField source="img" title="图片" label="图片" sortable={false} />

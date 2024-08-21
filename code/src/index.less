@@ -6,6 +6,8 @@
 .buttonGroup {
   display: flex;
   align-items: center;
+  background: #fff !important;
+
   > button,
   > a {
     margin-right: 0.6rem;
@@ -41,6 +43,18 @@
   }
 }
 
+.MuiScopedCssBaseline-root,
+.RaLayout-appFrame {
+  height: 100vh;
+  overflow-y: hidden;
+}
+.RaLayout-contentWithSidebar {
+  height: 100%;
+}
+.list-page {
+  overflow: scroll;
+}
+
 // 顶部条
 .MuiAppBar-root {
   background-color: #00152a !important;
@@ -64,7 +78,6 @@
 .RaLayout-content {
   background: #f1f2f6 !important;
   .RaList-main {
-    margin-top: 10px;
     background: #fff;
     padding: 0 10px;
   }

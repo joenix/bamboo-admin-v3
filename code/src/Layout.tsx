@@ -17,7 +17,11 @@ export const Layout = ({ children }: { children }) => {
       {/* 面包屑 */}
       <Breadcrumbs
         aria-label="breadcrumb"
-        style={{ padding: "20px 10px", background: " #fff" }}
+        style={{
+          padding: "20px 10px",
+          background: " #fff",
+          marginBottom: "10px",
+        }}
       >
         <Link color="inherit" component={RouterLink} to="/">
           Home
@@ -25,6 +29,7 @@ export const Layout = ({ children }: { children }) => {
         {pathnames.map((value, index) => {
           const last = index === pathnames.length - 1;
           const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+
           return last ? (
             <Typography color="textPrimary" key={to}>
               {value}

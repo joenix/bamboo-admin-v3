@@ -117,7 +117,6 @@ const CodeList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid>
-          <TextField source="id" label="id" sortable={false} />
           <TextField source="bookid" label="图书id" sortable={false} />
           <SelectField
             source="bookid"

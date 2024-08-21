@@ -84,7 +84,6 @@ const UserList = () => {
   return (
     <List actions={<ListActions />} filters={postFilters}>
       <Datagrid>
-        <TextField source="id" />
         <ChipField source="rank" />
         <DateField source="birthday" label="出生" />
         <BooleanField source="isAdult" label="是否成年" />
