@@ -35,10 +35,6 @@ const MaterialShow = () => {
     return (
       <>
         <div className="viewContainer">
-          <div className="title">ID:</div>
-          <TextField source="id" label="ID" />
-        </div>
-        <div className="viewContainer">
           <div className="title">物料类型:</div>
           <SelectField source="type" choices={TypeList} label="物料类型" />
         </div>

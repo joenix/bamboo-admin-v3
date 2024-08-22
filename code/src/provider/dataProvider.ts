@@ -322,7 +322,6 @@ export const dataProvider = {
 
   // 获取列表
   getList: async (resource, params) => {
-    console.log(555);
     const { msg } = await httpClient.post(api[resource].getall);
 
     const data = { data: msg.data, total: msg.totalPages };
@@ -332,7 +331,6 @@ export const dataProvider = {
         return Promise.resolve(BannerData);
       case "Material":
         MaterialData = data;
-        console.log(666);
         return Promise.resolve(data);
       case "Information":
         return Promise.resolve(InformationData);
@@ -364,7 +362,6 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Material":
         _d = MaterialData;
-        console.log(364, _d.data);
         return Promise.resolve({ data: _d?.data?.find((x) => x.id == id) });
       case "Information":
         _d = InformationData;
@@ -425,8 +422,9 @@ export const dataProvider = {
       },
     });
 
-    console.log(4444);
-    return Promise.resolve();
+    return Promise.resolve({
+      id,
+    });
   },
 
   // 批量删除 - 返回被删除的id

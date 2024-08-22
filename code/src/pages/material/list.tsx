@@ -20,6 +20,7 @@ import {
   UrlField,
   useResourceContext,
   useDataProvider,
+  useRefresh,
 } from "../../utils/dep";
 
 // Use Components
@@ -37,6 +38,7 @@ const MaterialList = () => {
   const resource = useResourceContext();
   const [dialogvisible, setDialogvisible] = useState(false);
   const [curId, setCurId] = useState(null);
+  const refresh = useRefresh();
 
   const ListActions = () => {
     const { total, isPending } = useListContext();
@@ -72,16 +74,14 @@ const MaterialList = () => {
   };
 
   const dialogconfirm = async () => {
-    console.log(111);
     // 1. 走删除单个接口
     await dataProvider.delete(resource, { id: curId });
-    console.log(222);
+
     // 2. 关闭弹窗
     dialogclose();
 
     // 3. 刷新页面
-    await dataProvider.getList(resource);
-    console.log(333);
+    refresh();
   };
 
   const CustomActions = ({ record }) => (

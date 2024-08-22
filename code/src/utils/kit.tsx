@@ -129,8 +129,6 @@ export const httpClient = {
 
     const { status, error, ...res } = result?.json;
 
-    console.log("result?.json;", result?.json);
-
     if (status === 200) {
       return res;
     }

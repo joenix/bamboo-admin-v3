@@ -104,10 +104,6 @@ const MaterialEdit = () => {
     return (
       <>
         <div className="viewContainer">
-          <div className="title">ID:</div>
-          <TextField source="id" label={false} />
-        </div>
-        <div className="viewContainer">
           <div className="title">物料类型:</div>
           <SelectInput
             source="type"
