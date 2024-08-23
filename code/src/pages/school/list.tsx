@@ -104,7 +104,7 @@ const SchoolList = () => {
   return (
     <>
       <List actions={<ListActions />} filters={postFilters}>
-        <Datagrid>
+        <Datagrid bulkActionButtons={false}>
           <SelectField
             source="type"
             choices={TypeList}

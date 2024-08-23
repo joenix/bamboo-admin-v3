@@ -104,7 +104,7 @@ const TeachList = () => {
   return (
     <>
       <List actions={<ListActions />} filters={postFilters}>
-        <Datagrid>
+        <Datagrid bulkActionButtons={false}>
           <TextField source="name" label="姓名" sortable={false} />
           <NumberField source="age" label="年龄" sortable={false} />
           <TextField source="gender" label="性别" sortable={false} />

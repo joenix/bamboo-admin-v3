@@ -102,7 +102,7 @@ const TipsList = () => {
   return (
     <>
       <List actions={<ListActions />} filters={postFilters}>
-        <Datagrid>
+        <Datagrid bulkActionButtons={false}>
           <TextField source="name" label="名字" sortable={false} />
           <TextField source="content" label="内容" sortable={false} />
           <ImageField source="img" title="图片" label="图片" sortable={false} />

@@ -322,14 +322,17 @@ export const dataProvider = {
 
   // 获取列表
   getList: async (resource, params) => {
-    const { msg } = await httpClient.post(api[resource].getall);
+    // const { msg } = await httpClient.post(api[resource].getall);
 
-    const data = { data: msg.data, total: msg.totalPages };
+    // const data = { data: msg.data, total: msg.totalPages };
 
     switch (resource) {
       case "Banner":
         return Promise.resolve(BannerData);
       case "Material":
+        const { msg } = await httpClient.post(api[resource].getall);
+
+        const data = { data: msg.data, total: msg.totalPages };
         MaterialData = data;
         return Promise.resolve(data);
       case "Information":
