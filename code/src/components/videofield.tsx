@@ -11,7 +11,7 @@ const VideoField = ({ source }) => {
 
   return (
     <>
-      <video width="200" height="150" controls>
+      <video width="150" height="100" controls>
         <source src={record[source]} type="video/mp4" />
         Your browser does not support the video tag.
       </video>

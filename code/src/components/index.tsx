@@ -14,6 +14,7 @@ import FileSelect from "./fileselect";
 import UpLoad from "./upload";
 import Loading from "./loading";
 import Notify from "./notify";
+import AudioField from "./audiofield";
 
 export {
   NotFount,
@@ -32,4 +33,5 @@ export {
   UpLoad,
   Loading,
   Notify,
+  AudioField,
 };

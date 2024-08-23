@@ -21,10 +21,11 @@ import {
   useResourceContext,
   useDataProvider,
   useRefresh,
+  ImageField,
 } from "../../utils/dep";
 
 // Use Components
-import { Confirmdialog } from "../../components";
+import { Confirmdialog, VideoField, AudioField } from "../../components";
 
 // Use Icon
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -108,6 +109,34 @@ const MaterialList = () => {
     </div>
   );
 
+  const RenderLink = ({ record }) => {
+    const { type, url } = record;
+
+    console.log(11, type);
+    switch (type) {
+      case 1:
+        return (
+          <ImageField source="url" title="图片" label="图片" sortable={false} />
+        );
+
+      case 2:
+        return <VideoField source="url" label="视频" sortable={false} />;
+
+      case 4:
+        return <AudioField source="url" label="音频" sortable={false} />;
+      default:
+        return (
+          <UrlField
+            source="url"
+            label="链接"
+            style={{ width: "200px", display: "block", overflow: "scroll" }}
+            sortable={false}
+            target="_blank"
+          ></UrlField>
+        );
+    }
+  };
+
   return (
     <>
       <List actions={<ListActions />} filters={postFilters}>
@@ -120,13 +149,10 @@ const MaterialList = () => {
             label="物料类型"
             sortable={false}
           />
-          <UrlField
-            source="url"
+          <FunctionField
             label="链接"
-            style={{ width: "200px", display: "block", overflow: "scroll" }}
-            sortable={false}
-            target="_blank"
-          ></UrlField>
+            render={(record) => <RenderLink record={record} />}
+          />
           <UrlField
             source="link"
             label="跳转地址"
