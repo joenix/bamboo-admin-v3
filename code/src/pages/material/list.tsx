@@ -125,14 +125,14 @@ const MaterialList = () => {
             label="链接"
             style={{ width: "200px", display: "block", overflow: "scroll" }}
             sortable={false}
-            target="block"
+            target="_blank"
           ></UrlField>
           <UrlField
             source="link"
             label="跳转地址"
             style={{ width: "200px", display: "block", overflow: "scroll" }}
             sortable={false}
-            target="block"
+            target="_blank"
           ></UrlField>
           <DateField
             source="createdAt"

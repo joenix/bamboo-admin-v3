@@ -40,7 +40,7 @@ const MaterialShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">链接:</div>
-          <UrlField source="url" label="链接" />
+          <UrlField source="url" target="_blank" label="链接" />
         </div>
         <div className="viewContainer">
           <div className="title">名称:</div>
@@ -52,7 +52,7 @@ const MaterialShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">跳转地址:</div>
-          <UrlField source="link" label="跳转地址" />
+          <UrlField source="link" target="_blank" label="跳转地址" />
         </div>
         <div className="viewContainer">
           <div className="title">创建时间:</div>

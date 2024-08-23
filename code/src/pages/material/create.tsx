@@ -114,12 +114,7 @@ const MaterialCreate = () => {
         </div>
         <div className="viewContainer">
           <div className="title">跳转地址:</div>
-          <TextInput
-            source="link"
-            label="跳转地址"
-            validate={[required()]}
-            variant="outlined"
-          />
+          <TextInput source="link" label="跳转地址" variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">链接:</div>

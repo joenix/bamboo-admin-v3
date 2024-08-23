@@ -15,6 +15,7 @@ import {
   useResourceContext,
   required,
   useState,
+  useFormContext,
 } from "../../utils/dep";
 
 // Use Icon
@@ -23,15 +24,11 @@ import InfoIcon from "@mui/icons-material/Info";
 // Use Config
 import { TypeList } from "./config";
 
-// Test
-import video from "../../static/video/SampleVideo.mp4";
-
 // Use Components
 import { UpLoad } from "../../components";
 
 const MaterialEdit = () => {
   const resouce = useResourceContext();
-  const [selectedType, setSelectedType] = useState(1);
 
   const EditActions = () => {
     const record = useRecordContext();
@@ -54,6 +51,8 @@ const MaterialEdit = () => {
 
   const View = () => {
     const record = useRecordContext();
+    const { setValue, getValues } = useFormContext();
+    const [selectedType, setSelectedType] = useState(1);
 
     if (!record) return null;
 
@@ -101,6 +100,13 @@ const MaterialEdit = () => {
       return <UpLoad accept={accept} onChange={upload}></UpLoad>;
     };
 
+    const changeType = (e) => {
+      const type = Number(e.target.value);
+      setValue("url", "");
+
+      setSelectedType(type);
+    };
+
     return (
       <>
         <div className="viewContainer">
@@ -111,6 +117,7 @@ const MaterialEdit = () => {
             label={false}
             variant="outlined"
             validate={[required()]}
+            onChange={changeType}
           />
         </div>
         <div className="viewContainer">
@@ -133,12 +140,7 @@ const MaterialEdit = () => {
         </div>
         <div className="viewContainer">
           <div className="title">跳转地址:</div>
-          <TextInput
-            source="link"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
+          <TextInput source="link" label={false} variant="outlined" />
         </div>
         <div className="viewContainer">
           <div className="title">链接:</div>
