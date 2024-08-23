@@ -72,7 +72,7 @@ const BooklList = () => {
   };
 
   const CustomActions = ({ record }) => (
-    <div className="buttonGroup">
+    <div className="buttonGroup transparent">
       <Button
         component={RouterLink}
         color="primary"

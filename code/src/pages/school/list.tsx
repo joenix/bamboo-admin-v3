@@ -77,7 +77,7 @@ const SchoolList = () => {
 
   const CustomActions = ({ record }) => {
     return (
-      <div className="buttonGroup">
+      <div className="buttonGroup transparent">
         <Button
           component={RouterLink}
           color="primary"

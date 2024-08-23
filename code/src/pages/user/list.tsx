@@ -43,7 +43,7 @@ const handleCancel = (event, id) => {
 };
 
 const CustomActions = ({ record }) => (
-  <div>
+  <div className="buttonGroup transparent">
     <Button onClick={(e) => handleConfirm(e, record.id)} color="primary">
       确认
     </Button>
