@@ -90,6 +90,7 @@ export const httpClient = {
         Token: token,
       }),
     };
+
     return fetchUtils.fetchJson(`${host}${url}${queryString}`, options);
   },
 
