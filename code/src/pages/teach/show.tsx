@@ -44,7 +44,7 @@ const TeachShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">性别:</div>
-          <TextField source="gender" label="性别" />
+          <SelectField source="gender" choices={GenderList} label="性别" />
         </div>
         <div className="viewContainer">
           <div className="title">年龄:</div>

@@ -8,6 +8,8 @@ import * as Tips from "./tips";
 import * as Information from "./information";
 import * as Role from "./role";
 import * as User from "./user";
+import * as Gift from "./gift";
+import * as GiftRecord from "./gift-record";
 
 export {
   Banner,
@@ -20,4 +22,6 @@ export {
   Information,
   Role,
   User,
+  Gift,
+  GiftRecord,
 };

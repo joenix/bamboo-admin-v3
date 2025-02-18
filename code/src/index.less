@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow: hidden;
+}
+
 .buttonGroup {
   display: flex;
   flex-direction: column;
@@ -26,6 +30,7 @@
   margin-bottom: 0.2rem;
   padding: 0 0.4rem;
   min-height: 4rem;
+  width: 50%;
   .title {
     min-width: 14rem;
     font-size: 0.9rem;
@@ -34,6 +39,9 @@
   input {
     font-size: 0.875rem;
     font-weight: 400;
+  }
+  legend {
+    display: none;
   }
 }
 
@@ -55,10 +63,8 @@
   overflow-y: hidden;
 }
 .RaLayout-contentWithSidebar {
-  height: 100%;
-}
-.list-page {
-  overflow: scroll;
+  height: calc(100vh - 48px);
+  overflow: hidden;
 }
 
 // 顶部条
@@ -83,8 +89,18 @@
 // 右侧板块
 .RaLayout-content {
   background: #f1f2f6 !important;
-  .RaList-main {
+  height: 100%;
+
+  .list-page, .show-page, .edit-page {
+    overflow: hidden;
+    flex: 1;
     background: #fff;
     padding: 0 10px;
+  }
+
+  .RaList-main, .RaEdit-main, .RaShow-main {
+    overflow: auto;
+    height: calc(100% - 48px);
+    padding-bottom: 50px;
   }
 }

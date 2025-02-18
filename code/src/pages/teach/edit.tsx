@@ -16,13 +16,17 @@ import {
   ImageInput,
   ImageField,
   required,
+  useNotify,
+  useRedirect,
+  useUpdate,
 } from "../../utils/dep";
 
 // Use Icon
 import InfoIcon from "@mui/icons-material/Info";
 
 // Use Config
-import { TypeList } from "./config";
+import { TypeList, GenderList } from "./config";
+import { api } from "@/http";
 
 // Use Components
 import { ImgSelect, UpLoad } from "../../components";
@@ -101,8 +105,9 @@ const TeachEdit = () => {
         </div>
         <div className="viewContainer">
           <div className="title">性别:</div>
-          <TextInput
+          <SelectInput
             source="gender"
+            choices={GenderList}
             label={false}
             variant="outlined"
             validate={[required()]}
@@ -110,11 +115,14 @@ const TeachEdit = () => {
         </div>
         <div className="viewContainer">
           <div className="title">年龄:</div>
-          <TextInput
+          <NumberInput
             source="age"
             label={false}
             variant="outlined"
             validate={[required()]}
+            min={20}
+            max={90}
+            step={1}
           />
         </div>
         <div className="viewContainer">
@@ -124,6 +132,7 @@ const TeachEdit = () => {
             label={false}
             variant="outlined"
             validate={[required()]}
+            multiline
           />
         </div>
         <div className="viewContainer">
@@ -153,22 +162,33 @@ const TeachEdit = () => {
             validate={[required()]}
           />
         </div>
-
         <div className="viewContainer">
           <div className="title">头像:</div>
-          <>
+          <div>
+            <ImageField source="avatar" title="头像"></ImageField>
             <UpLoad accept="images/*" onChange={upload}></UpLoad>
-            <ImageField source="avatar"></ImageField>
-          </>
+          </div>
         </div>
       </>
     );
   };
   // 自定义工具栏
   const CustomToolbar = (props) => {
+    const notify = useNotify();
+    const redirect = useRedirect();
+    const [update] = useUpdate();
+    const onSuccess = (data) => {
+      // notify(`Post "${data.title}" saved!`);
+      // redirect("/posts");
+    };
+
     return (
       <Toolbar {...props} className="buttonGroup">
-        <SaveButton label="保存" />
+        <SaveButton
+          type="button"
+          label="保存"
+          mutationOptions={{ onSuccess }}
+        />
       </Toolbar>
     );
   };

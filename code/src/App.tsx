@@ -48,6 +48,8 @@ import {
   Information,
   Role,
   User,
+  Gift,
+  GiftRecord,
 } from "./pages";
 
 // Use Components
@@ -226,6 +228,27 @@ export const App = () => {
           icon={VpnKey}
           // 自定义菜单标题
           options={{ label: "激活码管理" }}
+        ></Resource>
+
+        <Resource
+          name="gift"
+          list={Gift.List}
+          show={Gift.Show}
+          create={Gift.Create}
+          // 图标
+          icon={VpnKey}
+          // 自定义菜单标题
+          options={{ label: "礼品管理" }}
+        ></Resource>
+
+        <Resource
+          name="giftRecord"
+          list={GiftRecord.List}
+          show={GiftRecord.Show}
+          // 图标
+          icon={VpnKey}
+          // 自定义菜单标题
+          options={{ label: "积分兑换管理" }}
         ></Resource>
 
         {/* 自定义路由 - 不会显示在菜单上*/}

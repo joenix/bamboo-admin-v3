@@ -186,7 +186,7 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "宝山区",
-      gender: "男",
+      gender: "1",
       content: "我是教体育的..",
       avatar:
         "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
@@ -199,7 +199,7 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "嘉定区",
-      gender: "男",
+      gender: "1",
       content: "我是教柔道的..",
       avatar:
         "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
@@ -212,7 +212,7 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "静安区",
-      gender: "女",
+      gender: "0",
       content: "我是教芭蕾舞的..",
       avatar:
         "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
