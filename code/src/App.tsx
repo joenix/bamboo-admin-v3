@@ -207,17 +207,17 @@ export const App = () => {
         ></Resource>
 
         {/* User */}
-        {/* <Resource
-        name="User"
-        list={User.List}
-        edit={User.Edit}
-        show={User.Show}
-        create={User.Create}
-        // 图标
-        icon={Person}
-        // 自定义菜单标题
-        options={{ label: "用户管理" }}
-      ></Resource> */}
+        <Resource
+          name="User"
+          list={User.List}
+          edit={User.Edit}
+          show={User.Show}
+          create={User.Create}
+          // 图标
+          icon={Person}
+          // 自定义菜单标题
+          options={{ label: "用户管理" }}
+        ></Resource>
 
         {/* Code */}
         <Resource

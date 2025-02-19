@@ -8,81 +8,8 @@ import { api } from "../http/index";
 import video from "../static/video/SampleVideo.mp4";
 
 const defaultData = {
-  data: [
-    {
-      id: 1,
-      name: "Ervin Howell",
-      username: "Antonette",
-      email: "Shanna@melissa.tv",
-      address: {
-        street: "Victor Plains",
-        suite: "Suite 879",
-        city: "Wisokyburgh",
-        zipcode: "90566-7771",
-        geo: {
-          lat: "-43.9509",
-          lng: "-34.4618",
-        },
-      },
-      phone: "010-692-6593 x09125",
-      website: "http://www.baidu.com",
-      company: {
-        name: "Deckow-Crist",
-        catchPhrase: "Proactive didactic contingency",
-        bs: "synergize scalable supply-chains",
-      },
-      isAdult: false,
-      rank: "A",
-      birthday: "2024-03-02",
-      avator:
-        "https://wx4.sinaimg.cn/mw690/008bDdGsly1hrm34fxonfj30pf1co0wz.jpg",
-      money: 27,
-      signature: "<b style='color:red'>三思而后行</>",
-      hobby: "nija",
-      file: "https://example.com/files/doc1.pdf",
-      tags: [
-        { uid: 1, name: "admin" },
-        { uid: 2, name: "user" },
-      ],
-    },
-    {
-      id: 2,
-      name: "williamding",
-      username: "Antonette",
-      email: "Shanna@melissa.tv",
-      address: {
-        street: "Victor Plains",
-        suite: "Suite 879",
-        city: "Wisokyburgh",
-        zipcode: "90566-7771",
-        geo: {
-          lat: "-43.9509",
-          lng: "-34.4618",
-        },
-      },
-      phone: "010-692-6593 x09125",
-      website: "http://www.baidu.com",
-      company: {
-        name: "Deckow-Crist",
-        catchPhrase: "Proactive didactic contingency",
-        bs: "synergize scalable supply-chains",
-      },
-      isAdult: false,
-      rank: "A",
-      birthday: "2024-03-02",
-      avator:
-        "https://wx4.sinaimg.cn/mw690/008bDdGsly1hrm34fxonfj30pf1co0wz.jpg",
-      money: 27,
-      signature: "<b style='color:red'>三思而后行</>",
-      hobby: "nija",
-      file: "https://example.com/files/doc1.pdf",
-      tags: [
-        { uid: 1, name: "admin" },
-        { uid: 2, name: "user" },
-      ],
-    },
-  ],
-  total: 2,
+  data: [],
+  total: 0,
 };
 
 const BannerData = {
@@ -126,6 +53,25 @@ const BannerData = {
 
 let MaterialData = {
   data: [],
+  total: "",
+};
+
+const UserData = {
+  data: [
+    {
+      id: "111",
+      name: "张三",
+      phone: "13655555556",
+      address: "上海市徐汇区",
+    },
+    {
+      id: "222",
+      name: "李四",
+      phone: "13655555556",
+      address: "上海市徐汇区",
+      avator: "",
+    },
+  ],
   total: "",
 };
 
@@ -395,6 +341,8 @@ export const dataProvider = {
         return Promise.resolve(GiftData);
       case "GiftExchange":
         return Promise.resolve(GiftExchangeData);
+      case "User":
+        return Promise.resolve(UserData);
       default:
         return Promise.resolve(defaultData);
     }
