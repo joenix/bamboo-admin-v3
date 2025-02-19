@@ -303,6 +303,48 @@ const CodeData = {
   total: 2,
 };
 
+const GiftData = {
+  data: [
+    {
+      id: "1",
+      name: "礼品名称1",
+      credit: "10",
+      image:
+        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+    },
+    {
+      id: "2",
+      name: "礼品名称2",
+      credit: "20",
+      image:
+        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+    },
+  ],
+  total: 2,
+};
+
+const GiftExchangeData = {
+  data: [
+    {
+      id: "1",
+      name: "张三",
+      phone: "13655555556",
+      address: "上海市徐汇区",
+      giftId: "1",
+      giftName: "礼品名称1",
+    },
+    {
+      id: "2",
+      name: "李四",
+      phone: "13655555557",
+      address: "上海市青浦区",
+      giftId: "2",
+      giftName: "礼品名称2",
+    },
+  ],
+  total: 2,
+};
+
 // AataProvider
 export const dataProvider = {
   // 新建
@@ -349,6 +391,10 @@ export const dataProvider = {
         return Promise.resolve(RoleData);
       case "Code":
         return Promise.resolve(CodeData);
+      case "Gift":
+        return Promise.resolve(GiftData);
+      case "GiftExchange":
+        return Promise.resolve(GiftExchangeData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -386,6 +432,12 @@ export const dataProvider = {
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       case "Code":
         _d = CodeData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Gift":
+        _d = GiftData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "GiftExchange":
+        _d = GiftExchangeData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
         return Promise.resolve(defaultData);

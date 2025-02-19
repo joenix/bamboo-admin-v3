@@ -9,7 +9,7 @@ import * as Information from "./information";
 import * as Role from "./role";
 import * as User from "./user";
 import * as Gift from "./gift";
-import * as GiftRecord from "./gift-record";
+import * as GiftExchange from "./gift-exchange";
 
 export {
   Banner,
@@ -23,5 +23,5 @@ export {
   Role,
   User,
   Gift,
-  GiftRecord,
+  GiftExchange,
 };

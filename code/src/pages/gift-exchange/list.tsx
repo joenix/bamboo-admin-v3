@@ -28,7 +28,7 @@ import { Confirmdialog } from "../../components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const GiftList = () => {
+const GiftExchangeList = () => {
   const [dialogvisible, setDialogvisible] = useState(false);
   const [curId, setCurId] = useState(null);
 
@@ -39,7 +39,7 @@ const GiftList = () => {
     return (
       <TopToolbar>
         <FilterButton disableSaveQuery={true} />
-        <CreateButton label="新建" />
+        {/* <CreateButton label="新建" /> */}
         <RefreshButton label="刷新" />
         <ExportButton label="导出" />
         {/* <ImportButton>: benwinding/react-admin-import-csv. */}
@@ -50,7 +50,7 @@ const GiftList = () => {
   // 搜索
   const postFilters = [
     <SearchInput placeholder="请搜索" source="id" alwaysOn />,
-    <TextInput label="礼物名称" source="name" defaultValue="" />,
+    <TextInput label="姓名" source="name" defaultValue="" />,
   ];
 
   // 处理删除
@@ -103,13 +103,15 @@ const GiftList = () => {
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid bulkActionButtons={false}>
           <NumberField source="id" label="id" sortable={false} />
-          <TextField source="name" label="礼品名称" sortable={false} />
-          <ImageField source="image" label="礼品图片" sortable={false} />
-          <NumberField source="credit" label="所需积分" sortable={false} />
-          <FunctionField
+          <NumberField source="giftId" label="礼品ID" sortable={false} />
+          <TextField source="giftName" label="礼品名称" sortable={false} />
+          <TextField source="name" label="收货人" sortable={false} />
+          <TextField source="phone" label="收货人手机号" sortable={false} />
+          <TextField source="address" label="收货地址" sortable={false} />
+          {/* <FunctionField
             label="操作"
             render={(record) => <CustomActions record={record} />}
-          />
+          /> */}
         </Datagrid>
       </List>
       <Confirmdialog
@@ -123,4 +125,4 @@ const GiftList = () => {
   );
 };
 
-export default GiftList;
+export default GiftExchangeList;

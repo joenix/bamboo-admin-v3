@@ -23,6 +23,8 @@ import TipsAndUpdates from "@mui/icons-Material/TipsAndUpdates";
 import People from "@mui/icons-Material/People";
 import Person from "@mui/icons-Material/Person";
 import VpnKey from "@mui/icons-Material/VpnKey";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import AddShoppingCartSharpIcon from "@mui/icons-material/AddShoppingCartSharp";
 
 // Use Layout
 import { Layout } from "./Layout";
@@ -49,7 +51,7 @@ import {
   Role,
   User,
   Gift,
-  GiftRecord,
+  GiftExchange,
 } from "./pages";
 
 // Use Components
@@ -231,24 +233,25 @@ export const App = () => {
         ></Resource>
 
         <Resource
-          name="gift"
+          name="Gift"
           list={Gift.List}
           show={Gift.Show}
           create={Gift.Create}
+          edit={Gift.Edit}
           // 图标
-          icon={VpnKey}
+          icon={CardGiftcardIcon}
           // 自定义菜单标题
           options={{ label: "礼品管理" }}
         ></Resource>
 
         <Resource
-          name="giftRecord"
-          list={GiftRecord.List}
-          show={GiftRecord.Show}
+          name="GiftExchange"
+          list={GiftExchange.List}
+          show={GiftExchange.Show}
           // 图标
-          icon={VpnKey}
+          icon={AddShoppingCartSharpIcon}
           // 自定义菜单标题
-          options={{ label: "积分兑换管理" }}
+          options={{ label: "礼品兑换管理" }}
         ></Resource>
 
         {/* 自定义路由 - 不会显示在菜单上*/}
