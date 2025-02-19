@@ -19,6 +19,7 @@ import {
   useNotify,
   useRedirect,
   useUpdate,
+  useInput,
 } from "../../utils/dep";
 
 // Use Icon
@@ -57,7 +58,6 @@ const GiftEdit = () => {
     const record = useRecordContext();
 
     if (!record) return null;
-
     const upload = async (e) => {
       const { files } = e.target;
 
@@ -84,49 +84,55 @@ const GiftEdit = () => {
           <TextField source="id" label={false} />
         </div>
         <div className="viewContainer">
-          <div className="title">礼品名称:</div>
+          <div className="title required">礼品名称:</div>
           <TextInput
             source="name"
             label={false}
-            validate={[required()]}
+            validate={[required("请输入礼品名称")]}
             variant="outlined"
           />
         </div>
         <div className="viewContainer">
-          <div className="title">所需积分:</div>
+          <div className="title required">所需积分:</div>
           <NumberInput
             source="credit"
             label={false}
-            validate={[required()]}
+            validate={[required("所需积分")]}
             variant="outlined"
+            min={1}
           />
         </div>
         <div className="viewContainer">
-          <div className="title">礼品图片:</div>
-          <div>
-            <ImageField source="image" title="头像"></ImageField>
-            <UpLoad accept={"images/*"} onChange={upload}></UpLoad>
-          </div>
+          <div className="title required">礼品图片:</div>
+          <ImageInput
+            source="image"
+            placeholder="点击上传"
+            label={false}
+            validate={[required("请上传礼品图片")]}
+          >
+            <ImageField source="src" title="礼品"></ImageField>
+          </ImageInput>
         </div>
       </>
     );
   };
+
   // 自定义工具栏
   const CustomToolbar = (props) => {
     const notify = useNotify();
     const redirect = useRedirect();
     const [update] = useUpdate();
     const onSuccess = (data) => {
-      // notify(`Post "${data.title}" saved!`);
-      // redirect("/posts");
+      notify("更新成功");
+      redirect("/Gift");
     };
 
     return (
       <Toolbar {...props} className="buttonGroup">
         <SaveButton
-          type="button"
-          label="保存"
-          mutationOptions={{ onSuccess }}
+          label="更新"
+          // type="button"
+          // mutationOptions={{ onSuccess }}
         />
       </Toolbar>
     );

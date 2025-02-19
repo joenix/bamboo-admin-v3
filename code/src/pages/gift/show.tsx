@@ -41,7 +41,7 @@ const GiftShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">礼品图片:</div>
-          <ImageField source="image" title="图片" label="头像" />
+          <ImageField source="image.src" title="图片" label="头像" />
         </div>
       </>
     );

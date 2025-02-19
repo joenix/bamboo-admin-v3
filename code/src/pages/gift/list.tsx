@@ -104,7 +104,7 @@ const GiftList = () => {
         <Datagrid bulkActionButtons={false}>
           <NumberField source="id" label="id" sortable={false} />
           <TextField source="name" label="礼品名称" sortable={false} />
-          <ImageField source="image" label="礼品图片" sortable={false} />
+          <ImageField source="image.src" label="礼品图片" sortable={false} />
           <NumberField source="credit" label="所需积分" sortable={false} />
           <FunctionField
             label="操作"

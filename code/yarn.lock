@@ -2816,6 +2816,11 @@ ra-i18n-polyglot@^5.5.4:
     node-polyglot "^2.2.2"
     ra-core "^5.5.4"
 
+ra-language-chinese@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.npmmirror.com/ra-language-chinese/-/ra-language-chinese-2.0.10.tgz#7c51b4d13cd6cf62cf8b4e945e489ac85bdc0e7f"
+  integrity sha512-k+X6XdkBEZnmpKIJZj9Lb77Lj8LCmterilJTj2ovp3i8/H/dLo9IujASfjFypjHnVUpN7Y63LT19kgPrS6+row==
+
 ra-language-english@^5.5.4:
   version "5.5.4"
   resolved "https://registry.npmmirror.com/ra-language-english/-/ra-language-english-5.5.4.tgz#1bb8bf8711717b56de6e6cd9520014cb6f52b5ec"

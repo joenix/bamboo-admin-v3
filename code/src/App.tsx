@@ -67,6 +67,11 @@ import {
   Notify,
 } from "./components";
 
+import polyglotI18nProvider from "ra-i18n-polyglot";
+import chineseMessages from "ra-language-chinese";
+
+const i18nProvider = polyglotI18nProvider(() => chineseMessages, "ch");
+
 export const App = () => {
   return (
     <Provider store={store}>
@@ -96,6 +101,7 @@ export const App = () => {
         // 自定义ready页面
         // ready={Ready}
         theme={defaultTheme}
+        i18nProvider={i18nProvider}
       >
         {/* 动态Resource */}
         {/* {fetchResources} */}

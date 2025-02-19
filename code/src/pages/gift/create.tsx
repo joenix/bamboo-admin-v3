@@ -7,6 +7,8 @@ import {
   Create,
   required,
   NumberInput,
+  ImageInput,
+  ImageField,
 } from "../../utils/dep";
 
 // Use Components
@@ -55,7 +57,11 @@ const GiftCreate = () => {
         </div>
         <div className="viewContainer">
           <div className="title">礼品图片:</div>
-          <UpLoad accept={"images/*"} onChange={upload}></UpLoad>
+          {/* <UpLoad accept={"images/*"} onChange={upload}></UpLoad>
+           */}
+          <ImageInput source="image" placeholder="点击上传" label={false}>
+            <ImageField source="src" title="礼品"></ImageField>
+          </ImageInput>
         </div>
       </>
     );

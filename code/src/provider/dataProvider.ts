@@ -255,15 +255,19 @@ const GiftData = {
       id: "1",
       name: "礼品名称1",
       credit: "10",
-      image:
-        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+        title: "礼品名称1",
+      },
     },
     {
       id: "2",
       name: "礼品名称2",
       credit: "20",
-      image:
-        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+        title: "礼品名称2",
+      },
     },
   ],
   total: 2,
@@ -400,7 +404,7 @@ export const dataProvider = {
   // 编辑
   update: async (resource, params) => {
     const { data, id, previousData } = params;
-
+    console.log(1213, resource, params);
     await httpClient.post(`${api[resource].update}?id=${id}`, {
       data,
     });

@@ -27,15 +27,28 @@ html, body {
 
 .viewContainer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 0.2rem;
   padding: 0 0.4rem;
   min-height: 4rem;
   width: 50%;
   .title {
-    min-width: 14rem;
+    min-width: 10rem;
     font-size: 0.9rem;
     font-weight: 500;
+    height: 38px;
+    line-height: 38px;
+    margin-top: 2px;
+  
+    &.required {
+      &::before {
+        content: '*';
+        color: red;
+        margin-right: 0.2rem;
+        font-size: 0.875rem;
+        vertical-align: top;
+      }
+    }
   }
   input {
     font-size: 0.875rem;
@@ -106,7 +119,14 @@ html, body {
   }
 
   .RaImageField-image {
+    display: block;
+    height: auto !important;
     object-fit: cover !important;
     margin: 0 !important;
+  }
+
+  .RaFileInput-dropZone {
+    background: #1976d2 !important;
+    color: #FFF !important;
   }
 }
