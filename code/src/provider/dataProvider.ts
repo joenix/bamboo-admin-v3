@@ -182,7 +182,9 @@ const SchoolData = {
       content: "我是机构",
       nature: "",
       school_type: "",
-      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      img: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
     },
     {
       id: "2",
@@ -194,7 +196,9 @@ const SchoolData = {
       content: "我是学校",
       nature: "211大学",
       school_type: "公立学校",
-      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      img: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
     },
   ],
   total: 2,

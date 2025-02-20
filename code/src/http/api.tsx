@@ -66,6 +66,7 @@ export const api = {
     create: "/school/create",
     update: "/school/update",
     getall: "/school/get_all",
+    delete: "/school/delete",
   },
   // 激活码
   Code: {
