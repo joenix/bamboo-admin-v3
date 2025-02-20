@@ -28,9 +28,9 @@ html, body {
 .viewContainer {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 0.2rem;
+  // margin-bottom: 0.5rem;
   padding: 0 0.4rem;
-  min-height: 4rem;
+  // min-height: 4rem;
   width: 50%;
   .title {
     min-width: 10rem;
@@ -48,6 +48,11 @@ html, body {
         font-size: 0.875rem;
         vertical-align: top;
       }
+    }
+
+    & + .MuiTypography-root {
+      height: 38px;
+      line-height: 38px;
     }
   }
   input {
@@ -129,4 +134,8 @@ html, body {
     background: #1976d2 !important;
     color: #FFF !important;
   }
+}
+
+.MuiCard-root {
+  box-shadow: none !important;
 }

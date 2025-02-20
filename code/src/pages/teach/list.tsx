@@ -19,6 +19,7 @@ import {
   useState,
   NumberField,
   useResourceContext,
+  useDelete,
 } from "../../utils/dep";
 
 // Use Components
@@ -68,9 +69,11 @@ const TeachList = () => {
     setDialogvisible(false);
   };
 
+  const [deleteOne] = useDelete();
   const dialogconfirm = () => {
     // 1. 走删除单个接口
 
+    deleteOne("Teach", { id: curId });
     // 2. 关闭弹窗
     dialogclose();
   };
@@ -126,7 +129,7 @@ const TeachList = () => {
           />
           <TextField source="content" label="个人介绍" sortable={false} />
           <ImageField
-            source="avatar"
+            source="avatar.src"
             title="图片"
             label="头像"
             sortable={false}

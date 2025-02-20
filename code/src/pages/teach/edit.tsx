@@ -33,6 +33,7 @@ import { ImgSelect, UpLoad } from "../../components";
 
 // Use Kit
 import { httpClient } from "../../utils/kit";
+import FormCore from "./formCore";
 
 const TeachEdit = () => {
   const EditActions = () => {
@@ -84,91 +85,7 @@ const TeachEdit = () => {
           <div className="title">ID:</div>
           <TextField source="id" label={false} />
         </div>
-        <div className="viewContainer">
-          <div className="title">师资类型:</div>
-          <SelectInput
-            source="type"
-            choices={TypeList}
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">姓名:</div>
-          <TextInput
-            source="name"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">性别:</div>
-          <SelectInput
-            source="gender"
-            choices={GenderList}
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">年龄:</div>
-          <NumberInput
-            source="age"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-            min={20}
-            max={90}
-            step={1}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">个人介绍:</div>
-          <TextInput
-            source="content"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-            multiline
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">省:</div>
-          <TextInput
-            source="province"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">市:</div>
-          <TextInput
-            source="city"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">区:</div>
-          <TextInput
-            source="area"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">头像:</div>
-          <div>
-            <ImageField source="avatar" title="头像"></ImageField>
-            <UpLoad accept="images/*" onChange={upload}></UpLoad>
-          </div>
-        </div>
+        <FormCore />
       </>
     );
   };

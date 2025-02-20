@@ -13,6 +13,7 @@ import {
 
 // Use Components
 import { UpLoad } from "../../components";
+import FormCore from "./formCore";
 
 const GiftCreate = () => {
   const View = () => {
@@ -37,32 +38,7 @@ const GiftCreate = () => {
 
     return (
       <>
-        <div className="viewContainer">
-          <div className="title">礼品名称:</div>
-          <TextInput
-            source="name"
-            label={false}
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">所需积分:</div>
-          <NumberInput
-            source="gender"
-            label={false}
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">礼品图片:</div>
-          {/* <UpLoad accept={"images/*"} onChange={upload}></UpLoad>
-           */}
-          <ImageInput source="image" placeholder="点击上传" label={false}>
-            <ImageField source="src" title="礼品"></ImageField>
-          </ImageInput>
-        </div>
+        <FormCore />
       </>
     );
   };

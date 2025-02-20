@@ -87,7 +87,7 @@ export const httpClient = {
       headers: new Headers({
         Accept: "application/json",
         ...headers,
-        Token: token,
+        Authorization: token,
       }),
     };
 
@@ -123,34 +123,47 @@ export const httpClient = {
     // Show Loading
     store.dispatch(setLoading(true));
 
-    const result = await fetchUtils.fetchJson(`${host}${url}`, options);
+    try {
+      const result = await fetchUtils.fetchJson(`${host}${url}`, options);
 
-    // Hide Loading
-    store.dispatch(setLoading(false));
+      const { status, error, ...res } = result?.json;
 
-    const { status, error, ...res } = result?.json;
+      if (status === 200) {
+        return res;
+      }
+      console.log(status);
+      throw new Error(error);
+    } catch (error) {
+      let message = error.message || error.statusText;
+      if (error.status === 401) {
+        message = "登录信息已过期，请重新登录";
+      } else if (error.status === 404) {
+        message = "请求资源不存在";
+      } else if (error.status === 500) {
+        message = "服务器错误";
+      }
 
-    if (status === 200) {
-      return res;
-    }
-
-    // Show Nofify
-    store.dispatch(
-      setNotify({
-        content: error,
-        type: "error",
-        visible: true,
-      })
-    );
-
-    // Hide Notify
-    setTimeout(() => {
+      // Show Nofify
       store.dispatch(
         setNotify({
-          visible: false,
+          content: message,
+          type: "error",
+          visible: true,
         })
       );
-    }, 2000);
+
+      // Hide Notify
+      setTimeout(() => {
+        store.dispatch(
+          setNotify({
+            visible: false,
+          })
+        );
+      }, 2000);
+    } finally {
+      // Hide Loading
+      store.dispatch(setLoading(false));
+    }
 
     return Promise.reject();
   },

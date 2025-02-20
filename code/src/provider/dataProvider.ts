@@ -134,8 +134,9 @@ const TeachData = {
       area: "宝山区",
       gender: "1",
       content: "我是教体育的..",
-      avatar:
-        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      avatar: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
     },
     {
       id: "2",
@@ -147,8 +148,9 @@ const TeachData = {
       area: "嘉定区",
       gender: "1",
       content: "我是教柔道的..",
-      avatar:
-        "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      avatar: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
     },
     {
       id: "3",
@@ -160,8 +162,9 @@ const TeachData = {
       area: "静安区",
       gender: "0",
       content: "我是教芭蕾舞的..",
-      avatar:
-        "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      avatar: {
+        src: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      },
     },
   ],
   total: 3,
@@ -297,21 +300,6 @@ const GiftExchangeData = {
 
 // AataProvider
 export const dataProvider = {
-  // 新建
-  create: async (resource, params) => {
-    console.log("params", params);
-    const res = await httpClient.post(api[resource].create, params);
-
-    console.log("create", res);
-
-    return Promise.resolve({
-      data: {
-        // id - required
-        id: "199999",
-      },
-    });
-  },
-
   // 获取列表
   getList: async (resource, params) => {
     // const { msg } = await httpClient.post(api[resource].getall);
@@ -392,7 +380,7 @@ export const dataProvider = {
         _d = GiftExchangeData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
-        return Promise.resolve(defaultData);
+        return Promise.resolve({ data: {} });
     }
   },
   getMany: (resource, params) => {
@@ -401,12 +389,29 @@ export const dataProvider = {
   getManyReference: (resource, params) => {
     return Promise.resolve();
   },
+  // 新建
+  create: async (resource, params) => {
+    console.log("params", resource, params);
+    const res = await httpClient.post(api[resource].create, params);
+
+    console.log("create", res);
+
+    return Promise.resolve({
+      data: {
+        // id - required
+        id: "199999",
+      },
+    });
+  },
   // 编辑
   update: async (resource, params) => {
     const { data, id, previousData } = params;
     console.log(1213, resource, params);
-    await httpClient.post(`${api[resource].update}?id=${id}`, {
-      data,
+    await httpClient.post(`${api[resource].update}`, {
+      data: {
+        ...data,
+        id,
+      },
     });
 
     return Promise.resolve({
@@ -421,10 +426,9 @@ export const dataProvider = {
   // 删除单个
   delete: async (resource, params) => {
     const { id } = params;
-
-    await httpClient.post(`${api[resource].update}?id=${id}`, {
+    console.log("delete", resource, params);
+    await httpClient.post(`${api[resource].delete}`, {
       data: {
-        delete: true,
         id,
       },
     });

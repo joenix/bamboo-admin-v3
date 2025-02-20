@@ -109,7 +109,7 @@ export const App = () => {
         {/* 标准路由 */}
 
         {/* Material */}
-        <Resource
+        {/* <Resource
           name="Material"
           list={Material.List}
           edit={Material.Edit}
@@ -119,10 +119,10 @@ export const App = () => {
           icon={Inventory}
           // 自定义菜单标题
           options={{ label: "物料管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* Banner */}
-        <Resource
+        {/* <Resource
           name="Banner"
           list={Banner.List}
           edit={Banner.Edit}
@@ -132,7 +132,7 @@ export const App = () => {
           icon={ViewCarousel}
           // 自定义菜单标题
           options={{ label: "轮播管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* Information */}
         <Resource
@@ -144,7 +144,7 @@ export const App = () => {
           // 图标
           icon={SupportAgent}
           // 自定义菜单标题
-          options={{ label: "咨询管理" }}
+          options={{ label: "资讯管理" }}
         ></Resource>
 
         {/* Book */}
@@ -187,7 +187,7 @@ export const App = () => {
         ></Resource>
 
         {/* Tips */}
-        <Resource
+        {/* <Resource
           name="Tips"
           list={Tips.List}
           edit={Tips.Edit}
@@ -197,10 +197,10 @@ export const App = () => {
           icon={TipsAndUpdates}
           // 自定义菜单标题
           options={{ label: "贴士集管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* Role */}
-        <Resource
+        {/* <Resource
           name="Role"
           list={Role.List}
           edit={Role.Edit}
@@ -210,7 +210,7 @@ export const App = () => {
           icon={People}
           // 自定义菜单标题
           options={{ label: "角色管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* User */}
         <Resource

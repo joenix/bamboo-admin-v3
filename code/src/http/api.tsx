@@ -1,3 +1,6 @@
+import { create } from "domain";
+import { get } from "http";
+
 // Host
 export const host = "https://api.lhdd.club";
 
@@ -56,6 +59,7 @@ export const api = {
     create: "/teach/create",
     update: "/teach/update",
     getall: "/teach/get_all",
+    delete: "/teach/delete",
   },
   // 机构
   School: {
@@ -74,5 +78,16 @@ export const api = {
     create: "/material/create",
     update: "/material/update",
     getall: "/material/get_all",
+  },
+  Gift: {
+    create: "/gift/create",
+    updata: "/gift/update",
+    getall: "/gift/get_all",
+    detete: "/gift/detete",
+  },
+  GiftExchange: {
+    create: "/gift_exchange/create",
+    update: "/gift_exchange/update",
+    getall: "/gift_exchange/get_all",
   },
 };

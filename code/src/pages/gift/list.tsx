@@ -19,6 +19,7 @@ import {
   useState,
   NumberField,
   useResourceContext,
+  useDelete,
 } from "../../utils/dep";
 
 // Use Components
@@ -64,10 +65,10 @@ const GiftList = () => {
     setCurId(null);
     setDialogvisible(false);
   };
-
+  const [deleteOne] = useDelete();
   const dialogconfirm = () => {
     // 1. 走删除单个接口
-
+    deleteOne("Gift", { id: curId });
     // 2. 关闭弹窗
     dialogclose();
   };

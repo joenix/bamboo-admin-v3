@@ -68,7 +68,7 @@ const TeachShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">头像:</div>
-          <ImageField source="avatar" title="图片" label="头像" />
+          <ImageField source="avatar.src" title="图片" label="头像" />
         </div>
       </>
     );
