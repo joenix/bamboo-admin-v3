@@ -60,16 +60,23 @@ const UserData = {
   data: [
     {
       id: "111",
-      name: "张三",
-      phone: "13655555556",
-      address: "上海市徐汇区",
+      nickname: "张三",
+      username: "13655555556",
+      mobile: "13655555556",
+      avatarUrl:
+        "https://lhdd-club.oss-cn-hangzhou.aliyuncs.com/images/1739931846433-436632284-V46fqBFpNTra0aa8bd1d957d6b30c156a4e492f9059f.jpg",
+      registerTime: 1751876089621,
+      lastActiveTime: 1755860056060,
     },
     {
       id: "222",
-      name: "李四",
-      phone: "13655555556",
-      address: "上海市徐汇区",
-      avator: "",
+      nickname: "李四",
+      username: "13655555556",
+      mobile: "13655555556",
+      avatarUrl:
+        "https://lhdd-club.oss-cn-hangzhou.aliyuncs.com/images/1739931846433-436632284-V46fqBFpNTra0aa8bd1d957d6b30c156a4e492f9059f.jpg",
+      registerTime: 1751876089621,
+      lastActiveTime: 1755860056060,
     },
   ],
   total: "",
@@ -355,6 +362,9 @@ export const dataProvider = {
       case "Material":
         _d = MaterialData;
         return Promise.resolve({ data: _d?.data?.find((x) => x.id == id) });
+      case "User":
+        _d = UserData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Information":
         _d = InformationData;
         return Promise.resolve({ data: _d.data.find((x) => x.id == id) });

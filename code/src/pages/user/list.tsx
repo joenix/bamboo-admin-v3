@@ -29,12 +29,16 @@ import {
   RefreshButton,
 } from "../../utils/dep";
 
-const CustomActions = ({ record }) => (
-  <div className="buttonGroup transparent">
-    <EditButton label="编辑" />
-    <ShowButton label="查看" />
-  </div>
-);
+const CustomActions = ({ record }) => {
+  const handleClick = () => {};
+
+  return (
+    <div className="buttonGroup transparent">
+      {/* <Button label="拉黑" onClick={handleClick} /> */}
+      <ShowButton label="查看" />
+    </div>
+  );
+};
 
 const ListActions = () => {
   const { total, isPending } = useListContext();
@@ -67,11 +71,28 @@ const UserList = () => {
   return (
     <List actions={<ListActions />} filters={postFilters}>
       <Datagrid bulkActionButtons={false}>
-        <NumberField source="id" />
-        <TextField source="isAdult" label="昵称" />
-        <ImageField source="avator" title="头像" label="头像" />
-        <DateField source="birthday" label="注册时间" />
-        <DateField source="birthday" label="最近活跃时间" />
+        <NumberField source="id" sortable={false} />
+        <TextField source="username" label="用户名" sortable={false} />
+        <TextField source="mobile" label="手机号" sortable={false} />
+        <TextField source="nickname" label="昵称" sortable={false} />
+        <ImageField
+          source="avatarUrl"
+          title="头像"
+          label="头像"
+          sortable={false}
+        />
+        <DateField
+          source="registerTime"
+          label="注册时间"
+          sortable={false}
+          showTime
+        />
+        <DateField
+          source="lastActiveTime"
+          label="最近活跃时间"
+          sortable={false}
+          showTime
+        />
         <FunctionField
           label="操作"
           render={(record) => <CustomActions record={record} />}
