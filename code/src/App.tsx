@@ -66,11 +66,20 @@ import {
   Loading,
   Notify,
 } from "./components";
+import { deepmerge } from "@mui/utils";
 
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import chineseMessages from "ra-language-chinese";
 
 const i18nProvider = polyglotI18nProvider(() => chineseMessages, "ch");
+
+const myTheme = deepmerge(defaultTheme, {
+  palette: {
+    secondary: {
+      main: "#00152a",
+    },
+  },
+});
 
 export const App = () => {
   return (
@@ -100,7 +109,7 @@ export const App = () => {
         queryClient={queryClient}
         // 自定义ready页面
         // ready={Ready}
-        theme={defaultTheme}
+        theme={myTheme}
         i18nProvider={i18nProvider}
       >
         {/* 动态Resource */}

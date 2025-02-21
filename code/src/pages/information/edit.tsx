@@ -24,6 +24,7 @@ import { ImgSelect, Videoselect } from "../../components";
 
 // Test
 import video from "../../static/video/SampleVideo.mp4";
+import FormCore from "./formCore";
 
 const InformationEdit = () => {
   const EditActions = () => {
@@ -89,32 +90,7 @@ const InformationEdit = () => {
           <div className="title">ID:</div>
           <TextField source="id" label={false} />
         </div>
-        <div className="viewContainer">
-          <div className="title">名称:</div>
-          <TextInput
-            source="name"
-            label={false}
-            variant="outlined"
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">内容:</div>
-          <TextInput
-            source="content"
-            label={false}
-            variant="outlined"
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">视频:</div>
-          <Videoselect source="video" choices={VodeoList} label="选择视频" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">图片:</div>
-          <ImgSelect source="img" choices={ImgList} label="选择图片" />
-        </div>
+        <FormCore />
       </>
     );
   };
@@ -128,7 +104,7 @@ const InformationEdit = () => {
   };
 
   return (
-    <Edit title="编辑咨询" actions={<EditActions />}>
+    <Edit title="编辑资讯" actions={<EditActions />}>
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

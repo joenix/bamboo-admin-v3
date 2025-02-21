@@ -16,6 +16,7 @@ import { ImgSelect, Videoselect } from "../../components";
 
 // Test
 import video from "../../static/video/SampleVideo.mp4";
+import FormCore from "./formCore";
 
 const InformationCreate = () => {
   const View = () => {
@@ -54,32 +55,7 @@ const InformationCreate = () => {
 
     return (
       <>
-        <div className="viewContainer">
-          <div className="title">名称:</div>
-          <TextInput
-            source="name"
-            label="名称"
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">内容:</div>
-          <TextInput
-            source="content"
-            label="内容"
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">视频:</div>
-          <Videoselect source="video" choices={VodeoList} label="选择视频" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">图片:</div>
-          <ImgSelect source="img" choices={ImgList} label="选择图片" />
-        </div>
+        <FormCore />
       </>
     );
   };

@@ -35,6 +35,7 @@ export const api = {
     create: "/infomation/create",
     update: "/infomation/update",
     getall: "/infomation/get_all",
+    delete: "/infomation/delete",
   },
   // 图书
   Book: {

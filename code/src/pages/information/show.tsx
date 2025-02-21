@@ -6,6 +6,7 @@ import {
   ImageField,
   TopToolbar,
   EditButton,
+  RichTextField,
 } from "../../utils/dep";
 
 // Use Components
@@ -32,27 +33,19 @@ const InformationShow = () => {
           <TextField source="id" label="ID" />
         </div>
         <div className="viewContainer">
-          <div className="title">名称:</div>
+          <div className="title">资讯标题:</div>
           <TextField source="name" label="名称" />
         </div>
         <div className="viewContainer">
-          <div className="title">内容:</div>
-          <TextField source="content" label="内容" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">视频:</div>
-          <VideoField source="video" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">图片:</div>
-          <ImageField source="img" title="图片" label="图片" />
+          <div className="title">资讯内容:</div>
+          <RichTextField source="content" className="imformation-rich-field" />
         </div>
       </>
     );
   };
 
   return (
-    <Show actions={<ShowActions />} title="咨询详情">
+    <Show actions={<ShowActions />} title="资讯详情">
       <SimpleShowLayout>
         <View />
       </SimpleShowLayout>
