@@ -117,13 +117,9 @@ const CodeList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid bulkActionButtons={false}>
-          <TextField source="bookid" label="图书id" sortable={false} />
-          <SelectField
-            source="bookid"
-            choices={BookList}
-            label="书名"
-            sortable={false}
-          />
+          <TextField source="id" label="ID" sortable={false} />
+          <TextField source="bookId" label="图书id" sortable={false} />
+          <TextField source="bookName" label="图书名称" sortable={false} />
           <TextField source="count" label="发放数量" sortable={false} />
           <FunctionField
             label="操作"

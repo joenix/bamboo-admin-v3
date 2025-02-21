@@ -13,6 +13,7 @@ import {
 
 // Use Components
 import { ImgSelect, FileSelect } from "../../components";
+import FormCore from "./formCore";
 
 const CodeCreate = () => {
   const View = () => {
@@ -32,19 +33,7 @@ const CodeCreate = () => {
 
     return (
       <>
-        <div className="viewContainer">
-          <div className="title">书:</div>
-          <FileSelect source="bookid" choices={BookList} label="选择书" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">发放数量:</div>
-          <TextInput
-            source="count"
-            label="发放数量"
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
+        <FormCore />
       </>
     );
   };

@@ -156,19 +156,6 @@ export const App = () => {
           options={{ label: "资讯管理" }}
         ></Resource>
 
-        {/* Book */}
-        <Resource
-          name="Book"
-          list={Book.List}
-          edit={Book.Edit}
-          show={Book.Show}
-          create={Book.Create}
-          // 图标
-          icon={MenuBook}
-          // 自定义菜单标题
-          options={{ label: "图书管理" }}
-        ></Resource>
-
         {/* Teach */}
         <Resource
           name="Teach"
@@ -232,6 +219,19 @@ export const App = () => {
           icon={Person}
           // 自定义菜单标题
           options={{ label: "用户管理" }}
+        ></Resource>
+
+        {/* Book */}
+        <Resource
+          name="Book"
+          list={Book.List}
+          edit={Book.Edit}
+          show={Book.Show}
+          create={Book.Create}
+          // 图标
+          icon={MenuBook}
+          // 自定义菜单标题
+          options={{ label: "图书管理" }}
         ></Resource>
 
         {/* Code */}

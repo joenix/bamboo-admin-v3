@@ -104,7 +104,7 @@ const InformationEdit = () => {
   };
 
   return (
-    <Edit title="编辑资讯" actions={<EditActions />}>
+    <Edit title="编辑资讯" actions={<EditActions />} mutationMode="pessimistic">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

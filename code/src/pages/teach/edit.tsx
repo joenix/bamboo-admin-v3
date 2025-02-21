@@ -111,7 +111,7 @@ const TeachEdit = () => {
   };
 
   return (
-    <Edit title="编辑轮播" actions={<EditActions />}>
+    <Edit title="编辑轮播" actions={<EditActions />} mutationMode="pessimistic">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

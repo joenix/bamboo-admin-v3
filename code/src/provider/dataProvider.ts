@@ -100,15 +100,19 @@ const BookData = {
     {
       id: "111",
       content: "生鲜",
-      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
-      name: "孔子",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
+      bookName: "孔子",
       url: "http://www.mengzi.com",
     },
     {
       id: "222",
       content: "户外",
-      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
-      name: "孟子",
+      image: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
+      bookName: "孟子",
       url: "http://www.mengzi.com",
     },
   ],
@@ -237,12 +241,14 @@ const CodeData = {
   data: [
     {
       id: "1",
-      bookid: "111",
+      bookId: "111",
+      bookName: "111",
       count: "10",
     },
     {
       id: "2",
-      bookid: "222",
+      bookId: "222",
+      bookName: "222",
       count: "4",
     },
   ],

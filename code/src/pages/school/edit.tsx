@@ -95,7 +95,7 @@ const SchoolEdit = () => {
   };
 
   return (
-    <Edit title="编辑机构" actions={<EditActions />}>
+    <Edit title="编辑机构" actions={<EditActions />} mutationMode="pessimistic">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

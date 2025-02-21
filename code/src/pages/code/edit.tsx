@@ -21,6 +21,7 @@ import { ImgSelect, FileSelect } from "../../components";
 
 // Test
 import video from "../../static/video/SampleVideo.mp4";
+import FormCore from "./formCore";
 
 const CodeEdit = () => {
   const EditActions = () => {
@@ -67,19 +68,7 @@ const CodeEdit = () => {
           <div className="title">ID:</div>
           <TextField source="id" label={false} />
         </div>
-        <div className="viewContainer">
-          <div className="title">书:</div>
-          <FileSelect source="bookid" choices={BookList} label="选择书" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">发放数量:</div>
-          <TextInput
-            source="count"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
+        <FormCore />
       </>
     );
   };

@@ -31,24 +31,24 @@ const BookShow = () => {
     return (
       <>
         <div className="viewContainer">
-          <div className="title">ID:</div>
+          <div className="title">图书ID:</div>
           <TextField source="id" label="ID" />
         </div>
         <div className="viewContainer">
-          <div className="title">书名:</div>
-          <TextField source="name" label="书名" />
+          <div className="title">图书名称:</div>
+          <TextField source="bookName" label="图书名称" />
         </div>
-        <div className="viewContainer">
+        {/* <div className="viewContainer">
           <div className="title">内容:</div>
           <TextField source="content" label="内容" />
-        </div>
+        </div> */}
         <div className="viewContainer">
           <div className="title">链接:</div>
           <UrlField source="url" label="链接" />
         </div>
         <div className="viewContainer">
-          <div className="title">图片:</div>
-          <ImageField source="img" title="图片" label="图片" />
+          <div className="title">图书封面:</div>
+          <ImageField source="image.src" title="图片" label="图片" />
         </div>
       </>
     );

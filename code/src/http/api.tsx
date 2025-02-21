@@ -42,6 +42,7 @@ export const api = {
     create: "/book/create",
     update: "/book/update",
     getall: "/book/get_all",
+    delete: "/book/delete",
   },
   // 导航
   Banner: {
@@ -74,6 +75,7 @@ export const api = {
     create: "/code/create",
     update: "/code/update",
     getall: "/code/get_all",
+    delete: "/code/delete",
   },
   // 物料
   Material: {
