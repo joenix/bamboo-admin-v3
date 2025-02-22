@@ -14,9 +14,10 @@ export const api = {
     update: "/users/update",
   },
   // 通用
-  Public: {
-    upload: "/public/upload",
-    get: "/public/download",
+  Material: {
+    upload: "/material/upload",
+    getall: "/material/get_all",
+    download: "/material/download",
   },
   // 权限
   Permission: {

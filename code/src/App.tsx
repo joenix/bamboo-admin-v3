@@ -118,7 +118,7 @@ export const App = () => {
         {/* 标准路由 */}
 
         {/* Material */}
-        {/* <Resource
+        <Resource
           name="Material"
           list={Material.List}
           edit={Material.Edit}
@@ -128,7 +128,7 @@ export const App = () => {
           icon={Inventory}
           // 自定义菜单标题
           options={{ label: "物料管理" }}
-        ></Resource> */}
+        ></Resource>
 
         {/* Banner */}
         {/* <Resource

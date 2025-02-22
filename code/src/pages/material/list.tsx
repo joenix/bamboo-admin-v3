@@ -87,7 +87,7 @@ const MaterialList = () => {
 
   const CustomActions = ({ record }) => (
     <div className="buttonGroup transparent">
-      <Button
+      {/* <Button
         component={RouterLink}
         color="primary"
         variant="contained"
@@ -97,7 +97,7 @@ const MaterialList = () => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-      ></Button>
+      ></Button> */}
 
       <Button
         onClick={(e) => handleDel(e, record.id)}
@@ -141,37 +141,37 @@ const MaterialList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid bulkActionButtons={false}>
-          <TextField source="name" label="名字" sortable={false} />
-          <TextField source="content" label="内容" sortable={false} />
+          <TextField source="id" label="ID" sortable={false} />
           <SelectField
             source="type"
             choices={TypeList}
             label="物料类型"
             sortable={false}
           />
+          <TextField source="note" label="备注" sortable={false} />
           <FunctionField
             label="链接"
             render={(record) => <RenderLink record={record} />}
           />
-          <UrlField
+          {/* <UrlField
             source="link"
             label="跳转地址"
             style={{ width: "200px", display: "block", overflow: "scroll" }}
             sortable={false}
             target="_blank"
-          ></UrlField>
+          ></UrlField> */}
           <DateField
-            source="createdAt"
+            source="createTime"
             label="创建时间"
             showTime
             sortable={false}
           ></DateField>
-          <DateField
+          {/* <DateField
             source="updatedAt"
             label="更新时间"
             showTime
             sortable={false}
-          ></DateField>
+          ></DateField> */}
           <FunctionField
             label="操作"
             render={(record) => <CustomActions record={record} />}

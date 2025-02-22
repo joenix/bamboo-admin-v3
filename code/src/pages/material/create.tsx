@@ -22,6 +22,7 @@ import { api } from "../../http";
 
 // Use Components
 import { UpLoad } from "../../components";
+import FormCore from "./formCore";
 
 const MaterialCreate = () => {
   const View = () => {
@@ -82,7 +83,7 @@ const MaterialCreate = () => {
 
     return (
       <>
-        <div className="viewContainer">
+        {/* <div className="viewContainer">
           <div className="title">物料类型:</div>
           <SelectInput
             variant="outlined"
@@ -129,7 +130,8 @@ const MaterialCreate = () => {
         <div className="viewContainer">
           <div className="title">上传物料:</div>
           {renderUploader()}
-        </div>
+        </div> */}
+        <FormCore />
       </>
     );
   };

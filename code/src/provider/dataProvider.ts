@@ -51,9 +51,17 @@ const BannerData = {
   total: 3,
 };
 
-let MaterialData = {
-  data: [],
-  total: "",
+const MaterialData = {
+  data: [
+    {
+      id: 1,
+      type: 1,
+      url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      note: "备注",
+      createTime: 1764212210024,
+    },
+  ],
+  total: 1,
 };
 
 const UserData = {
@@ -320,11 +328,11 @@ export const dataProvider = {
       case "Banner":
         return Promise.resolve(BannerData);
       case "Material":
-        const { msg } = await httpClient.post(api[resource].getall);
+        // const { msg } = await httpClient.post(api[resource].getall);
 
-        const data = { data: msg.data, total: msg.totalPages };
-        MaterialData = data;
-        return Promise.resolve(data);
+        // const data = { data: msg.data, total: msg.totalPages };
+        // MaterialData = data;
+        return Promise.resolve(MaterialData);
       case "Information":
         return Promise.resolve(InformationData);
       case "Book":
