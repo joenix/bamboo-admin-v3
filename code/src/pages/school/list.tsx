@@ -19,6 +19,7 @@ import {
   useState,
   NumberField,
   useResourceContext,
+  useDelete,
 } from "../../utils/dep";
 
 // Use Components
@@ -68,9 +69,10 @@ const SchoolList = () => {
     setDialogvisible(false);
   };
 
+  const [deleteOne] = useDelete();
   const dialogconfirm = () => {
     // 1. 走删除单个接口
-
+    deleteOne("School", { id: curId });
     // 2. 关闭弹窗
     dialogclose();
   };
@@ -123,11 +125,11 @@ const SchoolList = () => {
               );
             }}
           />
-          <TextField source="nature" label="学校性质" sortable={false} />
-          <TextField source="school_type" label="学校类别" sortable={false} />
+          {/* <TextField source="nature" label="学校性质" sortable={false} />
+          <TextField source="school_type" label="学校类别" sortable={false} /> */}
           <TextField source="content" label="机构介绍" sortable={false} />
           <ImageField
-            source="img"
+            source="img.src"
             title="图片"
             label="机构图"
             sortable={false}

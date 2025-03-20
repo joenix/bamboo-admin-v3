@@ -23,6 +23,8 @@ import TipsAndUpdates from "@mui/icons-Material/TipsAndUpdates";
 import People from "@mui/icons-Material/People";
 import Person from "@mui/icons-Material/Person";
 import VpnKey from "@mui/icons-Material/VpnKey";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import AddShoppingCartSharpIcon from "@mui/icons-material/AddShoppingCartSharp";
 
 // Use Layout
 import { Layout } from "./Layout";
@@ -48,6 +50,8 @@ import {
   Information,
   Role,
   User,
+  Gift,
+  GiftExchange,
 } from "./pages";
 
 // Use Components
@@ -62,6 +66,20 @@ import {
   Loading,
   Notify,
 } from "./components";
+import { deepmerge } from "@mui/utils";
+
+import polyglotI18nProvider from "ra-i18n-polyglot";
+import chineseMessages from "ra-language-chinese";
+
+const i18nProvider = polyglotI18nProvider(() => chineseMessages, "ch");
+
+const myTheme = deepmerge(defaultTheme, {
+  palette: {
+    secondary: {
+      main: "#00152a",
+    },
+  },
+});
 
 export const App = () => {
   return (
@@ -91,7 +109,8 @@ export const App = () => {
         queryClient={queryClient}
         // 自定义ready页面
         // ready={Ready}
-        theme={defaultTheme}
+        theme={myTheme}
+        i18nProvider={i18nProvider}
       >
         {/* 动态Resource */}
         {/* {fetchResources} */}
@@ -112,7 +131,7 @@ export const App = () => {
         ></Resource>
 
         {/* Banner */}
-        <Resource
+        {/* <Resource
           name="Banner"
           list={Banner.List}
           edit={Banner.Edit}
@@ -122,7 +141,7 @@ export const App = () => {
           icon={ViewCarousel}
           // 自定义菜单标题
           options={{ label: "轮播管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* Information */}
         <Resource
@@ -134,20 +153,7 @@ export const App = () => {
           // 图标
           icon={SupportAgent}
           // 自定义菜单标题
-          options={{ label: "咨询管理" }}
-        ></Resource>
-
-        {/* Book */}
-        <Resource
-          name="Book"
-          list={Book.List}
-          edit={Book.Edit}
-          show={Book.Show}
-          create={Book.Create}
-          // 图标
-          icon={MenuBook}
-          // 自定义菜单标题
-          options={{ label: "图书管理" }}
+          options={{ label: "资讯管理" }}
         ></Resource>
 
         {/* Teach */}
@@ -177,7 +183,7 @@ export const App = () => {
         ></Resource>
 
         {/* Tips */}
-        <Resource
+        {/* <Resource
           name="Tips"
           list={Tips.List}
           edit={Tips.Edit}
@@ -187,10 +193,10 @@ export const App = () => {
           icon={TipsAndUpdates}
           // 自定义菜单标题
           options={{ label: "贴士集管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* Role */}
-        <Resource
+        {/* <Resource
           name="Role"
           list={Role.List}
           edit={Role.Edit}
@@ -200,20 +206,33 @@ export const App = () => {
           icon={People}
           // 自定义菜单标题
           options={{ label: "角色管理" }}
-        ></Resource>
+        ></Resource> */}
 
         {/* User */}
-        {/* <Resource
-        name="User"
-        list={User.List}
-        edit={User.Edit}
-        show={User.Show}
-        create={User.Create}
-        // 图标
-        icon={Person}
-        // 自定义菜单标题
-        options={{ label: "用户管理" }}
-      ></Resource> */}
+        <Resource
+          name="User"
+          list={User.List}
+          edit={User.Edit}
+          show={User.Show}
+          create={User.Create}
+          // 图标
+          icon={Person}
+          // 自定义菜单标题
+          options={{ label: "用户管理" }}
+        ></Resource>
+
+        {/* Book */}
+        <Resource
+          name="Book"
+          list={Book.List}
+          edit={Book.Edit}
+          show={Book.Show}
+          create={Book.Create}
+          // 图标
+          icon={MenuBook}
+          // 自定义菜单标题
+          options={{ label: "图书管理" }}
+        ></Resource>
 
         {/* Code */}
         <Resource
@@ -226,6 +245,28 @@ export const App = () => {
           icon={VpnKey}
           // 自定义菜单标题
           options={{ label: "激活码管理" }}
+        ></Resource>
+
+        <Resource
+          name="Gift"
+          list={Gift.List}
+          show={Gift.Show}
+          create={Gift.Create}
+          edit={Gift.Edit}
+          // 图标
+          icon={CardGiftcardIcon}
+          // 自定义菜单标题
+          options={{ label: "礼品管理" }}
+        ></Resource>
+
+        <Resource
+          name="GiftExchange"
+          list={GiftExchange.List}
+          show={GiftExchange.Show}
+          // 图标
+          icon={AddShoppingCartSharpIcon}
+          // 自定义菜单标题
+          options={{ label: "礼品兑换管理" }}
         ></Resource>
 
         {/* 自定义路由 - 不会显示在菜单上*/}

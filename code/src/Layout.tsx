@@ -15,7 +15,7 @@ export const Layout = ({ children }: { children }) => {
   return (
     <RALayout>
       {/* 面包屑 */}
-      <Breadcrumbs
+      {/* <Breadcrumbs
         aria-label="breadcrumb"
         style={{
           padding: "20px 10px",
@@ -40,7 +40,7 @@ export const Layout = ({ children }: { children }) => {
             </Link>
           );
         })}
-      </Breadcrumbs>
+      </Breadcrumbs> */}
       {children}
       <CheckForApplicationUpdate />
     </RALayout>

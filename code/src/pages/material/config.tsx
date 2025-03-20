@@ -8,7 +8,7 @@
 export const TypeList = [
   { id: 1, name: "图片" },
   { id: 2, name: "视频" },
-  { id: 3, name: "书" },
+  // { id: 3, name: "书" },
   { id: 4, name: "音乐" },
-  { id: 5, name: "附件" },
+  // { id: 5, name: "附件" },
 ];

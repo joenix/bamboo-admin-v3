@@ -13,6 +13,7 @@ import {
 
 // Use Components
 import { ImgSelect, FileSelect } from "../../components";
+import FormCore from "./formCore";
 
 const BookCreate = () => {
   const View = () => {
@@ -51,32 +52,7 @@ const BookCreate = () => {
 
     return (
       <>
-        <div className="viewContainer">
-          <div className="title">书名:</div>
-          <TextInput
-            source="name"
-            label="名称"
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">内容:</div>
-          <TextInput
-            source="content"
-            label="内容"
-            validate={[required()]}
-            variant="outlined"
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">书:</div>
-          <FileSelect source="url" choices={BookList} label="选择书" />
-        </div>
-        <div className="viewContainer">
-          <div className="title">图片:</div>
-          <ImgSelect source="img" choices={ImgList} label="选择图片" />
-        </div>
+        <FormCore />
       </>
     );
   };

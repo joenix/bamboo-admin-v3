@@ -8,81 +8,8 @@ import { api } from "../http/index";
 import video from "../static/video/SampleVideo.mp4";
 
 const defaultData = {
-  data: [
-    {
-      id: 1,
-      name: "Ervin Howell",
-      username: "Antonette",
-      email: "Shanna@melissa.tv",
-      address: {
-        street: "Victor Plains",
-        suite: "Suite 879",
-        city: "Wisokyburgh",
-        zipcode: "90566-7771",
-        geo: {
-          lat: "-43.9509",
-          lng: "-34.4618",
-        },
-      },
-      phone: "010-692-6593 x09125",
-      website: "http://www.baidu.com",
-      company: {
-        name: "Deckow-Crist",
-        catchPhrase: "Proactive didactic contingency",
-        bs: "synergize scalable supply-chains",
-      },
-      isAdult: false,
-      rank: "A",
-      birthday: "2024-03-02",
-      avator:
-        "https://wx4.sinaimg.cn/mw690/008bDdGsly1hrm34fxonfj30pf1co0wz.jpg",
-      money: 27,
-      signature: "<b style='color:red'>三思而后行</>",
-      hobby: "nija",
-      file: "https://example.com/files/doc1.pdf",
-      tags: [
-        { uid: 1, name: "admin" },
-        { uid: 2, name: "user" },
-      ],
-    },
-    {
-      id: 2,
-      name: "williamding",
-      username: "Antonette",
-      email: "Shanna@melissa.tv",
-      address: {
-        street: "Victor Plains",
-        suite: "Suite 879",
-        city: "Wisokyburgh",
-        zipcode: "90566-7771",
-        geo: {
-          lat: "-43.9509",
-          lng: "-34.4618",
-        },
-      },
-      phone: "010-692-6593 x09125",
-      website: "http://www.baidu.com",
-      company: {
-        name: "Deckow-Crist",
-        catchPhrase: "Proactive didactic contingency",
-        bs: "synergize scalable supply-chains",
-      },
-      isAdult: false,
-      rank: "A",
-      birthday: "2024-03-02",
-      avator:
-        "https://wx4.sinaimg.cn/mw690/008bDdGsly1hrm34fxonfj30pf1co0wz.jpg",
-      money: 27,
-      signature: "<b style='color:red'>三思而后行</>",
-      hobby: "nija",
-      file: "https://example.com/files/doc1.pdf",
-      tags: [
-        { uid: 1, name: "admin" },
-        { uid: 2, name: "user" },
-      ],
-    },
-  ],
-  total: 2,
+  data: [],
+  total: 0,
 };
 
 const BannerData = {
@@ -124,36 +51,63 @@ const BannerData = {
   total: 3,
 };
 
-let MaterialData = {
-  data: [],
+const MaterialData = {
+  data: [
+    {
+      id: 1,
+      type: 1,
+      url: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      note: "备注",
+      createTime: 1764212210024,
+    },
+  ],
+  total: 1,
+};
+
+const UserData = {
+  data: [
+    {
+      id: "111",
+      nickname: "张三",
+      username: "13655555556",
+      mobile: "13655555556",
+      avatarUrl:
+        "https://lhdd-club.oss-cn-hangzhou.aliyuncs.com/images/1739931846433-436632284-V46fqBFpNTra0aa8bd1d957d6b30c156a4e492f9059f.jpg",
+      registerTime: 1751876089621,
+      lastActiveTime: 1755860056060,
+    },
+    {
+      id: "222",
+      nickname: "李四",
+      username: "13655555556",
+      mobile: "13655555556",
+      avatarUrl:
+        "https://lhdd-club.oss-cn-hangzhou.aliyuncs.com/images/1739931846433-436632284-V46fqBFpNTra0aa8bd1d957d6b30c156a4e492f9059f.jpg",
+      registerTime: 1751876089621,
+      lastActiveTime: 1755860056060,
+    },
+  ],
   total: "",
 };
 
 const InformationData = {
   data: [
     {
-      id: "111",
-      content: "生鲜",
-      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
-      video,
+      id: "1",
+      content: `<p>一场私密的交流会，一次因材施教的教学</p> <p>对于下一个机遇的预测：抓重点，找方向，确定性，可持续发展。收获一群良师益友同路人，从“小市值成长为亿万级别”之路。</p> <img src="https://oss.lhdd.club/pic/article_sample_1.jpeg" /> <p>跟着仇老师到底学习什么？</p> <p>仇老师多次强调读书不是附庸风雅，是学习思维！穷人与富人最大的差异在思维上，因为“思路决定出路，态度决定高度，格局决定结局”。</p> <img src="https://oss.lhdd.club/pic/article_sample_2.jpeg" /> <p>仇老师读了四万多本书，20多年进出口贸易经验，用脚丈量世界多地。真正做到“读万卷书，行万里路”。</p> <p>仇老师最擅长读书，育人和赚钱！</p> <img src="https://oss.lhdd.club/pic/article_sample_3.jpeg" /> <p>仇老师说学习是为了生活，学习是为了能赚到钱，把家养好，把父母孝敬好。</p> <p>仇老师学富五车，通过学习实现了从1570元起家到财富自由，而今想把半生所学，和几十年的读书赚钱经验教给有缘的人。</p> <p>仇老师的目标是培养600个院士级别的人才和一万个亿万富翁！</p> <p>你是否想成为那个确定要“赢”的人？</p> <img src="https://oss.lhdd.club/pic/article_sample_4.jpeg" /> <p>仇老师之前分享的三气合一气即：体气+文气+才气=财气。</p> <p>财气由何而来？三气汇聚自然而生。</p> <p>功夫要落地，功夫要上身。</p> <img src="https://oss.lhdd.club/pic/article_sample_5.jpeg" /> <p>课堂上，老师讲的滔滔不绝，如“黄河之水天上来”；学员们沉浸其中，如“仙人抚我顶”，豁然开朗。</p> <img src="https://oss.lhdd.club/pic/article_sample_6.jpeg" /> <p>仇老师讲的都是肺腑之言，学员们听的深情投入。</p> <img src="https://oss.lhdd.club/pic/article_sample_7.jpeg" /> <p>老师授课传真本领，学员们十一假期来的超值！</p> <img src="https://oss.lhdd.club/pic/article_sample_8.jpeg" /> <p>各位学友，专注当下，沉醉其中！</p> <img src="https://oss.lhdd.club/pic/article_sample_9.jpeg" /> <img src="https://oss.lhdd.club/pic/article_sample_10.jpeg" /> <p>这个假期学员们收获满满，正能量爆棚。</p> <img src="https://oss.lhdd.club/pic/article_sample_11.jpeg" /> <p>线下学习，和仇老师面对面交流是得到老师传真本领的机会，能接收老师的高能量，真智慧，打开思维的大门。</p> <p>让我们相约下一期仇老师线下课，跟着老师长期熏习，改变思维方式，改变命运。</p>`,
       name: "生鲜类目",
+      createTime: 1710965372429,
+      updateTime: 1757308076757,
     },
     {
-      id: "222",
+      id: "2",
       content: "户外",
-      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
-      video,
       name: "户外类目",
-    },
-    {
-      id: "333",
-      content: "亲子",
-      img: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
-      video,
-      name: "亲子类目",
+      createTime: 1710965372429,
+      updateTime: 1757308076757,
     },
   ],
-  total: 3,
+  total: 2,
 };
 
 const BookData = {
@@ -161,15 +115,19 @@ const BookData = {
     {
       id: "111",
       content: "生鲜",
-      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
-      name: "孔子",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
+      bookName: "孔子",
       url: "http://www.mengzi.com",
     },
     {
       id: "222",
       content: "户外",
-      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
-      name: "孟子",
+      image: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
+      bookName: "孟子",
       url: "http://www.mengzi.com",
     },
   ],
@@ -186,10 +144,11 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "宝山区",
-      gender: "男",
+      gender: "1",
       content: "我是教体育的..",
-      avatar:
-        "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      avatar: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
     },
     {
       id: "2",
@@ -199,10 +158,11 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "嘉定区",
-      gender: "男",
+      gender: "1",
       content: "我是教柔道的..",
-      avatar:
-        "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      avatar: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
     },
     {
       id: "3",
@@ -212,10 +172,11 @@ const TeachData = {
       province: "上海",
       city: "上海市",
       area: "静安区",
-      gender: "女",
+      gender: "0",
       content: "我是教芭蕾舞的..",
-      avatar:
-        "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      avatar: {
+        src: "https://img2.baidu.com/it/u=640472597,1171972354&fm=253&fmt=auto&app=120&f=JPEG?w=750&h=500",
+      },
     },
   ],
   total: 3,
@@ -233,7 +194,9 @@ const SchoolData = {
       content: "我是机构",
       nature: "",
       school_type: "",
-      img: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      img: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+      },
     },
     {
       id: "2",
@@ -245,7 +208,9 @@ const SchoolData = {
       content: "我是学校",
       nature: "211大学",
       school_type: "公立学校",
-      img: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      img: {
+        src: "https://img2.baidu.com/it/u=2597929176,3520921866&fm=253&fmt=auto&app=120&f=JPEG?w=745&h=500",
+      },
     },
   ],
   total: 2,
@@ -291,13 +256,61 @@ const CodeData = {
   data: [
     {
       id: "1",
-      bookid: "111",
+      bookId: "111",
+      bookName: "111",
       count: "10",
     },
     {
       id: "2",
-      bookid: "222",
+      bookId: "222",
+      bookName: "222",
       count: "4",
+    },
+  ],
+  total: 2,
+};
+
+const GiftData = {
+  data: [
+    {
+      id: "1",
+      name: "礼品名称1",
+      credit: "10",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+        title: "礼品名称1",
+      },
+    },
+    {
+      id: "2",
+      name: "礼品名称2",
+      credit: "20",
+      image: {
+        src: "https://img0.baidu.com/it/u=100080021,1406455647&fm=253&fmt=auto&app=120&f=JPEG?w=756&h=500",
+        title: "礼品名称2",
+      },
+    },
+  ],
+  total: 2,
+};
+
+const GiftExchangeData = {
+  data: [
+    {
+      id: "1",
+      name: "张三",
+      phone: "13655555556",
+      address: "上海市徐汇区",
+      giftId: "1",
+      giftName: "礼品名称1",
+    },
+    {
+      id: "2",
+      name: "李四",
+      phone: "13655555557",
+      address: "上海市青浦区",
+      giftId: "2",
+      giftName: "礼品名称2",
     },
   ],
   total: 2,
@@ -305,21 +318,6 @@ const CodeData = {
 
 // AataProvider
 export const dataProvider = {
-  // 新建
-  create: async (resource, params) => {
-    console.log("params", params);
-    const res = await httpClient.post(api[resource].create, params);
-
-    console.log("create", res);
-
-    return Promise.resolve({
-      data: {
-        // id - required
-        id: "199999",
-      },
-    });
-  },
-
   // 获取列表
   getList: async (resource, params) => {
     // const { msg } = await httpClient.post(api[resource].getall);
@@ -330,11 +328,11 @@ export const dataProvider = {
       case "Banner":
         return Promise.resolve(BannerData);
       case "Material":
-        const { msg } = await httpClient.post(api[resource].getall);
+        // const { msg } = await httpClient.post(api[resource].getall);
 
-        const data = { data: msg.data, total: msg.totalPages };
-        MaterialData = data;
-        return Promise.resolve(data);
+        // const data = { data: msg.data, total: msg.totalPages };
+        // MaterialData = data;
+        return Promise.resolve(MaterialData);
       case "Information":
         return Promise.resolve(InformationData);
       case "Book":
@@ -349,6 +347,12 @@ export const dataProvider = {
         return Promise.resolve(RoleData);
       case "Code":
         return Promise.resolve(CodeData);
+      case "Gift":
+        return Promise.resolve(GiftData);
+      case "GiftExchange":
+        return Promise.resolve(GiftExchangeData);
+      case "User":
+        return Promise.resolve(UserData);
       default:
         return Promise.resolve(defaultData);
     }
@@ -366,6 +370,9 @@ export const dataProvider = {
       case "Material":
         _d = MaterialData;
         return Promise.resolve({ data: _d?.data?.find((x) => x.id == id) });
+      case "User":
+        _d = UserData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
       case "Information":
         _d = InformationData;
         return Promise.resolve({ data: _d.data.find((x) => x.id == id) });
@@ -387,8 +394,14 @@ export const dataProvider = {
       case "Code":
         _d = CodeData;
         return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "Gift":
+        _d = GiftData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
+      case "GiftExchange":
+        _d = GiftExchangeData;
+        return Promise.resolve({ data: _d.data.find((x) => x.id === id) });
       default:
-        return Promise.resolve(defaultData);
+        return Promise.resolve({ data: {} });
     }
   },
   getMany: (resource, params) => {
@@ -397,12 +410,29 @@ export const dataProvider = {
   getManyReference: (resource, params) => {
     return Promise.resolve();
   },
+  // 新建
+  create: async (resource, params) => {
+    console.log("params", resource, params);
+    const res = await httpClient.post(api[resource].create, params);
+
+    console.log("create", res);
+
+    return Promise.resolve({
+      data: {
+        // id - required
+        id: "199999",
+      },
+    });
+  },
   // 编辑
   update: async (resource, params) => {
     const { data, id, previousData } = params;
-
-    await httpClient.post(`${api[resource].update}?id=${id}`, {
-      data,
+    console.log(1213, resource, params);
+    await httpClient.post(`${api[resource].update}`, {
+      data: {
+        ...data,
+        id,
+      },
     });
 
     return Promise.resolve({
@@ -417,10 +447,9 @@ export const dataProvider = {
   // 删除单个
   delete: async (resource, params) => {
     const { id } = params;
-
-    await httpClient.post(`${api[resource].update}?id=${id}`, {
+    console.log("delete", resource, params);
+    await httpClient.post(`${api[resource].delete}`, {
       data: {
-        delete: true,
         id,
       },
     });

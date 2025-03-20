@@ -3,16 +3,15 @@ import {
   SimpleShowLayout,
   useRecordContext,
   TextField,
+  UrlField,
+  BooleanField,
   ImageField,
+  SelectField,
   TopToolbar,
   EditButton,
-  RichTextField,
 } from "../../utils/dep";
 
-// Use Components
-import { VideoField } from "../../components";
-
-const InformationShow = () => {
+const GiftShow = () => {
   const ShowActions = () => {
     return (
       <TopToolbar>
@@ -33,19 +32,23 @@ const InformationShow = () => {
           <TextField source="id" label="ID" />
         </div>
         <div className="viewContainer">
-          <div className="title">资讯标题:</div>
-          <TextField source="name" label="名称" />
+          <div className="title">礼品名称:</div>
+          <TextField source="name" label="礼品名称" />
         </div>
         <div className="viewContainer">
-          <div className="title">资讯内容:</div>
-          <RichTextField source="content" className="imformation-rich-field" />
+          <div className="title">所需积分:</div>
+          <TextField source="credit" label="所需积分" />
+        </div>
+        <div className="viewContainer">
+          <div className="title">礼品图片:</div>
+          <ImageField source="image.src" title="图片" label="头像" />
         </div>
       </>
     );
   };
 
   return (
-    <Show actions={<ShowActions />} title="资讯详情">
+    <Show actions={<ShowActions />}>
       <SimpleShowLayout>
         <View />
       </SimpleShowLayout>
@@ -53,4 +56,4 @@ const InformationShow = () => {
   );
 };
 
-export default InformationShow;
+export default GiftShow;

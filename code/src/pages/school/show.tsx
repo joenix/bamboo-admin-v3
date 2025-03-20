@@ -67,8 +67,8 @@ const SchoolShow = () => {
           <TextField source="area" label="区" />
         </div>
         <div className="viewContainer">
-          <div className="title">机构图:</div>
-          <ImageField source="img" title="图片" label="机构图" />
+          <div className="title">机构图片:</div>
+          <ImageField source="img.src" title="图片" label="机构图片" />
         </div>
       </>
     );

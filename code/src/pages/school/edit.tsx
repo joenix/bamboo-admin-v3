@@ -29,6 +29,7 @@ import { UpLoad } from "../../components";
 
 // Use Kit
 import { httpClient } from "../../utils/kit";
+import FormCore from "./formCore";
 
 const SchoolEdit = () => {
   const EditActions = () => {
@@ -80,87 +81,7 @@ const SchoolEdit = () => {
           <div className="title">ID:</div>
           <TextField source="id" label={false} />
         </div>
-        <div className="viewContainer">
-          <div className="title">机构类型:</div>
-          <SelectInput
-            source="type"
-            choices={TypeList}
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">机构名:</div>
-          <TextInput
-            source="name"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">机构介绍:</div>
-          <TextInput
-            source="content"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">学校性质:</div>
-          <TextInput
-            source="nature"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">学校类别:</div>
-          <TextInput
-            source="school_type"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">省:</div>
-          <TextInput
-            source="province"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">市:</div>
-          <TextInput
-            source="city"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-        <div className="viewContainer">
-          <div className="title">区:</div>
-          <TextInput
-            source="area"
-            label={false}
-            variant="outlined"
-            validate={[required()]}
-          />
-        </div>
-
-        <div className="viewContainer">
-          <div className="title">机构图:</div>
-          <>
-            <UpLoad accept="images/*" onChange={upload}></UpLoad>
-            <ImageField source="avatar"></ImageField>
-          </>
-        </div>
+        <FormCore />
       </>
     );
   };
@@ -174,7 +95,7 @@ const SchoolEdit = () => {
   };
 
   return (
-    <Edit title="编辑机构" actions={<EditActions />}>
+    <Edit title="编辑机构" actions={<EditActions />} mutationMode="pessimistic">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>

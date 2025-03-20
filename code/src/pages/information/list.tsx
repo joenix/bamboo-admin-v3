@@ -17,6 +17,7 @@ import {
   RouterLink,
   useState,
   useResourceContext,
+  DateField,
 } from "../../utils/dep";
 
 // Use Components
@@ -98,10 +99,28 @@ const InformationList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid bulkActionButtons={false}>
-          <TextField source="name" label="名字" sortable={false} />
-          <TextField source="content" label="内容" sortable={false} />
-          <ImageField source="img" title="图片" label="图片" sortable={false} />
-          <VideoField source="video" label="视频" sortable={false} />
+          <TextField source="id" label="id" sortable={false} />
+          <TextField source="name" label="资讯标题" sortable={false} />
+          <FunctionField
+            label="资讯内容"
+            render={(record) => (
+              <div className="two-line-ellipsis">{record.content}</div>
+            )}
+          />
+          ;
+          <DateField
+            source="createTime"
+            label="创建时间"
+            showTime
+            sortable={false}
+          />
+          <DateField
+            source="updateTime"
+            label="更新时间"
+            showTime
+            sortable={false}
+          />
+          {/* <TextField source="content" label="内容" sortable={false} /> */}
           <FunctionField
             label="操作"
             render={(record) => <CustomActions record={record} />}

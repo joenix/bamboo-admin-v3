@@ -48,13 +48,13 @@ const CodeShow = () => {
           <div className="title">ID:</div>
           <TextField source="id" label="ID" />
         </div>
-        <div className="viewContainer">
+        {/* <div className="viewContainer">
           <div className="title">书id:</div>
-          <TextField source="bookid" label="bookid" />
-        </div>
+          <TextField source="bookId" label="bookid" />
+        </div> */}
         <div className="viewContainer">
-          <div className="title">书名:</div>
-          <SelectField source="bookid" choices={BookList} label="BookList" />
+          <div className="title">图书名称:</div>
+          <TextField source="bookName" label="BookList" />
         </div>
         <div className="viewContainer">
           <div className="title">发放数量:</div>

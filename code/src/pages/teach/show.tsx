@@ -44,7 +44,7 @@ const TeachShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">性别:</div>
-          <TextField source="gender" label="性别" />
+          <SelectField source="gender" choices={GenderList} label="性别" />
         </div>
         <div className="viewContainer">
           <div className="title">年龄:</div>
@@ -68,7 +68,7 @@ const TeachShow = () => {
         </div>
         <div className="viewContainer">
           <div className="title">头像:</div>
-          <ImageField source="avatar" title="图片" label="头像" />
+          <ImageField source="avatar.src" title="图片" label="头像" />
         </div>
       </>
     );

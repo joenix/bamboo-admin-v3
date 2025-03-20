@@ -1,35 +1,40 @@
 import {
   SimpleForm,
-  TextField,
   SelectInput,
   TextInput,
-  BooleanInput,
   Toolbar,
   SaveButton,
   Create,
   required,
   NumberInput,
+  ImageInput,
+  ImageField,
 } from "../../utils/dep";
 
 // Use Components
-import { ImgSelect, FileSelect } from "../../components";
+import { UpLoad } from "../../components";
 import FormCore from "./formCore";
 
-const CodeCreate = () => {
+const GiftCreate = () => {
   const View = () => {
-    // 请求物料 - 书库
-    const BookList = [
-      {
-        id: 1,
-        name: "孟子",
-        url: "http://www.mengzi.com",
-      },
-      {
-        id: 2,
-        name: "孔子",
-        url: "http://www.kongzi.com",
-      },
-    ];
+    const upload = async (e) => {
+      const { files } = e.target;
+
+      // New FormData
+      const formData = new FormData();
+
+      // Add files to FormData
+      Array.from(files).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      // Upload File For Urls
+      const urls = await httpClient.post(api.Public.upload, {
+        data: formData,
+      });
+
+      // console.log("urls", urls);
+    };
 
     return (
       <>
@@ -47,7 +52,7 @@ const CodeCreate = () => {
   };
 
   return (
-    <Create title="新建激活码">
+    <Create>
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>
@@ -55,4 +60,4 @@ const CodeCreate = () => {
   );
 };
 
-export default CodeCreate;
+export default GiftCreate;

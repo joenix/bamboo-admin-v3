@@ -4,26 +4,38 @@ import {
   Edit,
   TopToolbar,
   TextField,
+  SelectInput,
   Button,
   TextInput,
   RouterLink,
+  BooleanInput,
   Toolbar,
   SaveButton,
+  NumberInput,
   useResourceContext,
+  ImageInput,
+  ImageField,
   required,
+  useNotify,
+  useRedirect,
+  useUpdate,
+  useInput,
 } from "../../utils/dep";
 
 // Use Icon
 import InfoIcon from "@mui/icons-material/Info";
 
-// Use Components
-import { ImgSelect, FileSelect } from "../../components";
+// Use Config
+import { api } from "@/http";
 
-// Test
-import video from "../../static/video/SampleVideo.mp4";
+// Use Components
+import { ImgSelect, UpLoad } from "../../components";
+
+// Use Kit
+import { httpClient } from "../../utils/kit";
 import FormCore from "./formCore";
 
-const CodeEdit = () => {
+const GiftEdit = () => {
   const EditActions = () => {
     const record = useRecordContext();
     const resouce = useResourceContext();
@@ -47,20 +59,24 @@ const CodeEdit = () => {
     const record = useRecordContext();
 
     if (!record) return null;
+    const upload = async (e) => {
+      const { files } = e.target;
 
-    // 请求物料 - 书库
-    const BookList = [
-      {
-        id: "111",
-        name: "孟子",
-        url: "http://www.mengzi.com",
-      },
-      {
-        id: "222",
-        name: "孔子",
-        url: "http://www.kongzi.com",
-      },
-    ];
+      // New FormData
+      const formData = new FormData();
+
+      // Add files to FormData
+      Array.from(files).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      // Upload File For Urls
+      const urls = await httpClient.post(api.Public.upload, {
+        data: formData,
+      });
+
+      // console.log("urls", urls);
+    };
 
     return (
       <>
@@ -72,17 +88,30 @@ const CodeEdit = () => {
       </>
     );
   };
+
   // 自定义工具栏
   const CustomToolbar = (props) => {
+    const notify = useNotify();
+    const redirect = useRedirect();
+    const [update] = useUpdate();
+    const onSuccess = (data) => {
+      notify("更新成功");
+      redirect("/Gift");
+    };
+
     return (
       <Toolbar {...props} className="buttonGroup">
-        <SaveButton label="保存" />
+        <SaveButton
+          label="更新"
+          // type="button"
+          // mutationOptions={{ onSuccess }}
+        />
       </Toolbar>
     );
   };
 
   return (
-    <Edit title="编辑激活码" actions={<EditActions />}>
+    <Edit actions={<EditActions />} mutationMode="pessimistic">
       <SimpleForm toolbar={<CustomToolbar />}>
         <View />
       </SimpleForm>
@@ -90,4 +119,4 @@ const CodeEdit = () => {
   );
 };
 
-export default CodeEdit;
+export default GiftEdit;

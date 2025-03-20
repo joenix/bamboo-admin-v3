@@ -19,6 +19,7 @@ import {
   useState,
   NumberField,
   useResourceContext,
+  useDelete,
 } from "../../utils/dep";
 
 // Use Components
@@ -29,7 +30,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 // Use Config
-import { TypeList } from "./config";
+import { TypeList, GenderList } from "./config";
 
 const TeachList = () => {
   const [dialogvisible, setDialogvisible] = useState(false);
@@ -68,9 +69,11 @@ const TeachList = () => {
     setDialogvisible(false);
   };
 
+  const [deleteOne] = useDelete();
   const dialogconfirm = () => {
     // 1. 走删除单个接口
 
+    deleteOne("Teach", { id: curId });
     // 2. 关闭弹窗
     dialogclose();
   };
@@ -107,7 +110,12 @@ const TeachList = () => {
         <Datagrid bulkActionButtons={false}>
           <TextField source="name" label="姓名" sortable={false} />
           <NumberField source="age" label="年龄" sortable={false} />
-          <TextField source="gender" label="性别" sortable={false} />
+          <SelectField
+            source="gender"
+            choices={GenderList}
+            label="性别"
+            sortable={false}
+          />
           <FunctionField
             label="地址"
             render={(record) => {
@@ -121,7 +129,7 @@ const TeachList = () => {
           />
           <TextField source="content" label="个人介绍" sortable={false} />
           <ImageField
-            source="avatar"
+            source="avatar.src"
             title="图片"
             label="头像"
             sortable={false}

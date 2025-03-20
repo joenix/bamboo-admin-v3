@@ -99,9 +99,15 @@ const BooklList = () => {
     <>
       <List actions={<ListActions />} filters={postFilters}>
         <Datagrid bulkActionButtons={false}>
-          <TextField source="name" label="书名" sortable={false} />
-          <TextField source="content" label="内容" sortable={false} />
-          <ImageField source="img" title="图片" label="图片" sortable={false} />
+          <TextField source="id" label="ID" sortable={false} />
+          <TextField source="bookName" label="图书名称" sortable={false} />
+          {/* <TextField source="content" label="内容" sortable={false} /> */}
+          <ImageField
+            source="image.src"
+            title="图书封面"
+            label="图书封面"
+            sortable={false}
+          />
           <UrlField source="url" label="链接" sortable={false} />
           <FunctionField
             label="操作"
