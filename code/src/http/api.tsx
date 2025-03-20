@@ -13,11 +13,13 @@ export const api = {
     login: "/users/login",
     update: "/users/update",
   },
-  // 通用
+  // 通用物料
   Material: {
     upload: "/material/upload",
     getall: "/material/get_all",
     download: "/material/download",
+    create: "/material/create",
+    update: "/material/update",
   },
   // 权限
   Permission: {
@@ -36,14 +38,14 @@ export const api = {
     create: "/infomation/create",
     update: "/infomation/update",
     getall: "/infomation/get_all",
-    delete: "/infomation/delete",
+    delete: "/infomation/remove",
   },
   // 图书
   Book: {
     create: "/book/create",
     update: "/book/update",
     getall: "/book/get_all",
-    delete: "/book/delete",
+    delete: "/book/remove",
   },
   // 导航
   Banner: {
@@ -62,33 +64,27 @@ export const api = {
     create: "/teach/create",
     update: "/teach/update",
     getall: "/teach/get_all",
-    delete: "/teach/delete",
+    delete: "/teach/remove",
   },
   // 机构
   School: {
     create: "/school/create",
     update: "/school/update",
     getall: "/school/get_all",
-    delete: "/school/delete",
+    delete: "/school/remove",
   },
   // 激活码
   Code: {
     create: "/code/create",
     update: "/code/update",
     getall: "/code/get_all",
-    delete: "/code/delete",
-  },
-  // 物料
-  Material: {
-    create: "/material/create",
-    update: "/material/update",
-    getall: "/material/get_all",
+    delete: "/code/remove",
   },
   Gift: {
     create: "/gift/create",
     updata: "/gift/update",
     getall: "/gift/get_all",
-    detete: "/gift/detete",
+    delete: "/gift/remove",
   },
   GiftExchange: {
     create: "/gift_exchange/create",

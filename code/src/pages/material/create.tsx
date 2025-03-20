@@ -45,7 +45,7 @@ const MaterialCreate = () => {
       });
 
       // Upload File For Urls
-      const urls = await httpClient.post(api.Public.upload, {
+      const urls = await httpClient.post(api.Material.upload, {
         data: formData,
       });
 
