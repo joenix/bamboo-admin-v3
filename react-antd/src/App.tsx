@@ -1,9 +1,11 @@
 import { ConfigProvider } from "antd";
+import zhCN from "antd/locale/zh_CN";
 import { BasicLayout } from "./layouts/BasicLayout";
 
 export default function App() {
   return (
     <ConfigProvider
+      locale={zhCN}
       theme={{
         token: {
           colorPrimary: "#1677ff",

@@ -25,7 +25,7 @@ export function BasicLayout() {
 
   const handleUserMenuClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "logout") {
-      localStorage.removeItem("login");
+      localStorage.removeItem("user");
       navigate("/login");
     }
   };
@@ -37,7 +37,10 @@ export function BasicLayout() {
       icon: React.createElement(icons[item.icon as keyof typeof icons]),
       label: item.name!,
     }));
-
+  const showName = () => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    return user.username || "-";
+  };
   return (
     <Layout className="h-screen">
       <Header className="flex items-center justify-between bg-white px-6 shadow-sm border-0 border-b border-gray-200 border-solid">
@@ -51,7 +54,7 @@ export function BasicLayout() {
         >
           <div className="flex items-center cursor-pointer hover:bg-gray-100 px-3 py-1 rounded-lg transition-colors">
             <Avatar icon={<UserOutlined />} className="bg-blue-500" />
-            <span className="ml-2 text-gray-700">Admin</span>
+            <span className="ml-2 text-gray-700">{showName()}</span>
           </div>
         </Dropdown>
       </Header>

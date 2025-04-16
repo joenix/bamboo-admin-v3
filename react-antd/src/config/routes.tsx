@@ -1,18 +1,18 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Result, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { BasicLayout } from "../layouts/BasicLayout";
-import Dashboard from "../pages/dashboard";
-import Material from "../pages/material";
-import Information from "../pages/information";
-import Teacher from "../pages/teacher";
-import Organization from "../pages/organization";
-import User from "../pages/user";
-import Book from "../pages/book";
-import ActivationCode from "../pages/activation-code";
-import Gift from "../pages/gift";
-import GiftExchange from "../pages/gift-exchange";
-
+import { BasicLayout } from "@/layouts/BasicLayout";
+import Dashboard from "@/pages/dashboard";
+import Material from "@/pages/material";
+import Information from "@/pages/information";
+import Teacher from "@/pages/teacher";
+import Organization from "@/pages/organization";
+import User from "@/pages/user";
+import Book from "@/pages/book";
+import ActivationCode from "@/pages/activation-code";
+import Gift from "@/pages/gift";
+import GiftExchange from "@/pages/gift-exchange";
+import Login from "@/pages/login";
 // 404 页面组件
 function NotFound() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function NotFound() {
 
 // 路由守卫组件
 function AuthGuard({ children }: { children: React.ReactNode }) {
-  const isLoggedIn = localStorage.getItem("login") !== null;
+  const isLoggedIn = localStorage.getItem("user") !== null;
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Login</div>,
+    element: <Login />,
   },
   {
     path: "/",
