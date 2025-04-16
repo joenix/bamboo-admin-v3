@@ -73,7 +73,7 @@ export function BasicLayout() {
           />
         </Sider>
         <Layout className="">
-          <Content className="rounded-lg shadow-sm min-h-[calc(100vh-64px)]">
+          <Content className="rounded-lg shadow-sm min-h-[calc(100vh-64px)] overflow-hidden">
             <Outlet />
           </Content>
         </Layout>

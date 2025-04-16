@@ -9,11 +9,13 @@ export const apiConfig = {
   },
   // 通用物料
   Material: {
-    upload: "/material/upload",
+    upload: "/admin/material/upload",
     getall: "/admin/material/get_all",
-    download: "/material/download",
-    create: "/material/create",
-    update: "/material/update",
+    getDetail: "/admin/material/get_one",
+    download: "/admin/material/download",
+    create: "/admin/material/create",
+    update: "/admin/material/update",
+    delete: "/admin/material/remove",
   },
   // 权限
   Permission: {

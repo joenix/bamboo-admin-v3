@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Space, Card } from "antd";
+import { Table, Button, Space, Card, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
+import MaterialDrawer from "./MaterialDrawer";
 // {
 //   "id": 1,
 //   "url": "https://oss.lhdd.club/banner_1.webp",
@@ -51,6 +52,9 @@ const Material = () => {
       title: "备注",
       dataIndex: "content",
       key: "content",
+      render: (text: string) => {
+        return text || "无";
+      },
     },
     {
       title: "链接",
@@ -97,21 +101,59 @@ const Material = () => {
     {
       title: "操作",
       key: "action",
-      render: () => (
+      render: (text, record) => (
         <Space size="middle">
-          <a>查看</a>
-          <a>编辑</a>
-          <a>删除</a>
+          <a onClick={() => handleEdit(record.id, "detail")}>查看</a>
+          <a onClick={() => handleEdit(record.id, "edit")}>编辑</a>
+          <a
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            删除
+          </a>
         </Space>
       ),
     },
   ];
-
+  const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [editingMaterialId, setEditingMaterialId] = useState(null);
+  const [editingMaterialType, setEditingMaterialType] = useState("");
+  const handleAdd = () => {
+    setEditingMaterialId(null);
+    setEditingMaterialType("add");
+    setDrawerVisible(true);
+  };
+
+  const handleEdit = (id: any, type: any) => {
+    setLoading(true);
+    setEditingMaterialId(id);
+    setEditingMaterialType(type);
+    setDrawerVisible(true);
+    setLoading(false);
+  };
+
+  const handleDelete = (id: any) => {
+    setLoading(true);
+    api
+      .post(apiConfig.Material.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item: any) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     api
@@ -124,24 +166,27 @@ const Material = () => {
           setTotal(res.data.msg.counts);
         }
         setLoading(false);
+        setRefresh(false);
       });
-  }, [page, pageSize]);
+  }, [page, pageSize, refresh]);
 
   return (
     <PageContainer>
       <div className="space-y-6">
         <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             新增素材
           </Button>
         </div>
 
         <Card>
           <Table
-            loading={loading}
             rowKey={"id"}
             columns={columns}
             dataSource={data}
+            scroll={{ y: "calc(100vh - 380px)" }}
+            className="[&_.ant-table-body]:!h-[calc(100vh-380px)]"
+            loading={loading}
             pagination={{
               current: page,
               pageSize: pageSize,
@@ -166,10 +211,26 @@ const Material = () => {
                 setPage(page);
                 setPageSize(pageSize);
               },
+              hideOnSinglePage: false,
             }}
           />
         </Card>
       </div>
+      {drawerVisible ? (
+        <MaterialDrawer
+          onClose={() => setDrawerVisible(false)}
+          materialId={editingMaterialId}
+          materialType={editingMaterialType}
+          onSuccess={() => {
+            setDrawerVisible(false);
+            setEditingMaterialId(null);
+            setEditingMaterialType("");
+            if (page === 1) {
+              setRefresh(true);
+            }
+          }}
+        />
+      ) : null}
     </PageContainer>
   );
 };
