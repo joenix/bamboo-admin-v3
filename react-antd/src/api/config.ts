@@ -6,6 +6,7 @@ export const apiConfig = {
     getall: "/users/get_all",
     login: "/users/login",
     update: "/users/update",
+    delete: "/users/remove",
   },
   // 通用物料
   Material: {

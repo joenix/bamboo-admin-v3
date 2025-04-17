@@ -124,7 +124,9 @@ const Material = () => {
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [editingMaterialId, setEditingMaterialId] = useState(null);
+  const [editingMaterialId, setEditingMaterialId] = useState<number | null>(
+    null
+  );
   const [editingMaterialType, setEditingMaterialType] = useState("");
   const handleAdd = () => {
     setEditingMaterialId(null);
@@ -132,7 +134,7 @@ const Material = () => {
     setDrawerVisible(true);
   };
 
-  const handleEdit = (id: any, type: any) => {
+  const handleEdit = (id: number, type: string) => {
     setLoading(true);
     setEditingMaterialId(id);
     setEditingMaterialType(type);
@@ -140,7 +142,7 @@ const Material = () => {
     setLoading(false);
   };
 
-  const handleDelete = (id: any) => {
+  const handleDelete = (id: number) => {
     setLoading(true);
     api
       .post(apiConfig.Material.delete, {
@@ -149,7 +151,7 @@ const Material = () => {
       .then((res) => {
         if (res.data.status === 200) {
           message.success("删除成功");
-          setData(data.filter((item: any) => item.id !== id));
+          setData(data.filter((item: { id: number }) => item.id !== id));
         }
         setLoading(false);
       });

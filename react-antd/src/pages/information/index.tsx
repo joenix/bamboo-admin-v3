@@ -41,11 +41,17 @@ const Information = () => {
     {
       title: "操作",
       key: "action",
-      render: () => (
+      render: (record: { id: number }) => (
         <Space size="middle">
           <a>查看</a>
           <a>编辑</a>
-          <a>删除</a>
+          <a
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            删除
+          </a>
         </Space>
       ),
     },
@@ -57,6 +63,21 @@ const Information = () => {
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const handleDelete = (id: number) => {
+    setLoading(true);
+    api
+      .post(apiConfig.Information.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item: { id: number }) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     setLoading(true);

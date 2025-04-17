@@ -1,4 +1,4 @@
-import { Table, Button, Space, Tag } from "antd";
+import { Table, Button, Space, Tag, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
@@ -6,51 +6,72 @@ import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
 
-const columns = [
-  {
-    title: "用户名",
-    dataIndex: "nickname",
-    key: "nickname",
-  },
-  {
-    title: "手机号",
-    dataIndex: "mobile",
-    key: "mobile",
-  },
-  {
-    title: "头像",
-    dataIndex: "avatarUrl",
-    key: "avatarUrl",
-    render: (avatarUrl: string) => (
-      <img src={avatarUrl} alt="头像" className="w-10 h-10 rounded-full" />
-    ),
-  },
-  {
-    title: "注册时间",
-    dataIndex: "createdAt",
-    key: "createdAt",
-    render: (createdAt: string) =>
-      dayjs(createdAt).format("YYYY-MM-DD HH:mm:ss"),
-  },
-  {
-    title: "操作",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>编辑</a>
-        <a>删除</a>
-      </Space>
-    ),
-  },
-];
-
 export default function User() {
+  const columns = [
+    {
+      title: "用户名",
+      dataIndex: "nickname",
+      key: "nickname",
+    },
+    {
+      title: "手机号",
+      dataIndex: "mobile",
+      key: "mobile",
+    },
+    {
+      title: "头像",
+      dataIndex: "avatarUrl",
+      key: "avatarUrl",
+      render: (avatarUrl: string) => (
+        <img src={avatarUrl} alt="头像" className="w-10 h-10 rounded-full" />
+      ),
+    },
+    {
+      title: "注册时间",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt: string) =>
+        dayjs(createdAt).format("YYYY-MM-DD HH:mm:ss"),
+    },
+    {
+      title: "操作",
+      key: "action",
+      render: (record: { id: number }) => (
+        <Space size="middle">
+          <a>编辑</a>
+          <a
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            删除
+          </a>
+        </Space>
+      ),
+    },
+  ];
+
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const handleDelete = (id: number) => {
+    setLoading(true);
+    api
+      .post(apiConfig.User.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item: { id: number }) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     setLoading(true);

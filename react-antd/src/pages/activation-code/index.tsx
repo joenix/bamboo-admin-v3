@@ -1,4 +1,4 @@
-import { Table, Button, Space, Tag } from "antd";
+import { Table, Button, Space, Tag, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
@@ -6,57 +6,80 @@ import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
 
-const columns = [
-  {
-    title: "激活码",
-    dataIndex: "code",
-    key: "code",
-  },
-  {
-    title: "图书ID",
-    dataIndex: "bookId",
-    key: "bookId",
-  },
-  {
-    title: "状态",
-    dataIndex: "active",
-    key: "active",
-    render: (active: string) => (
-      <Tag color={active ? "green" : "red"}>{active ? "已激活" : "未激活"}</Tag>
-    ),
-  },
-  {
-    title: "用户ID",
-    dataIndex: "userId",
-    key: "userId",
-    render: (userId: string) => (userId ? userId : "-"),
-  },
-  {
-    title: "创建时间",
-    dataIndex: "createdAt",
-    key: "createdAt",
-    render: (createdAt: string) =>
-      dayjs(createdAt).format("YYYY-MM-DD HH:mm:ss"),
-  },
-  {
-    title: "操作",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>编辑</a>
-        <a>删除</a>
-      </Space>
-    ),
-  },
-];
-
 export default function ActivationCode() {
+  const columns = [
+    {
+      title: "激活码",
+      dataIndex: "code",
+      key: "code",
+    },
+    {
+      title: "图书ID",
+      dataIndex: "bookId",
+      key: "bookId",
+    },
+    {
+      title: "状态",
+      dataIndex: "active",
+      key: "active",
+      render: (active: string) => (
+        <Tag color={active ? "green" : "red"}>
+          {active ? "已激活" : "未激活"}
+        </Tag>
+      ),
+    },
+    {
+      title: "用户ID",
+      dataIndex: "userId",
+      key: "userId",
+      render: (userId: string) => (userId ? userId : "-"),
+    },
+    {
+      title: "创建时间",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt: string) =>
+        dayjs(createdAt).format("YYYY-MM-DD HH:mm:ss"),
+    },
+    {
+      title: "操作",
+      key: "action",
+      render: (record: { id: number }) => (
+        <Space size="middle">
+          <a>编辑</a>
+          <a
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            删除
+          </a>
+        </Space>
+      ),
+    },
+  ];
+
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const handleDelete = (id: number) => {
+    setLoading(true);
+    api
+      .post(apiConfig.Code.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item: { id: number }) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -74,6 +97,7 @@ export default function ActivationCode() {
         setRefresh(false);
       });
   }, [page, pageSize, refresh]);
+
   return (
     <PageContainer>
       <div className="space-y-6">

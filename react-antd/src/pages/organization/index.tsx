@@ -1,61 +1,82 @@
-import { Table, Button, Space, Tag } from "antd";
+import { Table, Button, Space, Tag, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 
-const columns = [
-  {
-    title: "类型",
-    dataIndex: "type",
-    key: "type",
-  },
-  {
-    title: "机构名称",
-    dataIndex: "name",
-    key: "name",
-    ellipsis: true,
-  },
-  {
-    title: "地址",
-    dataIndex: "address",
-    key: "address",
-    ellipsis: true,
-  },
-  {
-    title: "负责人",
-    dataIndex: "remark",
-    key: "remark",
-    ellipsis: true,
-  },
-  {
-    title: "机构图片",
-    dataIndex: "img",
-    key: "img",
-    render: (img: string) => (
-      <img src={img} alt="机构图片" className="w-10 h-10 rounded-full" />
-    ),
-  },
-  {
-    title: "操作",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>编辑</a>
-        <a>删除</a>
-      </Space>
-    ),
-  },
-];
-
 export default function Organization() {
+  const columns = [
+    {
+      title: "类型",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "机构名称",
+      dataIndex: "name",
+      key: "name",
+      ellipsis: true,
+    },
+    {
+      title: "地址",
+      dataIndex: "address",
+      key: "address",
+      ellipsis: true,
+    },
+    {
+      title: "负责人",
+      dataIndex: "remark",
+      key: "remark",
+      ellipsis: true,
+    },
+    {
+      title: "机构图片",
+      dataIndex: "img",
+      key: "img",
+      render: (img: string) => (
+        <img src={img} alt="机构图片" className="w-10 h-10 rounded-full" />
+      ),
+    },
+    {
+      title: "操作",
+      key: "action",
+      render: () => (
+        <Space size="middle">
+          <a>编辑</a>
+          <a
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            删除
+          </a>
+        </Space>
+      ),
+    },
+  ];
+
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const handleDelete = (id: number) => {
+    setLoading(true);
+    api
+      .post(apiConfig.School.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item: { id: number }) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     setLoading(true);
