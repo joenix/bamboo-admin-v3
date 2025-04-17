@@ -95,7 +95,8 @@ const Material = () => {
         // 2024-11-11T19:43:12.000Z
         const date = new Date(text);
         // 使用 dayjs 处理时间，并转换为北京时间
-        return dayjs(date).add(-8, "hour").format("YYYY-MM-DD HH:mm:ss");
+        // return dayjs(date).add(-8, "hour").format("YYYY-MM-DD HH:mm:ss");
+        return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
       },
     },
     {

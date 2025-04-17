@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { asideMenuConfig, icons } from "../config/menu-config";
 import type { MenuProps } from "antd";
 import React from "react";
-
+import logo from "@/assets/img/logo.jpg";
 const { Header, Sider, Content } = Layout;
 
 const userMenuItems: MenuProps["items"] = [
@@ -44,7 +44,10 @@ export function BasicLayout() {
   return (
     <Layout className="h-screen">
       <Header className="flex items-center justify-between bg-white px-6 shadow-sm border-0 border-b border-gray-200 border-solid">
-        <div className="text-xl font-bold text-gray-800">Bamboo Admin</div>
+        <div className="text-xl font-bold text-gray-800 flex items-center">
+          <img src={logo} alt="logo" className="w-6 h-6 mr-2" />
+          六合竹简
+        </div>
         <Dropdown
           menu={{
             items: userMenuItems,

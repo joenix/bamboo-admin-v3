@@ -53,16 +53,16 @@ export const asideMenuConfig: MenuDataItem[] = [
     path: "/activation-code",
     icon: "KeyOutlined",
   },
-  {
-    name: "礼品管理",
-    path: "/gift",
-    icon: "GiftOutlined",
-  },
-  {
-    name: "礼品兑换管理",
-    path: "/gift-exchange",
-    icon: "ShoppingCartOutlined",
-  },
+  // {
+  //   name: "礼品管理",
+  //   path: "/gift",
+  //   icon: "GiftOutlined",
+  // },
+  // {
+  //   name: "礼品兑换管理",
+  //   path: "/gift-exchange",
+  //   icon: "ShoppingCartOutlined",
+  // },
 ];
 
 export const icons = {
