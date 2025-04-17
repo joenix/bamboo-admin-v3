@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
+import GenerateCodeModal from "./GenerateCodeModal";
 
 export default function ActivationCode() {
   const columns = [
@@ -17,6 +18,17 @@ export default function ActivationCode() {
       title: "图书ID",
       dataIndex: "bookId",
       key: "bookId",
+    },
+    {
+      title: "图书名称",
+      dataIndex: "bookId",
+      key: "bookId",
+      render: (bookId: number) => {
+        const book: any = bookData.find(
+          (item: { id: number }) => item.id === bookId
+        );
+        return book ? book.name : "-";
+      },
     },
     {
       title: "状态",
@@ -46,7 +58,6 @@ export default function ActivationCode() {
       key: "action",
       render: (record: { id: number }) => (
         <Space size="middle">
-          <a>编辑</a>
           <a
             onClick={() => {
               handleDelete(record.id);
@@ -65,7 +76,8 @@ export default function ActivationCode() {
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
-
+  const [bookData, setBookData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const handleDelete = (id: number) => {
     setLoading(true);
     api
@@ -80,6 +92,17 @@ export default function ActivationCode() {
         setLoading(false);
       });
   };
+
+  const getBookData = async () => {
+    const res = await api.post(apiConfig.Book.getall + "?page=1&pageSize=999");
+    if (res.data.status === 200) {
+      setBookData(res.data.msg.data);
+    }
+  };
+
+  useEffect(() => {
+    getBookData();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -97,12 +120,14 @@ export default function ActivationCode() {
         setRefresh(false);
       });
   }, [page, pageSize, refresh]);
-
+  const handleAdd = () => {
+    setModalVisible(true);
+  };
   return (
     <PageContainer>
       <div className="space-y-6">
         <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             生成激活码
           </Button>
         </div>
@@ -141,6 +166,15 @@ export default function ActivationCode() {
           }}
         />
       </div>
+      <GenerateCodeModal
+        visible={modalVisible}
+        bookData={bookData}
+        onCancel={() => setModalVisible(false)}
+        onSuccess={() => {
+          setModalVisible(false);
+          setRefresh(true);
+        }}
+      />
     </PageContainer>
   );
 }
