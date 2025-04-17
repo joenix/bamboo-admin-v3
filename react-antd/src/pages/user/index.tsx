@@ -1,12 +1,15 @@
 import { Table, Button, Space, Tag, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
+import UserEditDrawer from "@/pages/user/components/UserEditDrawer";
 
 export default function User() {
+  const [editDrawerVisible, setEditDrawerVisible] = useState(false);
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
   const columns = [
     {
       title: "用户名",
@@ -38,14 +41,14 @@ export default function User() {
       key: "action",
       render: (record: { id: number }) => (
         <Space size="middle">
-          <a>编辑</a>
-          <a
+          <a onClick={() => handleEdit(record)}>编辑</a>
+          {/* <a
             onClick={() => {
               handleDelete(record.id);
             }}
           >
             删除
-          </a>
+          </a> */}
         </Space>
       ),
     },
@@ -68,9 +71,20 @@ export default function User() {
         if (res.data.status === 200) {
           message.success("删除成功");
           setData(data.filter((item: { id: number }) => item.id !== id));
+        } else {
+          message.error(res.data.msg);
         }
         setLoading(false);
       });
+  };
+
+  const handleEdit = (record: any) => {
+    setCurrentUser(record);
+    setEditDrawerVisible(true);
+  };
+
+  const handleEditSuccess = () => {
+    setRefresh(true);
   };
 
   useEffect(() => {
@@ -82,7 +96,7 @@ export default function User() {
       })
       .then((res) => {
         if (res.data.status === 200) {
-          setData(res.data.msg.users);
+          setData(res.data.msg.data);
           setTotal(res.data.msg.counts);
         }
         setLoading(false);
@@ -92,11 +106,11 @@ export default function User() {
   return (
     <PageContainer>
       <div className="space-y-6">
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <Button type="primary" icon={<PlusOutlined />}>
             新增用户
           </Button>
-        </div>
+        </div> */}
         <Table
           rowKey={"id"}
           columns={columns}
@@ -131,6 +145,14 @@ export default function User() {
             hideOnSinglePage: false,
           }}
         />
+        {editDrawerVisible && (
+          <UserEditDrawer
+            visible={editDrawerVisible}
+            onClose={() => setEditDrawerVisible(false)}
+            userData={currentUser}
+            onSuccess={handleEditSuccess}
+          />
+        )}
       </div>
     </PageContainer>
   );

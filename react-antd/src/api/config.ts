@@ -1,12 +1,16 @@
 // API 路径配置
 export const apiConfig = {
+  // 文件上传
+  File: {
+    upload: "https://api.lhdd.club/public/upload",
+  },
   // 用户
   User: {
-    registry: "/users/regist",
-    getall: "/users/get_all",
-    login: "/users/login",
-    update: "/users/update",
-    delete: "/users/remove",
+    registry: "/admin/users/regist",
+    getall: "/admin/users/get_all",
+    login: "/admin/users/login",
+    update: "/admin/users/update",
+    delete: "/admin/users/remove",
   },
   // 通用物料
   Material: {

@@ -1,11 +1,60 @@
-import { Table, Button, Space, Tag, message } from "antd";
+import { Table, Button, Space, message, Drawer } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
+import TeacherForm from "./components/TeacherForm";
+import { Teacher } from "./types";
+const TypeList = [
+  { id: "1", name: "点读师" },
+  { id: "2", name: "导学师" },
+  { id: "3", name: "规划师" },
+];
 
-export default function Teacher() {
+const GenderList = [
+  { id: "1", name: "男" },
+  { id: "0", name: "女" },
+];
+export default function Teach() {
+  const [formVisible, setFormVisible] = useState(false);
+  const [formMode, setFormMode] = useState<"add" | "edit">("add");
+  const [currentRecord, setCurrentRecord] = useState<Teacher | null>(null);
+  const [refresh, setRefresh] = useState(false);
+  const [data, setData] = useState<Teacher[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [total, setTotal] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const handleDelete = (id: number) => {
+    setLoading(true);
+    api
+      .post(apiConfig.Teach.delete, {
+        id,
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          message.success("删除成功");
+          setData(data.filter((item) => item.id !== id));
+        }
+        setLoading(false);
+      });
+  };
+
+  const handleEdit = (record: Teacher) => {
+    setFormMode("edit");
+    console.log(record);
+    setCurrentRecord(record);
+    setFormVisible(true);
+  };
+
+  const handleAdd = () => {
+    setFormMode("add");
+    setCurrentRecord(null);
+    setFormVisible(true);
+  };
+
   const columns = [
     {
       title: "姓名",
@@ -21,6 +70,8 @@ export default function Teacher() {
       title: "性别",
       dataIndex: "gender",
       key: "gender",
+      render: (gender: string) =>
+        GenderList.find((item) => item.id === gender)?.name,
     },
     {
       title: "地址",
@@ -46,13 +97,14 @@ export default function Teacher() {
       title: "师资类型",
       dataIndex: "type",
       key: "type",
+      render: (type: string) => TypeList.find((item) => item.id === type)?.name,
     },
     {
       title: "操作",
       key: "action",
-      render: (record: { id: number }) => (
+      render: (record: Teacher) => (
         <Space size="middle">
-          <a>编辑</a>
+          <a onClick={() => handleEdit(record)}>编辑</a>
           <a
             onClick={() => {
               handleDelete(record.id);
@@ -65,31 +117,10 @@ export default function Teacher() {
     },
   ];
 
-  const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const [total, setTotal] = useState(1);
-  const [loading, setLoading] = useState(false);
-
-  const handleDelete = (id: number) => {
-    setLoading(true);
-    api
-      .post(apiConfig.Teach.delete, {
-        id,
-      })
-      .then((res) => {
-        if (res.data.status === 200) {
-          message.success("删除成功");
-          setData(data.filter((item: { id: number }) => item.id !== id));
-        }
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
+    if (!refresh) return;
     setLoading(true);
-    const filters = [];
+    const filters: string[] = [];
     api
       .post(
         apiConfig.Teach.getall + "?page=" + page + "&pageSize=" + pageSize,
@@ -99,15 +130,14 @@ export default function Teacher() {
       )
       .then((res) => {
         if (res.data.status === 200) {
-          const data = res.data.msg.data.map((item: any) => {
+          const data = res.data.msg.data.map((item: Teacher) => {
             const content = item.content.split(",");
 
             return {
               ...item,
-              gender: content[0] === "1" ? "女" : "男",
+              gender: content[0],
               age: content[1],
               address: content[2],
-              type: content[3],
             };
           });
           setData(data);
@@ -117,11 +147,12 @@ export default function Teacher() {
         setRefresh(false);
       });
   }, [page, pageSize, refresh]);
+
   return (
     <PageContainer>
       <div className="space-y-6">
         <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             添加教师
           </Button>
         </div>
@@ -160,6 +191,27 @@ export default function Teacher() {
             hideOnSinglePage: false,
           }}
         />
+
+        {formVisible && (
+          <Drawer
+            title={formMode === "add" ? "添加教师" : "编辑教师"}
+            placement="right"
+            width={500}
+            onClose={() => setFormVisible(false)}
+            open={formVisible}
+          >
+            <TeacherForm
+              visible={formVisible}
+              onClose={() => setFormVisible(false)}
+              initialValues={currentRecord}
+              mode={formMode}
+              onSuccess={() => {
+                setFormVisible(false);
+                setRefresh(true);
+              }}
+            />
+          </Drawer>
+        )}
       </div>
     </PageContainer>
   );

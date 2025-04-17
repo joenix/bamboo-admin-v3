@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
-import GenerateCodeModal from "./GenerateCodeModal";
+import GenerateCodeModal from "./components/GenerateCodeModal";
 
 export default function ActivationCode() {
   const columns = [

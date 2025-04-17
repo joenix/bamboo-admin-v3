@@ -5,7 +5,7 @@ import PageContainer from "@/components/PageContainer";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
-import MaterialDrawer from "./MaterialDrawer";
+import MaterialDrawer from "./components/MaterialDrawer";
 // {
 //   "id": 1,
 //   "url": "https://oss.lhdd.club/banner_1.webp",

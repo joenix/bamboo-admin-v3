@@ -1,12 +1,29 @@
-import { Table, Button, Space, Tag, message } from "antd";
+import { Table, Button, Space, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
-import dayjs from "dayjs";
+import BookDrawer from "./components/BookDrawer";
+
+interface BookRecord {
+  id: number;
+  name: string;
+  img: string;
+  url: string;
+}
 
 export default function Book() {
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [drawerType, setDrawerType] = useState<"add" | "edit" | "view">("add");
+  const [currentRecord, setCurrentRecord] = useState<BookRecord | null>(null);
+  const [refresh, setRefresh] = useState(false);
+  const [data, setData] = useState<BookRecord[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [total, setTotal] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const columns = [
     {
       title: "书名",
@@ -29,27 +46,26 @@ export default function Book() {
     {
       title: "操作",
       key: "action",
-      render: (record: { id: number }) => (
+      render: (record: BookRecord) => (
         <Space size="middle">
-          <a>编辑</a>
-          <a
-            onClick={() => {
-              handleDelete(record.id);
-            }}
-          >
-            删除
-          </a>
+          <a onClick={() => handleEdit(record)}>编辑</a>
+          <a onClick={() => handleDelete(record.id)}>删除</a>
         </Space>
       ),
     },
   ];
 
-  const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const [total, setTotal] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const handleAdd = () => {
+    setDrawerType("add");
+    setCurrentRecord(null);
+    setDrawerVisible(true);
+  };
+
+  const handleEdit = (record: BookRecord) => {
+    setDrawerType("edit");
+    setCurrentRecord(record);
+    setDrawerVisible(true);
+  };
 
   const handleDelete = (id: number) => {
     setLoading(true);
@@ -60,15 +76,24 @@ export default function Book() {
       .then((res) => {
         if (res.data.status === 200) {
           message.success("删除成功");
-          setData(data.filter((item: { id: number }) => item.id !== id));
+          setData(data.filter((item) => item.id !== id));
         }
         setLoading(false);
       });
   };
 
+  const handleDrawerClose = () => {
+    setDrawerVisible(false);
+    setCurrentRecord(null);
+  };
+
+  const handleDrawerSuccess = () => {
+    setRefresh(!refresh);
+  };
+
   useEffect(() => {
     setLoading(true);
-    const filters = [];
+    const filters: any[] = [];
     api
       .post(apiConfig.Book.getall + "?page=" + page + "&pageSize=" + pageSize, {
         filters,
@@ -82,11 +107,12 @@ export default function Book() {
         setRefresh(false);
       });
   }, [page, pageSize, refresh]);
+
   return (
     <PageContainer>
       <div className="space-y-6">
         <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             添加书籍
           </Button>
         </div>
@@ -123,6 +149,13 @@ export default function Book() {
             },
             hideOnSinglePage: false,
           }}
+        />
+        <BookDrawer
+          visible={drawerVisible}
+          onClose={handleDrawerClose}
+          type={drawerType}
+          record={currentRecord}
+          onSuccess={handleDrawerSuccess}
         />
       </div>
     </PageContainer>
