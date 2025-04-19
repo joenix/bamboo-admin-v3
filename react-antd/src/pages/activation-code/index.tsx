@@ -1,4 +1,14 @@
-import { Table, Button, Space, Tag, message, Form, Input, Card } from "antd";
+import {
+  Table,
+  Button,
+  Space,
+  Tag,
+  message,
+  Form,
+  Input,
+  Card,
+  Modal,
+} from "ant-design/icons";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
@@ -93,18 +103,26 @@ export default function ActivationCode() {
   ];
 
   const handleDelete = (id: number) => {
-    setLoading(true);
-    api
-      .post(apiConfig.Code.delete, {
-        id,
-      })
-      .then((res) => {
-        if (res.data.status === 200) {
-          message.success("删除成功");
-          setData(data.filter((item) => item.id !== id));
-        }
-        setLoading(false);
-      });
+    Modal.confirm({
+      title: "确认删除",
+      content: "确定要删除这个激活码吗？此操作不可恢复。",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => {
+        setLoading(true);
+        api
+          .post(apiConfig.Code.delete, {
+            id,
+          })
+          .then((res) => {
+            if (res.data.status === 200) {
+              message.success("删除成功");
+              setData(data.filter((item) => item.id !== id));
+            }
+            setLoading(false);
+          });
+      },
+    });
   };
 
   const getBookData = async () => {

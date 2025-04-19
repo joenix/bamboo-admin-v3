@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Space, Card, message, Form, Input, Select } from "antd";
+import {
+  Table,
+  Button,
+  Space,
+  Card,
+  message,
+  Form,
+  Input,
+  Select,
+  Modal,
+} from "antd";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import api from "@/api";
@@ -163,18 +173,26 @@ const Material = () => {
   };
 
   const handleDelete = (id: number) => {
-    setLoading(true);
-    api
-      .post(apiConfig.Material.delete, {
-        id,
-      })
-      .then((res) => {
-        if (res.data.status === 200) {
-          message.success("删除成功");
-          setData(data.filter((item) => item.id !== id));
-        }
-        setLoading(false);
-      });
+    Modal.confirm({
+      title: "确认删除",
+      content: "确定要删除这个物料吗？此操作不可恢复。",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => {
+        setLoading(true);
+        api
+          .post(apiConfig.Material.delete, {
+            id,
+          })
+          .then((res) => {
+            if (res.data.status === 200) {
+              message.success("删除成功");
+              setData(data.filter((item) => item.id !== id));
+            }
+            setLoading(false);
+          });
+      },
+    });
   };
 
   const handleSearch = () => {
