@@ -20,7 +20,7 @@ export default function Teach() {
   const [formVisible, setFormVisible] = useState(false);
   const [formMode, setFormMode] = useState<"add" | "edit">("add");
   const [currentRecord, setCurrentRecord] = useState<Teacher | null>(null);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(true);
   const [data, setData] = useState<Teacher[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);

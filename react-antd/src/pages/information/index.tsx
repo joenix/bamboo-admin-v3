@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
 import { Table, Button, Space, Card, Tag, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
+import InformationDrawer from "./components/InformationDrawer";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
 
 const Information = () => {
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [drawerType, setDrawerType] = useState<"create" | "edit">("create");
+  const [currentItem, setCurrentItem] = useState<any>(null);
+  const [refresh, setRefresh] = useState(false);
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [total, setTotal] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const columns = [
     {
       title: "标题",
@@ -15,12 +26,10 @@ const Information = () => {
       ellipsis: true,
     },
     {
-      title: "分类",
-      dataIndex: "type",
-      key: "type",
-      render: (type: string) => (
-        <Tag color={type === "0" ? "blue" : "green"}>{type}</Tag>
-      ),
+      title: "内容",
+      dataIndex: "content",
+      key: "content",
+      ellipsis: true,
     },
     {
       title: "发布时间",
@@ -43,26 +52,29 @@ const Information = () => {
       key: "action",
       render: (record: { id: number }) => (
         <Space size="middle">
-          <a>查看</a>
-          <a>编辑</a>
-          <a
+          <Button
+            type="link"
+            icon={<EditOutlined />}
             onClick={() => {
-              handleDelete(record.id);
+              setDrawerType("edit");
+              setCurrentItem(record);
+              setDrawerVisible(true);
             }}
           >
+            编辑
+          </Button>
+          <Button
+            type="link"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record.id)}
+          >
             删除
-          </a>
+          </Button>
         </Space>
       ),
     },
   ];
-
-  const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const [total, setTotal] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const handleDelete = (id: number) => {
     setLoading(true);
@@ -113,7 +125,15 @@ const Information = () => {
     <PageContainer>
       <div className="space-y-6">
         <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setDrawerType("create");
+              setCurrentItem(null);
+              setDrawerVisible(true);
+            }}
+          >
             发布资讯
           </Button>
         </div>
@@ -155,6 +175,19 @@ const Information = () => {
           />
         </Card>
       </div>
+
+      <InformationDrawer
+        visible={drawerVisible}
+        onClose={() => {
+          setDrawerVisible(false);
+          setCurrentItem(null);
+        }}
+        onSuccess={() => {
+          setRefresh(true);
+        }}
+        informationItem={currentItem}
+        type={drawerType}
+      />
     </PageContainer>
   );
 };

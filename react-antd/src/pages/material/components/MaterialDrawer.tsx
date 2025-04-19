@@ -1,36 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Drawer } from "antd";
+import { Drawer, Form } from "antd";
 import MaterialForm from "./MaterialForm";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 
-const MaterialDrawer = ({ onClose, materialId, onSuccess, materialType }) => {
+const MaterialDrawer = ({
+  onClose,
+  materialItem,
+  onSuccess,
+  materialType,
+}: any) => {
+  const [form] = Form.useForm();
+
   const [initialValues, setInitialValues] = useState({});
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    if (materialId) {
+    if (materialItem) {
       // 编辑模式，获取物料信息
-      api
-        .post(apiConfig.Material.getDetail, {
-          id: materialId,
-        })
-        .then((res) => {
-          if (res.data.status === 200) {
-            setInitialValues(res.data.msg);
-            setOpen(true);
-          }
-        });
+      setInitialValues(materialItem);
+      setOpen(true);
     } else {
       // 新增模式，清空表单
       setInitialValues({});
       setOpen(true);
     }
-  }, [materialId]);
+  }, [materialItem]);
 
   const handleSubmit = (values) => {
-    const apiCall = materialId
-      ? api.put(`${apiConfig.Material.update}/${materialId}`, values)
-      : api.post(apiConfig.Material.create, values);
+    const submitData = {
+      url: values.url,
+      link: values.link,
+      name: values.name,
+      content: values.content,
+      type: values.type,
+    };
+    const apiCall = materialItem
+      ? api.post(apiConfig.Material.update, {
+          ...submitData,
+          id: materialItem.id,
+        })
+      : api.post(apiConfig.Material.create, submitData);
 
     apiCall.then((res) => {
       if (res.data.status === 200) {
@@ -43,7 +52,7 @@ const MaterialDrawer = ({ onClose, materialId, onSuccess, materialType }) => {
   return (
     <Drawer
       title={
-        materialId
+        materialItem
           ? materialType === "edit"
             ? "编辑物料"
             : "查看物料"
@@ -54,6 +63,7 @@ const MaterialDrawer = ({ onClose, materialId, onSuccess, materialType }) => {
       width={480}
     >
       <MaterialForm
+        form={form}
         type={materialType}
         initialValues={initialValues}
         onSubmit={handleSubmit}

@@ -8,7 +8,7 @@ export const apiConfig = {
   User: {
     registry: "/admin/users/regist",
     getall: "/admin/users/get_all",
-    login: "/admin/users/login",
+    login: "/users/login",
     update: "/admin/users/update",
     delete: "/admin/users/remove",
   },
@@ -39,6 +39,7 @@ export const apiConfig = {
     create: "/admin/information/create",
     update: "/admin/information/update",
     getall: "/admin/information/get_all",
+    getone: "/admin/information/get_one",
     delete: "/admin/information/remove",
   },
   // 图书

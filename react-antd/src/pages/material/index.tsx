@@ -104,8 +104,8 @@ const Material = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => handleEdit(record.id, "detail")}>查看</a>
-          <a onClick={() => handleEdit(record.id, "edit")}>编辑</a>
+          {/* <a onClick={() => handleEdit(record.id, "detail")}>查看</a> */}
+          <a onClick={() => handleEdit(record, "edit")}>编辑</a>
           <a
             onClick={() => {
               handleDelete(record.id);
@@ -124,19 +124,17 @@ const Material = () => {
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [editingMaterialId, setEditingMaterialId] = useState<number | null>(
-    null
-  );
+  const [editingMaterialItem, setEditingMaterialItem] = useState<any>(null);
   const [editingMaterialType, setEditingMaterialType] = useState("");
   const handleAdd = () => {
-    setEditingMaterialId(null);
+    setEditingMaterialItem(null);
     setEditingMaterialType("add");
     setDrawerVisible(true);
   };
 
-  const handleEdit = (id: number, type: string) => {
+  const handleEdit = (item: any, type: string) => {
     setLoading(true);
-    setEditingMaterialId(id);
+    setEditingMaterialItem(item);
     setEditingMaterialType(type);
     setDrawerVisible(true);
     setLoading(false);
@@ -222,11 +220,11 @@ const Material = () => {
       {drawerVisible ? (
         <MaterialDrawer
           onClose={() => setDrawerVisible(false)}
-          materialId={editingMaterialId}
+          materialItem={editingMaterialItem}
           materialType={editingMaterialType}
           onSuccess={() => {
             setDrawerVisible(false);
-            setEditingMaterialId(null);
+            setEditingMaterialItem(null);
             setEditingMaterialType("");
             if (page === 1) {
               setRefresh(true);

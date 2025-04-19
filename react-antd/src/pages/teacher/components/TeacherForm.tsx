@@ -51,18 +51,30 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
         remark: values.remark,
         content,
       };
-
+      let isSuccess = false;
       if (mode === "add") {
-        await api.post(apiConfig.Teach.create, submitData);
-        message.success("添加成功");
+        const res = await api.post(apiConfig.Teach.create, submitData);
+        if (res.data.status === 200) {
+          message.success("添加成功");
+          isSuccess = true;
+        } else {
+          message.error(res.data.msg);
+        }
       } else {
-        await api.post(apiConfig.Teach.update, {
+        const res = await api.post(apiConfig.Teach.update, {
           ...submitData,
           id: initialValues?.id,
         });
-        message.success("更新成功");
+        if (res.data.status === 200) {
+          message.success("更新成功");
+          isSuccess = true;
+        } else {
+          message.error(res.data.msg);
+        }
       }
-      onSuccess();
+      if (isSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       message.error("操作失败");
     } finally {

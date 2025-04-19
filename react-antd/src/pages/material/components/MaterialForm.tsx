@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Select, Upload } from "antd";
+import { Form, Input, Button, Select, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
@@ -10,7 +10,7 @@ import { apiConfig } from "@/api/config";
  *  4 音乐
  *  5 附件
  */
-const MaterialForm = ({ initialValues, onSubmit, onClose, type }) => {
+const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }) => {
   return (
     <Form
       disabled={type === "detail"}
@@ -55,12 +55,19 @@ const MaterialForm = ({ initialValues, onSubmit, onClose, type }) => {
         rules={[{ required: true, message: "请上传物料" }]}
       >
         <Upload
-          action={`https://api.lhdd.club${apiConfig.Material.upload}`}
+          action={`${apiConfig.File.upload}`}
+          name="files"
+          maxCount={1}
           headers={{
             Token: JSON.parse(localStorage.getItem("user") || "{}").token,
           }}
           onChange={(info) => {
-            console.log(info);
+            if (info.file.status === "done") {
+              form.setFieldValue("img", info.file.response.msg[0].path);
+              message.success("上传成功");
+            } else if (info.file.status === "error") {
+              message.error("上传失败");
+            }
           }}
         >
           <Button icon={<UploadOutlined />}>上传</Button>
