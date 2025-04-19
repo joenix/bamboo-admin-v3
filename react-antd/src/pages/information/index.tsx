@@ -1,22 +1,35 @@
 import { useState, useEffect } from "react";
-import { Table, Button, Space, Card, Tag, message } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Table, Button, Space, Card, message, Form, Input, Modal } from "antd";
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import InformationDrawer from "./components/InformationDrawer";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
 import dayjs from "dayjs";
 
+interface InformationItem {
+  id: number;
+  name: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const Information = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [drawerType, setDrawerType] = useState<"create" | "edit">("create");
-  const [currentItem, setCurrentItem] = useState<any>(null);
-  const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
+  const [currentItem, setCurrentItem] = useState<InformationItem | null>(null);
+  const [data, setData] = useState<InformationItem[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchForm] = Form.useForm();
 
   const columns = [
     {
@@ -50,7 +63,7 @@ const Information = () => {
     {
       title: "操作",
       key: "action",
-      render: (record: { id: number }) => (
+      render: (record: InformationItem) => (
         <Space size="middle">
           <Button
             type="link"
@@ -67,7 +80,7 @@ const Information = () => {
             type="link"
             danger
             icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record.id)}
+            onClick={() => showDeleteConfirm(record.id)}
           >
             删除
           </Button>
@@ -75,6 +88,19 @@ const Information = () => {
       ),
     },
   ];
+
+  const showDeleteConfirm = (id: number) => {
+    Modal.confirm({
+      title: "确认删除",
+      content: "确定要删除这条资讯吗？",
+      okText: "确定",
+      okType: "danger",
+      cancelText: "取消",
+      onOk() {
+        handleDelete(id);
+      },
+    });
+  };
 
   const handleDelete = (id: number) => {
     setLoading(true);
@@ -85,13 +111,24 @@ const Information = () => {
       .then((res) => {
         if (res.data.status === 200) {
           message.success("删除成功");
-          setData(data.filter((item: { id: number }) => item.id !== id));
+          setData(data.filter((item) => item.id !== id));
         }
         setLoading(false);
       });
   };
 
-  useEffect(() => {
+  const handleSearch = () => {
+    setPage(1);
+    fetchData();
+  };
+
+  const handleReset = () => {
+    searchForm.resetFields();
+    setPage(1);
+    fetchData();
+  };
+
+  const fetchData = () => {
     setLoading(true);
 
     const filters = [
@@ -100,6 +137,15 @@ const Information = () => {
         value: "0",
       },
     ];
+
+    const searchValues = searchForm.getFieldsValue();
+    if (searchValues.name) {
+      filters.push({
+        key: "name",
+        value: searchValues.name,
+      });
+    }
+
     api
       .post(
         apiConfig.Information.getall +
@@ -117,28 +163,54 @@ const Information = () => {
           setTotal(res.data.msg.counts);
         }
         setLoading(false);
-        setRefresh(false);
       });
-  }, [page, pageSize, refresh]);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [page, pageSize]);
 
   return (
     <PageContainer>
       <div className="space-y-6">
-        <div className="flex justify-end">
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => {
-              setDrawerType("create");
-              setCurrentItem(null);
-              setDrawerVisible(true);
-            }}
-          >
-            发布资讯
-          </Button>
-        </div>
-
         <Card>
+          <Form
+            form={searchForm}
+            layout="inline"
+            onFinish={handleSearch}
+            className="mb-4"
+          >
+            <Form.Item name="name" label="标题">
+              <Input placeholder="请输入标题" allowClear />
+            </Form.Item>
+            <Form.Item>
+              <Space>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon={<SearchOutlined />}
+                >
+                  搜索
+                </Button>
+                <Button onClick={handleReset}>重置</Button>
+              </Space>
+            </Form.Item>
+          </Form>
+
+          <div className="flex justify-end mb-4">
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                setDrawerType("create");
+                setCurrentItem(null);
+                setDrawerVisible(true);
+              }}
+            >
+              发布资讯
+            </Button>
+          </div>
+
           <Table
             rowKey={"id"}
             columns={columns}
@@ -183,7 +255,7 @@ const Information = () => {
           setCurrentItem(null);
         }}
         onSuccess={() => {
-          setRefresh(true);
+          fetchData();
         }}
         informationItem={currentItem}
         type={drawerType}

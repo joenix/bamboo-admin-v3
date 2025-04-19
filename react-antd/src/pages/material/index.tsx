@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Space, Card, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Table, Button, Space, Card, message, Form, Input, Select } from "antd";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import api from "@/api";
 import { apiConfig } from "@/api/config";
@@ -17,12 +17,42 @@ import MaterialDrawer from "./components/MaterialDrawer";
 //   "createdAt": "2024-11-11T19:43:12.000Z",
 //   "updatedAt": "2024-11-11T19:43:12.000Z"
 // }
+
+interface Material {
+  id: number;
+  url: string;
+  link: string;
+  name: string;
+  content: string;
+  type: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface SearchFormValues {
+  name?: string;
+  type?: number;
+  content?: string;
+}
+
 const Material = () => {
+  const [refresh, setRefresh] = useState(false);
+  const [data, setData] = useState<Material[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [total, setTotal] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [editingMaterialItem, setEditingMaterialItem] =
+    useState<Material | null>(null);
+  const [editingMaterialType, setEditingMaterialType] = useState("");
+  const [searchForm] = Form.useForm<SearchFormValues>();
+
   const columns = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
+      title: "名称",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "物料类型",
@@ -102,7 +132,7 @@ const Material = () => {
     {
       title: "操作",
       key: "action",
-      render: (text, record) => (
+      render: (text: any, record: Material) => (
         <Space size="middle">
           {/* <a onClick={() => handleEdit(record.id, "detail")}>查看</a> */}
           <a onClick={() => handleEdit(record, "edit")}>编辑</a>
@@ -117,22 +147,14 @@ const Material = () => {
       ),
     },
   ];
-  const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const [total, setTotal] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [editingMaterialItem, setEditingMaterialItem] = useState<any>(null);
-  const [editingMaterialType, setEditingMaterialType] = useState("");
+
   const handleAdd = () => {
     setEditingMaterialItem(null);
     setEditingMaterialType("add");
     setDrawerVisible(true);
   };
 
-  const handleEdit = (item: any, type: string) => {
+  const handleEdit = (item: Material, type: string) => {
     setLoading(true);
     setEditingMaterialItem(item);
     setEditingMaterialType(type);
@@ -149,17 +171,53 @@ const Material = () => {
       .then((res) => {
         if (res.data.status === 200) {
           message.success("删除成功");
-          setData(data.filter((item: { id: number }) => item.id !== id));
+          setData(data.filter((item) => item.id !== id));
         }
         setLoading(false);
       });
   };
 
-  useEffect(() => {
+  const handleSearch = () => {
+    setPage(1);
+    fetchData();
+  };
+
+  const handleReset = () => {
+    searchForm.resetFields();
+    setPage(1);
+    fetchData();
+  };
+
+  const fetchData = () => {
     setLoading(true);
+    const filters: { key: string; value: string }[] = [];
+    const searchValues = searchForm.getFieldsValue();
+
+    if (searchValues.name) {
+      filters.push({
+        key: "name",
+        value: searchValues.name,
+      });
+    }
+    if (searchValues.type) {
+      filters.push({
+        key: "type",
+        value: searchValues.type.toString(),
+      });
+    }
+    if (searchValues.content) {
+      filters.push({
+        key: "content",
+        value: searchValues.content,
+      });
+    }
+
     api
       .post(
-        apiConfig.Material.getall + "?page=" + page + "&pageSize=" + pageSize
+        apiConfig.Material.getall + "?page=" + page + "&pageSize=" + pageSize,
+        {
+          filters,
+        }
       )
       .then((res) => {
         if (res.data.status === 200) {
@@ -169,16 +227,53 @@ const Material = () => {
         setLoading(false);
         setRefresh(false);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [page, pageSize, refresh]);
 
   return (
     <PageContainer>
       <div className="space-y-6">
-        <div className="flex justify-end">
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            新增素材
-          </Button>
-        </div>
+        <Card>
+          <div className="flex justify-between items-center mb-4">
+            <Form form={searchForm} layout="inline" onFinish={handleSearch}>
+              <Form.Item name="name" label="名称">
+                <Input placeholder="请输入名称" allowClear />
+              </Form.Item>
+              <Form.Item name="type" label="类型">
+                <Select
+                  placeholder="请选择类型"
+                  allowClear
+                  options={[
+                    { label: "图片", value: 1 },
+                    { label: "视频", value: 2 },
+                    { label: "音频", value: 4 },
+                  ]}
+                />
+              </Form.Item>
+              <Form.Item name="content" label="备注">
+                <Input placeholder="请输入备注" allowClear />
+              </Form.Item>
+              <Form.Item>
+                <Space>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    icon={<SearchOutlined />}
+                  >
+                    搜索
+                  </Button>
+                  <Button onClick={handleReset}>重置</Button>
+                </Space>
+              </Form.Item>
+            </Form>
+            <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
+              新增素材
+            </Button>
+          </div>
+        </Card>
 
         <Card>
           <Table
