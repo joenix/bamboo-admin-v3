@@ -8,7 +8,7 @@ import {
   Input,
   Card,
   Modal,
-} from "ant-design/icons";
+} from "antd";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import PageContainer from "@/components/PageContainer";
 import { useState, useEffect } from "react";
