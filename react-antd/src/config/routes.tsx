@@ -1,18 +1,18 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Result, Button } from "antd";
-import { useNavigate } from "react-router-dom";
-import { BasicLayout } from "@/layouts/BasicLayout";
-import Dashboard from "@/pages/dashboard";
-import Material from "@/pages/material";
-import Information from "@/pages/information";
-import Teacher from "@/pages/teacher";
-import Organization from "@/pages/organization";
-import User from "@/pages/user";
-import Book from "@/pages/book";
-import ActivationCode from "@/pages/activation-code";
-import Gift from "@/pages/gift";
-import GiftExchange from "@/pages/gift-exchange";
-import Login from "@/pages/login";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { Result, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { BasicLayout } from '@/layouts/BasicLayout';
+import Dashboard from '@/pages/dashboard';
+import Material from '@/pages/material';
+import Information from '@/pages/information';
+import Teacher from '@/pages/teacher';
+import Organization from '@/pages/organization';
+import User from '@/pages/user';
+import Book from '@/pages/book';
+import ActivationCode from '@/pages/activation-code';
+import Gift from '@/pages/gift';
+import GiftExchange from '@/pages/gift-exchange';
+import Login from '@/pages/login';
 // 404 页面组件
 function NotFound() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function NotFound() {
         <Button
           type="primary"
           onClick={() => {
-            navigate("/dashboard");
+            navigate('/dashboard');
           }}
         >
           返回首页
@@ -37,7 +37,7 @@ function NotFound() {
 
 // 路由守卫组件
 function AuthGuard({ children }: { children: React.ReactNode }) {
-  const isLoggedIn = localStorage.getItem("user") !== null;
+  const isLoggedIn = localStorage.getItem('user') !== null;
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
@@ -49,15 +49,15 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 // 路由配置
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Navigate to="/dashboard" replace />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/",
+    path: '/',
     element: (
       <AuthGuard>
         <BasicLayout />
@@ -65,49 +65,65 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "dashboard",
+        path: 'dashboard',
         element: <Dashboard />,
       },
       {
-        path: "material",
+        path: 'material',
         element: <Material />,
       },
       {
-        path: "information",
+        path: 'information',
         element: <Information />,
       },
       {
-        path: "teacher",
+        path: 'kungfu',
+        element: <Information />,
+      },
+      {
+        path: 'lecture',
+        element: <Information />,
+      },
+      {
+        path: 'achievement',
+        element: <Information />,
+      },
+      {
+        path: 'learning',
+        element: <Information />,
+      },
+      {
+        path: 'teacher',
         element: <Teacher />,
       },
       {
-        path: "organization",
+        path: 'organization',
         element: <Organization />,
       },
       {
-        path: "user",
+        path: 'user',
         element: <User />,
       },
       {
-        path: "book",
+        path: 'book',
         element: <Book />,
       },
       {
-        path: "activation-code",
+        path: 'activation-code',
         element: <ActivationCode />,
       },
       {
-        path: "gift",
+        path: 'gift',
         element: <Gift />,
       },
       {
-        path: "gift-exchange",
+        path: 'gift-exchange',
         element: <GiftExchange />,
       },
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
 ]);

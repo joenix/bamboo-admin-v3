@@ -5,21 +5,21 @@ const api = axios.create({
   baseURL: 'https://api.lhdd.club',
   // baseURL: "http://localhost:6033",
   timeout: 10000,
-  headers: {
-    Token: JSON.parse(localStorage.getItem('user') || '{}').token,
-  },
 });
 
 // 添加请求拦截器 - Joenix
 api.interceptors.request.use(config => {
   try {
     // Get Token from Storage
-    const { token } = JSON.parse(localStorage.getItem('user'));
+    const { token } = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Token = `${token}`;
     }
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 
   return config;
 });
