@@ -29,7 +29,7 @@ const CoverSelect: React.FC<CoverSelectProps> = ({ open, onClose, onSelect }) =>
         filters: [
           {
             key: 'mineType',
-            value: '1',
+            value: 1,
             op: 'equals',
           },
         ],

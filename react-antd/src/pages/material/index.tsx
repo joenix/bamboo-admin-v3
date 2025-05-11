@@ -55,8 +55,8 @@ const Material = () => {
     },
     {
       title: '物料类型',
-      dataIndex: 'type',
-      key: 'type',
+      dataIndex: 'mineType',
+      key: 'mineType',
       render: (text: number) => {
         /**
          *  1 图片
@@ -197,7 +197,7 @@ const Material = () => {
 
   const fetchData = () => {
     setLoading(true);
-    const filters: { key: string; value: string; op?: string }[] = [];
+    const filters: { key: string; value: string | number; op?: string }[] = [];
     const searchValues = searchForm.getFieldsValue();
 
     if (searchValues.name) {
@@ -209,7 +209,7 @@ const Material = () => {
     if (searchValues.type) {
       filters.push({
         key: 'mineType',
-        value: searchValues.type.toString(),
+        value: Number(searchValues.type),
         op: 'equals',
       });
     }
