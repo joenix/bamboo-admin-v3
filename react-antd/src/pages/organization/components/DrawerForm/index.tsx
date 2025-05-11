@@ -1,8 +1,8 @@
-import { Drawer, Form, Input, Button, Upload, message, Select } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
-import { useState } from "react";
-import { apiConfig } from "@/api/config";
+import { Drawer, Form, Input, Button, Upload, message, Select } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+import { useState } from 'react';
+import { apiConfig } from '@/api/config';
 
 interface DrawerFormProps {
   visible: boolean;
@@ -13,21 +13,15 @@ interface DrawerFormProps {
 }
 
 const TypeList = [
-  { value: "0", label: "授权机构" },
-  { value: "1", label: "培训机构" },
-  { value: "2", label: "学校" },
+  { value: '0', label: '授权机构' },
+  { value: '1', label: '培训机构' },
+  { value: '2', label: '学校' },
 ];
 
-const DrawerForm: React.FC<DrawerFormProps> = ({
-  visible,
-  onClose,
-  onSubmit,
-  initialValues,
-  title,
-}) => {
+const DrawerForm: React.FC<DrawerFormProps> = ({ visible, onClose, onSubmit, initialValues, title }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-
+  const [previewUrl, setPreviewUrl] = useState(initialValues?.img || '');
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -36,23 +30,26 @@ const DrawerForm: React.FC<DrawerFormProps> = ({
       form.resetFields();
       onClose();
     } catch (error) {
-      console.error("表单验证失败:", error);
+      console.error('表单验证失败:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const uploadProps: UploadProps = {
-    name: "files",
+    name: 'files',
+    maxCount: 1,
     action: apiConfig.File.upload,
     headers: {
-      Token: JSON.parse(localStorage.getItem("user") || "{}").token,
+      Token: JSON.parse(localStorage.getItem('user') || '{}').token,
     },
+    showUploadList: false,
     onChange(info) {
-      if (info.file.status === "done") {
-        form.setFieldValue("img", info.file.response.msg[0].path);
+      if (info.file.status === 'done') {
+        form.setFieldValue('img', info.file.response.msg[0].path);
+        setPreviewUrl(info.file.response.msg[0].path);
         message.success(`${info.file.name} 上传成功`);
-      } else if (info.file.status === "error") {
+      } else if (info.file.status === 'error') {
         message.error(`${info.file.name} 上传失败`);
       }
     },
@@ -66,7 +63,7 @@ const DrawerForm: React.FC<DrawerFormProps> = ({
       open={visible}
       width={500}
       footer={
-        <div style={{ textAlign: "right" }}>
+        <div style={{ textAlign: 'right' }}>
           <Button onClick={onClose} style={{ marginRight: 8 }}>
             取消
           </Button>
@@ -77,18 +74,10 @@ const DrawerForm: React.FC<DrawerFormProps> = ({
       }
     >
       <Form form={form} layout="vertical" initialValues={initialValues}>
-        <Form.Item
-          name="type"
-          label="类型"
-          rules={[{ required: true, message: "请输入机构类型" }]}
-        >
+        <Form.Item name="type" label="类型" rules={[{ required: true, message: '请输入机构类型' }]}>
           <Select placeholder="请输入机构类型" options={TypeList} />
         </Form.Item>
-        <Form.Item
-          name="name"
-          label="机构名称"
-          rules={[{ required: true, message: "请输入机构名称" }]}
-        >
+        <Form.Item name="name" label="机构名称" rules={[{ required: true, message: '请输入机构名称' }]}>
           <Input placeholder="请输入机构名称" />
         </Form.Item>
         <Form.Item name="address" label="地址">
@@ -111,7 +100,14 @@ const DrawerForm: React.FC<DrawerFormProps> = ({
         </Form.Item>
         <Form.Item name="img" label="机构图片">
           <Upload {...uploadProps}>
-            <Button icon={<UploadOutlined />}>上传图片</Button>
+            <div className="flex flex-row items-center gap-2">
+              {previewUrl && (
+                <div className="text-sm text-gray-500">
+                  <img src={previewUrl} alt="机构图片" className="w-10 h-10 rounded-full" />
+                </div>
+              )}
+              <Button icon={<UploadOutlined />}>上传图片</Button>
+            </div>
           </Upload>
         </Form.Item>
       </Form>
