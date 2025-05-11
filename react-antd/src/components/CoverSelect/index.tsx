@@ -28,7 +28,7 @@ const CoverSelect: React.FC<CoverSelectProps> = ({ open, onClose, onSelect }) =>
       const res = await api.post(apiConfig.Material.getall + '?page=' + page + '&pageSize=' + pageSize, {
         filters: [
           {
-            key: 'type',
+            key: 'mineType',
             value: '1',
             op: 'equals',
           },

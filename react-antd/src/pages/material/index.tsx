@@ -208,7 +208,7 @@ const Material = () => {
     }
     if (searchValues.type) {
       filters.push({
-        key: 'type',
+        key: 'mineType',
         value: searchValues.type.toString(),
         op: 'equals',
       });
