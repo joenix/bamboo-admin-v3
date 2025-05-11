@@ -10,7 +10,7 @@ const Login = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: { username: string; password: string }) => {
-    if (username !== 'admin' && password !== 'lhdd.club') {
+    if (values.username !== 'admin' && values.password !== 'lhdd.club') {
       return message.error('请使用管理员账户登录');
     }
 
