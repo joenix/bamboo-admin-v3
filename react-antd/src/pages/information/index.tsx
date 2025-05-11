@@ -98,10 +98,11 @@ const InformationContent = () => {
   const fetchData = () => {
     setLoading(true);
 
-    const filters = [
+    const filters: any = [
       {
         key: 'type',
-        value: type,
+        value: type.toString(),
+        op: 'equals',
       },
     ];
 
@@ -235,20 +236,21 @@ const InformationContent = () => {
           />
         </Card>
       </div>
-
-      <InformationDrawer
-        filterType={type}
-        visible={drawerVisible}
-        onClose={() => {
-          setDrawerVisible(false);
-          setCurrentItem(null);
-        }}
-        onSuccess={() => {
-          fetchData();
-        }}
-        informationItem={currentItem}
-        type={drawerType}
-      />
+      {drawerVisible && (
+        <InformationDrawer
+          filterType={type}
+          visible={drawerVisible}
+          onClose={() => {
+            setDrawerVisible(false);
+            setCurrentItem(null);
+          }}
+          onSuccess={() => {
+            fetchData();
+          }}
+          informationItem={currentItem}
+          type={drawerType}
+        />
+      )}
     </PageContainer>
   );
 };

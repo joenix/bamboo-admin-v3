@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import api from '@/api';
 import { apiConfig } from '@/api/config';
+import CoverSelect from '@/components/CoverSelect';
 
 interface InformationDrawerProps {
   filterType: number;
@@ -18,7 +19,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [editorContent, setEditorContent] = useState('');
-
+  const [showCoverSelect, setShowCoverSelect] = useState(false);
   // Quill 编辑器配置
   const modules = {
     toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ list: 'ordered' }, { list: 'bullet' }], [{ align: [] }], ['link', 'image'], ['clean']],
@@ -29,6 +30,8 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
       // 编辑模式，获取咨询信息
       form.setFieldsValue({
         name: informationItem.name,
+        img: informationItem.img,
+        content: informationItem.content,
       });
       setEditorContent(informationItem.content);
     } else {
@@ -45,7 +48,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
       const submitData = {
         ...values,
         content: editorContent,
-        type: filterType,
+        type: filterType.toString(),
       };
 
       const apiCall =
@@ -64,7 +67,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
       }
     } catch (error) {
       console.error('表单提交失败:', error);
-      message.error(`${type === 'edit' ? '编辑' : '新增'}失败`);
+      // message.error(`${type === 'edit' ? '编辑' : '新增'}失败`);
     } finally {
       setLoading(false);
     }
@@ -91,8 +94,37 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
         <Form.Item name="name" label="咨询标题" rules={[{ required: true, message: '请输入咨询标题' }]}>
           <Input placeholder="请输入咨询标题" />
         </Form.Item>
-        <Form.Item label="咨询内容" required rules={[{ required: true, message: '请输入咨询内容' }]}>
-          <ReactQuill theme="snow" value={editorContent} onChange={setEditorContent} modules={modules} style={{ height: '100%', marginBottom: '50px' }} />
+        <Form.Item name="img" label="封面" required rules={[{ required: true, message: '请选择封面' }]}>
+          <CoverSelect
+            open={showCoverSelect}
+            onClose={() => {
+              setShowCoverSelect(false);
+            }}
+            onSelect={(val: string) => {
+              setShowCoverSelect(false);
+              form.setFieldValue('img', val);
+            }}
+          />
+          <div className="flex flex-row items-center gap-2">
+            {form.getFieldValue('img') && (
+              <div className="">
+                <img src={form.getFieldValue('img')} alt="封面" className="w-[80px] h-[80px] rounded-lg" />
+              </div>
+            )}
+            <Button onClick={() => setShowCoverSelect(true)}>选择封面</Button>
+          </div>
+        </Form.Item>
+        <Form.Item name="content" label="咨询内容" required rules={[{ required: true, message: '请输入咨询内容' }]} validateTrigger={['onChange', 'onBlur']}>
+          <ReactQuill
+            theme="snow"
+            value={editorContent}
+            onChange={content => {
+              setEditorContent(content);
+              form.setFieldValue('content', content);
+            }}
+            modules={modules}
+            style={{ height: '500px', marginBottom: '10px' }}
+          />
         </Form.Item>
       </Form>
     </Drawer>
