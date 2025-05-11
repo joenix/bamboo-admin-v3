@@ -1,5 +1,5 @@
 import { Card, Row, Col, Statistic } from 'antd';
-import { UserOutlined, BookOutlined, GiftOutlined, TeamOutlined } from '@ant-design/icons';
+import { UserOutlined, BookOutlined } from '@ant-design/icons';
 import PageContainer from '@/components/PageContainer';
 import { useEffect, useState } from 'react';
 import api from '@/api';

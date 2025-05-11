@@ -1,5 +1,4 @@
-import { Drawer, Form, Input, Button, Upload, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Drawer, Form, Input, Button, message } from 'antd';
 import { useState, useEffect } from 'react';
 import api from '@/api';
 import { apiConfig } from '@/api/config';

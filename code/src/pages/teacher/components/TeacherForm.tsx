@@ -1,30 +1,30 @@
-import { Form, Input, Select, Upload, Button, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import api from "@/api";
-import { apiConfig } from "@/api/config";
-import { Teacher, TeacherFormData } from "../types";
+import { Form, Input, Select, Upload, Button, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import api from '@/api';
+import { apiConfig } from '@/api/config';
+import { Teacher, TeacherFormData } from '../types';
 
 interface TeacherFormProps {
   visible: boolean;
   onClose: () => void;
   initialValues?: Teacher;
-  mode: "add" | "edit";
+  mode: 'add' | 'edit';
   onSuccess: () => void;
 }
 const TypeList = [
-  { id: "1", name: "点读师" },
-  { id: "2", name: "导学师" },
-  { id: "3", name: "规划师" },
+  { id: '1', name: '点读师' },
+  { id: '2', name: '导学师' },
+  { id: '3', name: '规划师' },
 ];
 
-const GenderList = [
-  { id: "1", name: "男" },
-  { id: "0", name: "女" },
-];
+// const GenderList = [
+//   { id: "1", name: "男" },
+//   { id: "0", name: "女" },
+// ];
 
 const TeacherForm: React.FC<TeacherFormProps> = ({
-  visible,
+  // visible,
   onClose,
   initialValues,
   mode,
@@ -36,12 +36,7 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
   const handleSubmit = async (values: TeacherFormData) => {
     setLoading(true);
     try {
-      const content = [
-        values.gender,
-        values.age,
-        values.address,
-        TypeList.find((item) => item.id === values.type)?.name,
-      ].join(",");
+      const content = [values.gender, values.age, values.address, TypeList.find(item => item.id === values.type)?.name].join(',');
 
       const submitData = {
         name: values.name,
@@ -52,10 +47,10 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
         content,
       };
       let isSuccess = false;
-      if (mode === "add") {
+      if (mode === 'add') {
         const res = await api.post(apiConfig.Teach.create, submitData);
         if (res.data.status === 200) {
-          message.success("添加成功");
+          message.success('添加成功');
           isSuccess = true;
         } else {
           message.error(res.data.msg);
@@ -66,7 +61,7 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
           id: initialValues?.id,
         });
         if (res.data.status === 200) {
-          message.success("更新成功");
+          message.success('更新成功');
           isSuccess = true;
         } else {
           message.error(res.data.msg);
@@ -76,59 +71,34 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
         onSuccess();
       }
     } catch (error) {
-      message.error("操作失败");
+      message.error('操作失败');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      initialValues={initialValues}
-      onFinish={handleSubmit}
-    >
-      <Form.Item
-        name="name"
-        label="姓名"
-        rules={[{ required: true, message: "请输入姓名" }]}
-      >
+    <Form form={form} layout="vertical" initialValues={initialValues} onFinish={handleSubmit}>
+      <Form.Item name="name" label="姓名" rules={[{ required: true, message: '请输入姓名' }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item
-        name="age"
-        label="年龄"
-        rules={[{ required: true, message: "请输入年龄" }]}
-      >
+      <Form.Item name="age" label="年龄" rules={[{ required: true, message: '请输入年龄' }]}>
         <Input type="number" />
       </Form.Item>
 
-      <Form.Item
-        name="gender"
-        label="性别"
-        rules={[{ required: true, message: "请选择性别" }]}
-      >
+      <Form.Item name="gender" label="性别" rules={[{ required: true, message: '请选择性别' }]}>
         <Select>
           <Select.Option value="1">男</Select.Option>
           <Select.Option value="0">女</Select.Option>
         </Select>
       </Form.Item>
 
-      <Form.Item
-        name="address"
-        label="地址"
-        rules={[{ required: true, message: "请输入地址" }]}
-      >
+      <Form.Item name="address" label="地址" rules={[{ required: true, message: '请输入地址' }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item
-        name="type"
-        label="师资类型"
-        rules={[{ required: true, message: "请选择师资类型" }]}
-      >
+      <Form.Item name="type" label="师资类型" rules={[{ required: true, message: '请选择师资类型' }]}>
         <Select>
           <Select.Option value="1">点读师</Select.Option>
           <Select.Option value="2">导学师</Select.Option>
@@ -145,12 +115,12 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
           action={apiConfig.File.upload}
           name="files"
           headers={{
-            Token: JSON.parse(localStorage.getItem("user") || "{}").token,
+            Token: JSON.parse(localStorage.getItem('user') || '{}').token,
           }}
           showUploadList={false}
-          onChange={(info) => {
-            if (info.file.status === "done") {
-              form.setFieldValue("img", info.file.response.msg[0].path);
+          onChange={info => {
+            if (info.file.status === 'done') {
+              form.setFieldValue('img', info.file.response.msg[0].path);
             }
           }}
         >

@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Drawer, Form } from "antd";
-import MaterialForm from "./MaterialForm";
-import api from "@/api";
-import { apiConfig } from "@/api/config";
+import { useEffect, useState } from 'react';
+import { Drawer, Form } from 'antd';
+import MaterialForm from './MaterialForm';
+import api from '@/api';
+import { apiConfig } from '@/api/config';
 
-const MaterialDrawer = ({
-  onClose,
-  materialItem,
-  onSuccess,
-  materialType,
-}: any) => {
+const MaterialDrawer = ({ onClose, materialItem, onSuccess, materialType }: any) => {
   const [form] = Form.useForm();
 
   const [initialValues, setInitialValues] = useState({});
@@ -26,7 +21,7 @@ const MaterialDrawer = ({
     }
   }, [materialItem]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: any) => {
     const submitData = {
       url: values.url,
       link: values.link,
@@ -41,7 +36,7 @@ const MaterialDrawer = ({
         })
       : api.post(apiConfig.Material.create, submitData);
 
-    apiCall.then((res) => {
+    apiCall.then(res => {
       if (res.data.status === 200) {
         onSuccess();
         onClose();
@@ -50,25 +45,8 @@ const MaterialDrawer = ({
   };
 
   return (
-    <Drawer
-      title={
-        materialItem
-          ? materialType === "edit"
-            ? "编辑物料"
-            : "查看物料"
-          : "新增物料"
-      }
-      open={open}
-      onClose={onClose}
-      width={480}
-    >
-      <MaterialForm
-        form={form}
-        type={materialType}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        onClose={onClose}
-      />
+    <Drawer title={materialItem ? (materialType === 'edit' ? '编辑物料' : '查看物料') : '新增物料'} open={open} onClose={onClose} width={480}>
+      <MaterialForm form={form} type={materialType} initialValues={initialValues} onSubmit={handleSubmit} onClose={onClose} />
     </Drawer>
   );
 };

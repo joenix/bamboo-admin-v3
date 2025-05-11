@@ -90,7 +90,7 @@ const Material = () => {
       dataIndex: 'link',
       key: 'link',
       render: (
-        text: string,
+        // text: string,
         record: {
           type: number;
           url: string | undefined;
@@ -131,7 +131,7 @@ const Material = () => {
     {
       title: '操作',
       key: 'action',
-      render: (text: any, record: Material) => (
+      render: (/*text: any, */ record: Material) => (
         <Space size="middle">
           {/* <a onClick={() => handleEdit(record.id, "detail")}>查看</a> */}
           <a onClick={() => handleEdit(record, 'edit')}>编辑</a>
