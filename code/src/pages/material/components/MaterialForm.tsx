@@ -1,4 +1,4 @@
-import { Form, Input, Button, Select, Upload, message } from 'antd';
+import { Form, Input, Button, Select, Upload, message, Image } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { apiConfig } from '@/api/config';
 /**
@@ -27,10 +27,17 @@ const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }: { initia
       <Form.Item label="跳转地址" name="link">
         <Input />
       </Form.Item>
-      <Form.Item label="链接" name="url">
-        <Input />
-      </Form.Item>
-      <Form.Item label="上传物料" name="attachments" rules={[{ required: true, message: '请上传物料' }]}>
+      {initialValues.url && (
+        <Form.Item label="链接">
+          <Input value={initialValues.url} disabled />
+        </Form.Item>
+      )}
+      <Form.Item label="上传物料" name="url" rules={[{ required: true, message: '请上传物料' }]}>
+        {initialValues.url && (
+          <div className=" mb-2">
+            <Image width={80} height={80} src={initialValues.url} alt="图片" />
+          </div>
+        )}
         <Upload
           action={`${apiConfig.File.upload}`}
           name="files"
@@ -40,7 +47,7 @@ const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }: { initia
           }}
           onChange={info => {
             if (info.file.status === 'done') {
-              form.setFieldValue('img', info.file.response.msg[0].path);
+              form.setFieldValue('url', info.file.response.msg[0].path);
               message.success('上传成功');
             } else if (info.file.status === 'error') {
               message.error('上传失败');

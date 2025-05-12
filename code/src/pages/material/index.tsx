@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Button, Space, Card, message, Form, Input, Select, Modal } from 'antd';
+import { Table, Button, Space, Card, message, Form, Input, Select, Modal, Image } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import PageContainer from '@/components/PageContainer';
 import api from '@/api';
@@ -106,7 +106,7 @@ const Material = () => {
          */
         switch (record?.mineType) {
           case 1:
-            return <img className="w-10 h-10" src={record?.url} alt="图片" />;
+            return <Image width={40} height={40} src={record?.url} alt="图片" />;
           case 2:
             return <video className="w-10 h-10" src={text} controls />;
           case 4:
