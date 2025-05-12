@@ -108,9 +108,9 @@ const Material = () => {
           case 1:
             return <img className="w-10 h-10" src={record?.url} alt="图片" />;
           case 2:
-            return <video className="w-10 h-10" src={record?.link} controls />;
+            return <video className="w-10 h-10" src={text} controls />;
           case 4:
-            return <audio className="w-10 h-10" src={record?.link} controls />;
+            return <audio className="w-10 h-10" src={text} controls />;
           default:
             return record?.link || record?.url;
         }
