@@ -31,7 +31,7 @@ interface Material {
 
 interface SearchFormValues {
   name?: string;
-  type?: number;
+  mineType?: number;
   content?: string;
 }
 
@@ -90,9 +90,9 @@ const Material = () => {
       dataIndex: 'link',
       key: 'link',
       render: (
-        // text: string,
+        text: string,
         record: {
-          type: number;
+          mineType: number;
           url: string | undefined;
           link: string | undefined;
         },
@@ -104,15 +104,15 @@ const Material = () => {
          *  4 音乐
          *  5 附件
          */
-        switch (record.type) {
+        switch (record?.mineType) {
           case 1:
-            return <img className="w-10 h-10" src={record.url} alt="图片" />;
+            return <img className="w-10 h-10" src={record?.url} alt="图片" />;
           case 2:
-            return <video className="w-10 h-10" src={record.link} controls />;
+            return <video className="w-10 h-10" src={record?.link} controls />;
           case 4:
-            return <audio className="w-10 h-10" src={record.link} controls />;
+            return <audio className="w-10 h-10" src={record?.link} controls />;
           default:
-            return record.link || record.url;
+            return record?.link || record?.url;
         }
       },
     },
@@ -206,10 +206,10 @@ const Material = () => {
         value: searchValues.name,
       });
     }
-    if (searchValues.type) {
+    if (searchValues.mineType) {
       filters.push({
         key: 'mineType',
-        value: Number(searchValues.type),
+        value: Number(searchValues.mineType),
         op: 'equals',
       });
     }
@@ -247,7 +247,7 @@ const Material = () => {
               <Form.Item name="name" label="名称">
                 <Input placeholder="请输入名称" allowClear />
               </Form.Item>
-              <Form.Item name="type" label="类型">
+              <Form.Item name="mineType" label="类型">
                 <Select
                   placeholder="请选择类型"
                   allowClear
