@@ -24,7 +24,7 @@ interface Material {
   link: string;
   name: string;
   content: string;
-  type: number;
+  mineType: number;
   createdAt: string;
   updatedAt: string;
 }
