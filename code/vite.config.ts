@@ -13,7 +13,6 @@ export default defineConfig({
         target: 'https://api.lhdd.club/admin',
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ""),
-        cors: true,
       },
     },
   },
