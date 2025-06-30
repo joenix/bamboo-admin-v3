@@ -16,3 +16,33 @@ body {
   margin: 0;
   /* padding: 0; */
 }
+
+.home,
+.home main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  background: #c7ecff url(@/assets/img/home.png) center/contain no-repeat;
+}
+
+.home main {
+  flex: 1;
+  text-shadow: 0 0 1rem rgba(0, 0, 0, 0.75);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home footer {
+  line-height: 2rem;
+}
+
+.home a {
+  color: #303132;
+  text-decoration-line: none;
+}

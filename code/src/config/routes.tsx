@@ -13,6 +13,7 @@ import ActivationCode from '@/pages/activation-code';
 import Gift from '@/pages/gift';
 import GiftExchange from '@/pages/gift-exchange';
 import Login from '@/pages/login';
+import Home from '@/pages/home';
 // 404 页面组件
 function NotFound() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const isLoggedIn = localStorage.getItem('user') !== null;
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/home" replace />;
   }
 
   return <>{children}</>;
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Navigate to="/dashboard" replace />,
+  },
+  {
+    path: '/home',
+    element: <Home />,
   },
   {
     path: '/login',
