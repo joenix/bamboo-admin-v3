@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Drawer, Form } from 'antd';
+import { Drawer, Form, message } from 'antd';
 import MaterialForm from './MaterialForm';
 import api from '@/api';
 import { apiConfig } from '@/api/config';
@@ -40,6 +40,8 @@ const MaterialDrawer = ({ onClose, materialItem, onSuccess, materialType }: any)
       if (res.data.status === 200) {
         onSuccess();
         onClose();
+      } else {
+        message.error('操作失败');
       }
     });
   };

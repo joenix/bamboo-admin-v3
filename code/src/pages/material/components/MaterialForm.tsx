@@ -10,7 +10,7 @@ import { apiConfig } from '@/api/config';
  */
 const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }: { initialValues: any; onSubmit: any; onClose: any; type: any; form: any }) => {
   return (
-    <Form disabled={type === 'detail'} initialValues={initialValues} onFinish={onSubmit} layout="vertical">
+    <Form form={form} disabled={type === 'detail'} initialValues={initialValues} onFinish={onSubmit} layout="vertical">
       <Form.Item label="类型" name="type" rules={[{ required: true, message: '请选择类型' }]}>
         <Select>
           <Select.Option value={1}>图片</Select.Option>
