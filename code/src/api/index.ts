@@ -4,7 +4,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: 'https://api.lhdd.club',
   // baseURL: "http://localhost:6033",
-  timeout: 10000,
+  timeout: 600000,
 });
 
 // 添加请求拦截器 - Joenix
