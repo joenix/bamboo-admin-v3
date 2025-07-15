@@ -38,7 +38,7 @@ const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }: { initia
             <Image width={80} height={80} src={initialValues.url} alt="图片" />
           </div>
         )}
-        <Upload
+        {/* <Upload
           action={`${apiConfig.File.upload}`}
           name="files"
           maxCount={1}
@@ -52,6 +52,45 @@ const MaterialForm = ({ initialValues, onSubmit, onClose, type, form }: { initia
             } else if (info.file.status === 'error') {
               message.error('上传失败');
             }
+          }}
+        >
+          <Button icon={<UploadOutlined />}>上传</Button>
+        </Upload> */}
+        <Upload
+          name="files"
+          maxCount={1}
+          customRequest={({ file, onSuccess, onError }) => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 300 秒
+
+            const formData = new FormData();
+            formData.append('files', file);
+
+            fetch(`${apiConfig.File.upload}`, {
+              method: 'POST',
+              headers: {
+                Token: JSON.parse(localStorage.getItem('user') || '{}').token,
+              },
+              body: formData,
+              signal: controller.signal,
+            })
+              .then(async res => {
+                clearTimeout(timeoutId);
+                if (!res.ok) throw new Error('网络错误');
+                const data = await res.json();
+                onSuccess?.(data);
+                form.setFieldValue('url', data.msg[0].path);
+                message.success('上传成功');
+              })
+              .catch(err => {
+                clearTimeout(timeoutId);
+                if (err.name === 'AbortError') {
+                  message.error('上传超时');
+                } else {
+                  message.error('上传失败');
+                }
+                onError?.(err);
+              });
           }}
         >
           <Button icon={<UploadOutlined />}>上传</Button>
