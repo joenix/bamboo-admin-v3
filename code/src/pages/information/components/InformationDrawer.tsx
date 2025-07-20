@@ -75,7 +75,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
             message.warning('请点击编辑器中光标位置后再上传图片');
             return;
           }
-          console.log(100, range.index);
+
           editor.insertEmbed(range.index, 'image', imageUrl);
           editor.setSelection(range.index + 1);
         })
