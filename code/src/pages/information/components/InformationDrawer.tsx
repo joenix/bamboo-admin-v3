@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Drawer, Form, Input, Button, message } from 'antd';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -21,9 +21,84 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
   const [editorContent, setEditorContent] = useState('');
   const [showCoverSelect, setShowCoverSelect] = useState(false);
   // Quill 编辑器配置
-  const modules = {
-    toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ list: 'ordered' }, { list: 'bullet' }], [{ align: [] }], ['link', 'image'], ['clean']],
+  // const modules = {
+  //   toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ list: 'ordered' }, { list: 'bullet' }], [{ align: [] }], ['link', 'image'], ['clean']],
+  // };
+
+  // ReactQuill 引用，用来操作编辑器
+  const quillRef = useRef<ReactQuill>(null);
+
+  // 图片上传处理
+  const imageHandler = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 300000); // 300 秒
+
+      const file = input.files?.[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('files', file);
+
+      fetch(`${apiConfig.File.upload}`, {
+        method: 'POST',
+        headers: {
+          Token: JSON.parse(localStorage.getItem('user') || '{}').token,
+        },
+        body: formData,
+        signal: controller.signal,
+      })
+        .then(async res => {
+          clearTimeout(timeoutId);
+          if (!res.ok) throw new Error('网络错误');
+          const data = await res.json();
+
+          const imageUrl = data.msg[0].path;
+
+          console.log('图片上传成功:', imageUrl);
+
+          const editor = quillRef.current?.editor;
+          if (!editor) {
+            console.warn('editor 未获取到');
+            message.error('Editor 加载异常');
+            return;
+          }
+
+          const range = editor.getSelection(true);
+          if (!range) {
+            console.warn('range 未获取到');
+            message.warning('请点击编辑器中光标位置后再上传图片');
+            return;
+          }
+          console.log(100, range.index);
+          editor.insertEmbed(range.index, 'image', imageUrl);
+          editor.setSelection(range.index + 1);
+        })
+        .catch(err => {
+          clearTimeout(timeoutId);
+
+          console.error('图片上传失败', err);
+          message.error('图片上传失败，请重试');
+        });
+    };
   };
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ list: 'ordered' }, { list: 'bullet' }], [{ align: [] }], ['link', 'image'], ['clean']],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    [],
+  );
 
   useEffect(() => {
     if (informationItem && type === 'edit') {
@@ -116,6 +191,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
         </Form.Item>
         <Form.Item name="content" label="咨询内容" required rules={[{ required: true, message: '请输入咨询内容' }]} validateTrigger={['onChange', 'onBlur']}>
           <ReactQuill
+            ref={quillRef}
             theme="snow"
             value={editorContent}
             onChange={content => {
