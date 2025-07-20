@@ -77,7 +77,7 @@ const InformationDrawer: React.FC<InformationDrawerProps> = ({ filterType, visib
           }
 
           editor.insertEmbed(range.index, 'image', imageUrl);
-          editor.setSelection(range.index + 1);
+          editor.setSelection(range.index + 1, 0);
         })
         .catch(err => {
           clearTimeout(timeoutId);
