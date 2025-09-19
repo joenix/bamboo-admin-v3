@@ -32,6 +32,7 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (values: TeacherFormData) => {
     setLoading(true);
@@ -119,8 +120,16 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
           }}
           showUploadList={false}
           onChange={info => {
+            if (info.file.status === 'uploading') {
+              setUploading(true);
+            }
             if (info.file.status === 'done') {
+              setUploading(false);
               form.setFieldValue('img', info.file.response.msg[0].path);
+            }
+            if (info.file.status === 'error') {
+              setUploading(false);
+              message.error('上传失败');
             }
           }}
         >
@@ -129,7 +138,7 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" loading={loading}>
+        <Button type="primary" htmlType="submit" loading={loading} disabled={uploading}>
           提交
         </Button>
         <Button onClick={onClose} style={{ marginLeft: 8 }}>
