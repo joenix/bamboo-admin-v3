@@ -37,13 +37,13 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
   const handleSubmit = async (values: TeacherFormData) => {
     setLoading(true);
     try {
-      const content = [values.gender, values.age, values.address, TypeList.find(item => item.id === values.type)?.name].join(',');
+      const content = [values.gender, values.age, values.address, TypeList.find(item => item.id === values.mode)?.name].join(',');
 
       const submitData = {
         name: values.name,
         img: values.img,
         video: null,
-        type: values.type,
+        mode: values.mode,
         remark: values.remark,
         content,
       };
@@ -99,7 +99,7 @@ const TeacherForm: React.FC<TeacherFormProps> = ({
         <Input />
       </Form.Item>
 
-      <Form.Item name="type" label="师资类型" rules={[{ required: true, message: '请选择师资类型' }]}>
+      <Form.Item name="mode" label="师资类型" rules={[{ required: true, message: '请选择师资类型' }]}>
         <Select>
           <Select.Option value="1">点读师</Select.Option>
           <Select.Option value="2">导学师</Select.Option>

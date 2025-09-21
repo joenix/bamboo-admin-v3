@@ -4,7 +4,7 @@ export interface Teacher {
   age: number;
   gender: string;
   address: string;
-  type: string;
+  mode: string;
   remark?: string;
   img?: string;
   content: string;
@@ -15,7 +15,7 @@ export interface TeacherFormData {
   age: number;
   gender: string;
   address: string;
-  type: string;
+  mode: string;
   remark?: string;
   img?: string;
 }
