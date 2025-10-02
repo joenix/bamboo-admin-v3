@@ -111,6 +111,12 @@ export default function User() {
       render: (createdAt: string) => dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
+      title: '积分',
+      dataIndex: 'credits',
+      key: 'credits',
+      render: (_: unknown, record: UserData) => <div>{JSON.stringify(record)}</div>,
+    },
+    {
       title: '操作',
       key: 'action',
       render: (_: unknown, record: UserData) => (
