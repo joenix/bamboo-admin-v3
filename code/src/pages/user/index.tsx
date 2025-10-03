@@ -143,7 +143,10 @@ export default function User() {
     api
       .post(apiConfig.Cretid.update, {
         userId,
-        creditAmount: newCredit,
+        // 正负值
+        credit: minus,
+        content: '后台手动修改',
+        operation: '后台手动修改',
       })
       .then(res => {
         if (res.data.status === 200) {
