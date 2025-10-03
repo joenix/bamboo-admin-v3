@@ -1,4 +1,4 @@
-import { Table, Button, Space, Form, Input, Card } from 'antd';
+import { Table, Button, Space, Form, Input, Card, Modal, InputNumber, Col, Row, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import PageContainer from '@/components/PageContainer';
 import { useState, useEffect } from 'react';
@@ -13,6 +13,7 @@ interface UserData {
   mobile: string;
   avatarUrl: string;
   createdAt: string;
+  credits: object;
 }
 
 // interface UserEditDrawerProps {
@@ -31,6 +32,18 @@ export default function User() {
   const [total, setTotal] = useState(1);
   const [loading, setLoading] = useState(false);
   const [searchForm] = Form.useForm();
+
+  // 开启积分操控面板
+  const [isCreditOpen, setIsCreditOpen] = useState(false);
+
+  // 积分操作用户信息
+  const [userInfo, setUserInfo] = useState({});
+
+  // 积分操作积分数值
+  const [credit, setCredit] = useState<number>(0);
+
+  // 设置积分差值
+  const [minus, setMinus] = useState<number>(0);
 
   const handleSearch = () => {
     setPage(1);
@@ -78,6 +91,31 @@ export default function User() {
     fetchData();
   }, [page, pageSize]);
 
+  // 重置 积分
+  useEffect(() => {
+    if (isCreditOpen) {
+      setMinus(0);
+    }
+  }, [isCreditOpen]);
+
+  const creditEdit = (record: credit) => {
+    console.log(100, record);
+    // 获取参数
+    const { nickname, mobile, credits } = record;
+
+    // 获取积分, id === creditId
+    const { userId, id, credit } = credits;
+
+    // 设置积分操作用户信息
+    setUserInfo({ userId, id, nickname, mobile });
+
+    // 设置积分数值
+    setCredit(credit);
+
+    // 打开积分面板
+    setIsCreditOpen(true);
+  };
+
   const handleEdit = (record: UserData) => {
     setCurrentUser(record);
     setEditDrawerVisible(true);
@@ -85,6 +123,33 @@ export default function User() {
 
   const handleEditSuccess = () => {
     fetchData();
+  };
+
+  const handleCredit = async () => {
+    console.log('Minus:', minus, 'userInfo:', userInfo);
+    // 获取参数
+    const { userId, id } = userInfo;
+
+    // 积分够不够
+    if (credit + minus <= 0) {
+      return message.error('该用户积分不足');
+    }
+
+    // 重设积分
+    setCredit(credit + minus);
+
+    // 更新积分
+    api
+      .post(apiConfig.Cretid.update, {
+        userId,
+        // id,
+        creditAmount: credit,
+      })
+      .then(res => {
+        if (res.data.status === 200) {
+          message.success('积分更新成功，请刷新页面');
+        }
+      });
   };
 
   const columns = [
@@ -114,7 +179,13 @@ export default function User() {
       title: '积分',
       dataIndex: 'credits',
       key: 'credits',
-      render: (_: unknown, record: UserData) => <div>{JSON.stringify(record)}</div>,
+      render: (_: unknown, record: UserData) => (
+        <Space size="middle">
+          <Button type="link" onClick={() => creditEdit(record)} disabled={!record.credits}>
+            积分：{record.credits?.credit ?? 0}
+          </Button>
+        </Space>
+      ),
     },
     {
       title: '操作',
@@ -184,6 +255,31 @@ export default function User() {
             }}
           />
         </Card>
+
+        <Modal title="积分操作" footer={null} closable={true} open={isCreditOpen} onCancel={() => setIsCreditOpen(false)}>
+          <div className="space-y-6">
+            <Row>
+              <Col span={12}>
+                <Space direction="vertical">
+                  <div>昵称：{userInfo.nickname}</div>
+                  <div>手机：{userInfo.mobile}</div>
+                  <div>积分：{credit}</div>
+                </Space>
+              </Col>
+              <Col span={12}>
+                <Space direction="vertical">
+                  <div>请输入需要 添加 或 扣除 的积分：</div>
+                  <Space>
+                    <InputNumber min={-10000} max={10000} value={minus} onChange={value => setMinus(value)} />
+                    <Button type="primary" onClick={handleCredit}>
+                      确认更新
+                    </Button>
+                  </Space>
+                </Space>
+              </Col>
+            </Row>
+          </div>
+        </Modal>
 
         {editDrawerVisible && currentUser && <UserEditDrawer visible={editDrawerVisible} onClose={() => setEditDrawerVisible(false)} userData={currentUser} onSuccess={handleEditSuccess} />}
       </div>
