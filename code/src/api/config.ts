@@ -14,7 +14,8 @@ export const apiConfig = {
   },
   // 积分
   Cretid: {
-    update: '/admin/credit/get_all_users_credit',
+    getall: '/admin/credit/get_all_users_credit',
+    update: '/admin/credit/update_user_credit',
   },
   // 通用物料
   Material: {
