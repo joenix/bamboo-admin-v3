@@ -144,7 +144,7 @@ export default function User() {
       .post(apiConfig.Cretid.update, {
         userId,
         // 正负值
-        credit: minus,
+        credit: newCredit,
         content: '后台手动修改',
         operation: '后台手动修改',
       })
