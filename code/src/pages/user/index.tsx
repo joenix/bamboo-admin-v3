@@ -13,7 +13,7 @@ interface UserData {
   mobile: string;
   avatarUrl: string;
   createdAt: string;
-  credits: object;
+  credits?: Credit | null;
 }
 
 // interface UserEditDrawerProps {
@@ -22,6 +22,21 @@ interface UserData {
 //   userData?: UserData;
 //   onSuccess: () => void;
 // }
+
+interface Credit {
+  credit: number;
+  userId: number;
+}
+
+interface UserInfo {
+  id: number;
+  userId: number;
+  nickname: string;
+  mobile: string;
+  credits?: {
+    credit: number;
+  };
+}
 
 export default function User() {
   const [editDrawerVisible, setEditDrawerVisible] = useState(false);
@@ -37,7 +52,7 @@ export default function User() {
   const [isCreditOpen, setIsCreditOpen] = useState(false);
 
   // 积分操作用户信息
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState<UserData | null>(null);
 
   // 积分操作积分数值
   const [credit, setCredit] = useState<number>(0);
@@ -98,7 +113,7 @@ export default function User() {
     }
   }, [isCreditOpen]);
 
-  const creditEdit = (record: credit) => {
+  const creditEdit = (record: Credit) => {
     console.log(100, record);
     // 获取参数
     const { nickname, mobile, credits } = record;
@@ -270,7 +285,7 @@ export default function User() {
                 <Space direction="vertical">
                   <div>请输入需要 添加 或 扣除 的积分：</div>
                   <Space>
-                    <InputNumber min={-10000} max={10000} value={minus} onChange={value => setMinus(value)} />
+                    <InputNumber min={-10000} max={10000} value={minus} onChange={value => setMinus(value ?? 0)} />
                     <Button type="primary" onClick={handleCredit}>
                       确认更新
                     </Button>
