@@ -146,7 +146,6 @@ export default function User() {
         // 正负值
         credit: minus,
         content: '后台手动修改',
-        operation: '后台手动修改',
       })
       .then(res => {
         if (res.data.status === 200) {
