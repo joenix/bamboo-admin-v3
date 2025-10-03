@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Modal, Form, Select, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Modal, Form, Select, message, InputNumber } from 'antd';
 import api from '@/api';
 import { apiConfig } from '@/api/config';
 import dayjs from 'dayjs';
@@ -17,8 +17,31 @@ interface GenerateCodeModalProps {
 }
 
 const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel, onSuccess, bookData }) => {
+  console.log(20, bookData);
+
+  const [books, setBooks] = useState([]);
+  const [count, setCount] = useState(0);
+
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+
+  const fetchBooks = () => {
+    console.log(41000);
+    const filters: { key: string; value: string }[] = [];
+
+    api
+      .post(apiConfig.Book.getall + '?page=' + page + '&pageSize=' + pageSize, {
+        filters,
+      })
+      .then(res => {
+        if (res.data.status === 200) {
+          setBooks(res.data.msg.data);
+        }
+      });
+  };
 
   const handleSubmit = async () => {
     try {
@@ -26,6 +49,7 @@ const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel
       setLoading(true);
       const response = await api.post(apiConfig.Code.create, {
         bookId: values.bookId,
+        count,
         code: dayjs().valueOf().toString(),
       });
 
@@ -43,13 +67,21 @@ const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel
     }
   };
 
+  useEffect(() => {
+    fetchBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, pageSize]);
+
   return (
     <Modal title="生成激活码" open={visible} onCancel={onCancel} onOk={handleSubmit} okText="生成" cancelText="取消" confirmLoading={loading} destroyOnClose>
       <Form form={form} layout="vertical" initialValues={{ count: 1 }}>
-        <Form.Item name="bookId" label="选择书籍" rules={[{ required: true, message: '请选择书籍' }]}>
+        <Form.Item name="count" label="数量" rules={[{ required: true, message: '请填写数量' }]}>
+          <InputNumber min={0} max={10000} value={count} onChange={value => setCount((value ?? 0) as number)} />
+        </Form.Item>
+        <Form.Item name="bookId" label="书籍" rules={[{ required: true, message: '请选择书籍' }]}>
           <Select
             placeholder="请选择书籍"
-            options={bookData.map(book => ({
+            options={books.map(book => ({
               label: book.name,
               value: book.id,
             }))}
