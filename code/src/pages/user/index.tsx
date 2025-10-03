@@ -28,16 +28,6 @@ interface Credit {
   userId: number;
 }
 
-interface UserInfo {
-  id: number;
-  userId: number;
-  nickname: string;
-  mobile: string;
-  credits?: {
-    credit: number;
-  };
-}
-
 export default function User() {
   const [editDrawerVisible, setEditDrawerVisible] = useState(false);
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
