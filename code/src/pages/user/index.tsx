@@ -6,6 +6,13 @@ import api from '@/api';
 import { apiConfig } from '@/api/config';
 import dayjs from 'dayjs';
 import UserEditDrawer from '@/pages/user/components/UserEditDrawer';
+import type { ColumnsType } from 'antd/es/table';
+
+interface Credit {
+  id: number;
+  userId: number;
+  credit: number;
+}
 
 interface UserData {
   id: number;
@@ -14,18 +21,6 @@ interface UserData {
   avatarUrl: string;
   createdAt: string;
   credits?: Credit | null;
-}
-
-// interface UserEditDrawerProps {
-//   visible: boolean;
-//   onClose: () => void;
-//   userData?: UserData;
-//   onSuccess: () => void;
-// }
-
-interface Credit {
-  credit: number;
-  userId: number;
 }
 
 export default function User() {
@@ -41,7 +36,7 @@ export default function User() {
   // 开启积分操控面板
   const [isCreditOpen, setIsCreditOpen] = useState(false);
 
-  // 积分操作用户信息
+  // 积分操作用户信息（直接保存整个 UserData）
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
 
   // 积分操作积分数值
@@ -89,35 +84,35 @@ export default function User() {
           setTotal(res.data.msg.counts);
         }
         setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize]);
 
-  // 重置 积分
+  // 重置 minus 每次打开弹窗时归零
   useEffect(() => {
     if (isCreditOpen) {
       setMinus(0);
     }
   }, [isCreditOpen]);
 
-  const creditEdit = (record: Credit) => {
-    console.log(100, record);
-    // 获取参数
-    const { nickname, mobile, credits } = record;
+  // 点击“积分”按钮，打开弹窗（record 为 UserData）
+  const creditEdit = (record: UserData) => {
+    if (!record) return;
+    // 如果没有 credits 则提示并返回
+    if (!record.credits) {
+      message.error('该用户暂无积分记录');
+      return;
+    }
 
-    // 获取积分, id === creditId
-    const { userId, id, credit } = credits;
-
-    // 设置积分操作用户信息
-    setUserInfo({ userId, id, nickname, mobile });
-
-    // 设置积分数值
-    setCredit(credit);
-
-    // 打开积分面板
+    setUserInfo(record);
+    setCredit(record.credits.credit ?? 0);
     setIsCreditOpen(true);
   };
 
@@ -131,33 +126,41 @@ export default function User() {
   };
 
   const handleCredit = async () => {
-    console.log('Minus:', minus, 'userInfo:', userInfo);
-    // 获取参数
-    const { userId, id } = userInfo;
+    if (!userInfo) return;
 
-    // 积分够不够
-    if (credit + minus <= 0) {
+    const userId = userInfo.id;
+    const newCredit = credit + minus;
+
+    // 积分不能为负
+    if (newCredit < 0) {
       return message.error('该用户积分不足');
     }
 
-    // 重设积分
-    setCredit(credit + minus);
+    // 本地立即更新展示
+    setCredit(newCredit);
 
-    // 更新积分
+    // 更新后端（传用户 id 和新的积分值）
     api
       .post(apiConfig.Cretid.update, {
         userId,
-        // id,
-        creditAmount: credit,
+        creditAmount: newCredit,
       })
       .then(res => {
         if (res.data.status === 200) {
           message.success('积分更新成功，请刷新页面');
+          // 可选：刷新表格数据
+          fetchData();
+        } else {
+          message.error(res.data?.msg || '更新失败');
         }
+      })
+      .catch(err => {
+        console.error(err);
+        message.error('更新失败');
       });
   };
 
-  const columns = [
+  const columns: ColumnsType<UserData> = [
     {
       title: '用户名',
       dataIndex: 'nickname',
@@ -197,7 +200,12 @@ export default function User() {
       key: 'action',
       render: (_: unknown, record: UserData) => (
         <Space size="middle">
-          <Button type="link" onClick={() => handleEdit(record)}>
+          <Button
+            type="link"
+            onClick={() => {
+              handleEdit(record);
+            }}
+          >
             编辑
           </Button>
         </Space>
@@ -252,9 +260,9 @@ export default function User() {
                 prev_3: '向前 3 页',
                 next_3: '向后 3 页',
               },
-              onChange: (page, pageSize) => {
-                setPage(page);
-                setPageSize(pageSize);
+              onChange: (p, ps) => {
+                setPage(p);
+                setPageSize(ps);
               },
               hideOnSinglePage: false,
             }}
@@ -266,8 +274,8 @@ export default function User() {
             <Row>
               <Col span={12}>
                 <Space direction="vertical">
-                  <div>昵称：{userInfo.nickname}</div>
-                  <div>手机：{userInfo.mobile}</div>
+                  <div>昵称：{userInfo?.nickname ?? '-'}</div>
+                  <div>手机：{userInfo?.mobile ?? '-'}</div>
                   <div>积分：{credit}</div>
                 </Space>
               </Col>
@@ -275,7 +283,7 @@ export default function User() {
                 <Space direction="vertical">
                   <div>请输入需要 添加 或 扣除 的积分：</div>
                   <Space>
-                    <InputNumber min={-10000} max={10000} value={minus} onChange={value => setMinus(value ?? 0)} />
+                    <InputNumber min={-10000} max={10000} value={minus} onChange={value => setMinus((value ?? 0) as number)} />
                     <Button type="primary" onClick={handleCredit}>
                       确认更新
                     </Button>
