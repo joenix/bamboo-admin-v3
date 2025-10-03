@@ -19,11 +19,13 @@ interface GenerateCodeModalProps {
 const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel, onSuccess, bookData }) => {
   console.log(20, bookData);
 
-  const [books, setBooks] = useState([]);
+  // 修改点 ①：给 useState 指定类型
+  const [books, setBooks] = useState<Book[]>([]);
   const [count, setCount] = useState(0);
 
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  // 修改点 ②：删除未使用的 page / pageSize
+  // const [page, setPage] = useState(1);
+  // const [pageSize, setPageSize] = useState(20);
 
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -33,9 +35,8 @@ const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel
     const filters: { key: string; value: string }[] = [];
 
     api
-      .post(apiConfig.Book.getall + '?page=' + page + '&pageSize=' + pageSize, {
-        filters,
-      })
+      // 修改点 ③：不传 page / pageSize
+      .post(apiConfig.Book.getall, { filters })
       .then(res => {
         if (res.data.status === 200) {
           setBooks(res.data.msg.data);
@@ -69,8 +70,7 @@ const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({ visible, onCancel
 
   useEffect(() => {
     fetchBooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, pageSize]);
+  }, []); // 修改点 ④：依赖项改成空数组
 
   return (
     <Modal title="生成激活码" open={visible} onCancel={onCancel} onOk={handleSubmit} okText="生成" cancelText="取消" confirmLoading={loading} destroyOnClose>
