@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Button, Space, Card, message, Form, Input, Select, Modal, Image } from 'antd';
+import { Table, Button, Space, Card, message, Form, Input, Select, Modal } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import PageContainer from '@/components/PageContainer';
 import api from '@/api';
