@@ -27,6 +27,14 @@ export const apiConfig = {
     update: '/admin/material/update',
     delete: '/admin/material/remove',
   },
+  // 贴士集
+  Tips: {
+    upload: '/admin/tip/upload',
+    getall: '/admin/tip/get_all',
+    create: '/admin/tip/create',
+    update: '/admin/tip/update',
+    delete: '/admin/tip/remove',
+  },
   // 权限
   Permission: {
     create: '/admin/permission/create',

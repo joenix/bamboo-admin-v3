@@ -13,6 +13,11 @@ export const asideMenuConfig: MenuDataItem[] = [
     icon: 'AppstoreOutlined',
   },
   {
+    name: '贴士集',
+    path: '/tips',
+    icon: 'AppstoreOutlined',
+  },
+  {
     name: '资讯管理',
     path: '/information',
     icon: 'FileTextOutlined',

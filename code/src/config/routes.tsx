@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BasicLayout } from '@/layouts/BasicLayout';
 import Dashboard from '@/pages/dashboard';
 import Material from '@/pages/material';
+import Tips from '@/pages/tips';
 import Information from '@/pages/information';
 import Teacher from '@/pages/teacher';
 import Organization from '@/pages/organization';
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: 'material',
         element: <Material />,
+      },
+      {
+        path: 'tips',
+        element: <Tips />,
       },
       {
         path: 'information',
